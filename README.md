@@ -6,20 +6,20 @@ Tailwind Helper is meant to assist you in converting your designs into Tailwind 
 
 > You have a figma design and want to know what the Tailwind class of a 26px font size is?
 
-> > Simply use the Font size helper and then copy and paste the class into your html element.
+Simply use the Font size helper and then copy and paste the class into your html element.
 
 ## Current helpers
 
 ### Text
 
-- Font size helper
+- Font size
+- Font weight
+- Letter spacing
 
 ## Upcoming helpers
 
 ### Text
 
-- Font weight
-- Letter spacing
 - Line height
 
 ### Colors

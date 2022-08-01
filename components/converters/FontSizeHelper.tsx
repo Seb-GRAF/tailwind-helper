@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import FontSizeExample from './FontSizeExample'
 import CopyToClipboard from '../CopyToClipboard'
+import OutOfBounds from '../OutOfBounds'
 
 type UnitKey = 'rem' | 'px'
+
+interface Props {
+  setFontSize: (value: string) => void
+}
 
 interface FontSize {
   class: string
@@ -26,12 +30,12 @@ const fontSizes: FontSize[] = [
   { class: 'text-9xl', rem: 8, px: 128 },
 ]
 
-const FontSizeConverter = (): JSX.Element => {
+const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
   const [value, setValue] = useState(16)
   const [unit, setUnit] = useState<UnitKey>('px')
-  const [outOfBoundsMessage, setOutOfBoundsMessage] = useState<
-    'max' | 'min' | null
-  >(null)
+  const [outOfBounds, setOutOfBounds] = useState<'max' | 'min' | 'def' | null>(
+    null
+  )
   const [convertedFontSize, setConvertedFontSize] = useState<FontSize | null>(
     fontSizes[3]
   )
@@ -72,25 +76,26 @@ const FontSizeConverter = (): JSX.Element => {
     }
   }, [value, unit])
 
-  // check if converted font size is at upper/lower limit
   useEffect(() => {
+    // check if converted font size is at upper/lower limit
     if (convertedFontSize?.class === 'text-xs') {
-      setOutOfBoundsMessage('min')
+      setOutOfBounds('min')
     } else if (convertedFontSize?.class === 'text-9xl') {
-      setOutOfBoundsMessage('max')
+      setOutOfBounds('max')
+    } else if (convertedFontSize?.class === 'text-base') {
+      setOutOfBounds('def')
     } else {
-      setOutOfBoundsMessage(null)
+      setOutOfBounds(null)
     }
-  }, [convertedFontSize])
+
+    // sets parent font size to converted size
+    setFontSize(convertedFontSize!.class)
+  }, [convertedFontSize, setFontSize])
 
   return (
-    <section>
-      <h1 className='text-xl font-semibold'>Font Size Converter</h1>
-      <p className='mb-4'>
-        Enter a font size and get the closest Tailwind class (em, rem, %).
-      </p>
+    <section className='w-full'>
       {/* CONVERTER */}
-      <form className='flex items-center gap-4 p-4 bg-gray-200'>
+      <form className='flex flex-col justify-center w-full gap-4'>
         <label htmlFor='fontSize' className='flex items-center gap-4'>
           Font Size
           {/* SIZE INPUT*/}
@@ -136,21 +141,11 @@ const FontSizeConverter = (): JSX.Element => {
         </button>
       </form>
       {/* RESULT */}
-      <div className='h-full p-4 bg-gray-200 output'>
+      <div className='inline-block w-full h-full'>
         {convertedFontSize && (
           <div className='flex flex-col gap-4'>
-            {/* displays a message if value is not an exact match */}
-            <p className=''>
-              {convertedFontSize.px === value ||
-              convertedFontSize.rem === value ? (
-                <span>Your value is an exact match to this Tailwind class</span>
-              ) : (
-                <span>Closest Tailwind class to your value</span>
-              )}
-            </p>
-
             <div>
-              <p className='flex items-center gap-4 cursor-pointer'>
+              <p className='flex items-center gap-4'>
                 <CopyToClipboard
                   valueToCopy={convertedFontSize.class.toString()}>
                   <span className='font-semibold'>{`'${convertedFontSize.class}'`}</span>
@@ -161,24 +156,14 @@ const FontSizeConverter = (): JSX.Element => {
                 <CopyToClipboard valueToCopy={convertedFontSize.px.toString()}>
                   <span>{`${convertedFontSize.px}px`}</span>
                 </CopyToClipboard>
-                {outOfBoundsMessage === 'min' ? (
-                  <span className='text-sm opacity-60'>
-                    This is the lowest default font value
-                  </span>
-                ) : outOfBoundsMessage === 'max' ? (
-                  <span className='text-sm opacity-60'>
-                    This is the highest default font value
-                  </span>
-                ) : null}
+                {outOfBounds && <OutOfBounds bounds={outOfBounds} />}
               </p>
             </div>
           </div>
         )}
       </div>
-      {/* EXAMPLE */}
-      <FontSizeExample fontSize={convertedFontSize!.class} />
     </section>
   )
 }
 
-export default FontSizeConverter
+export default FontSizeHelper

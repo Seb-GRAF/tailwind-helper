@@ -1,3 +1,7 @@
-export { FontSizeConverter } from './converters/'
+export { FontSizeHelper } from './converters/'
+export { FontWeightHelper } from './converters/'
+export { LetterSpacingHelper } from './converters/'
 export { default as Tooltip } from './Tooltip'
 export { default as CopyToClipboard } from './CopyToClipboard'
+export { default as FontHelper } from './FontHelper'
+export { default as FontExample } from './FontExample'
