@@ -2,7 +2,7 @@ export { FontSizeHelper } from './helpers'
 export { FontWeightHelper } from './helpers'
 export { LetterSpacingHelper } from './helpers'
 
-export { WidgetConverter, WidgetResult, WidgetWrapper } from './layout'
+export { WidgetConverter, WidgetResult, WidgetWrapper, Header } from './layout'
 
 export { default as Tooltip } from './Tooltip'
 export { default as CopyToClipboard } from './CopyToClipboard'

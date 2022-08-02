@@ -43,6 +43,13 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
     return closest
   }
 
+  const reset = () => {
+    if (value === 0) return
+    setValue(0)
+    setOutOfBounds(null)
+    setConvertedLetterSpacing(letterSpacing[3])
+  }
+
   // updates converted spacing on value change
   useEffect(() => {
     const closestLetterSpacing = getClosestLetterSpacing(letterSpacing, value)
@@ -69,6 +76,11 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
 
   return (
     <WidgetWrapper>
+      <button
+        className='absolute text-sm transition-all top-2 right-3 text-slate-400 hover:text-pink-400 '
+        onClick={reset}>
+        Reset
+      </button>
       <WidgetConverter helperName='Letter Spacing'>
         <div className='relative'>
           <StyledInput
@@ -81,7 +93,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
             setValue={setValue}
             hasUnit={true}
           />
-          <span className='absolute top-0 right-0 flex items-center w-10 h-full pointer-events-none'>
+          <span className='absolute top-0 right-0 flex items-center w-10 h-full text-pink-400 pointer-events-none'>
             em
           </span>
           <StyledRange

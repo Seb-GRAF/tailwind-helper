@@ -259,8 +259,18 @@ const colors: color[] = [
 ]
 
 const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
-  const [value, setValue] = useState('#e2e8f0')
-  const [closestColor, setClosestColor] = useState<color>(colors[3])
+  const [value, setValue] = useState('#f472b6')
+  const [closestColor, setClosestColor] = useState<color>({
+    class: 'pink-400',
+    hex: '#f472b6',
+  })
+
+  const reset = () => {
+    const input = document.getElementById('hex-value') as HTMLInputElement
+    setValue('#f472b6')
+    input.value = '#f472b6'
+    setClosestColor(colors[3])
+  }
 
   // Converts hex to array of rgb
   const hexToRgb = (hex: string): number[] => {
@@ -270,6 +280,7 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
       .match(/.{2}/g)
       ?.map((value) => parseInt(value, 16))
   }
+
   // Distance between 2 colors (in RGB)
   // https://stackoverflow.com/questions/23990802/find-nearest-color-from-a-colors-list
   const distance = (a: number[], b: number[]): number => {
@@ -297,6 +308,11 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
 
   return (
     <WidgetWrapper>
+      <button
+        className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-pink-400 hover:text-pink-700'
+        onClick={reset}>
+        Reset
+      </button>
       <WidgetConverter helperName='Color Helper'>
         <div className='flex flex-col gap-2'>
           <div className='relative overflow-hidden h-14 w-44 rounded-xl'>
@@ -319,11 +335,11 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
           </div>
           <input
             type='text'
-            defaultValue='#e2e8f0'
+            defaultValue={value}
             id='hex-value'
             placeholder='#000000'
             maxLength={7}
-            className='p-1 text-center w-44 bg-slate-700 rounded-xl'
+            className='p-1 text-center w-44 bg-slate-100 dark:bg-slate-700 rounded-xl'
             onChange={(e) => {
               if (e.target.value.length === 7 && e.target.value[0] === '#') {
                 setValue(e.target.value)
@@ -338,7 +354,7 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
           <span className='font-semibold'>{`" ${closestColor.class} "`}</span>
         </CopyToClipboard>
         <CopyToClipboard valueToCopy={closestColor.hex}>
-          <span>{`[${closestColor.hex}]`}</span>
+          <span>{`${closestColor.hex}`}</span>
         </CopyToClipboard>
       </WidgetResult>
     </WidgetWrapper>

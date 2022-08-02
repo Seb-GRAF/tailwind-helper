@@ -46,6 +46,13 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
     return closest
   }
 
+  const reset = () => {
+    if (value === 400) return
+    setValue(400)
+    setOutOfBounds(null)
+    setConvertedFontWeight(fontWeight[4])
+  }
+
   // updates converted size on value and unit change
   useEffect(() => {
     const closestFontWeight = getClosestFontWeight(fontWeight, value)
@@ -72,6 +79,11 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
 
   return (
     <WidgetWrapper>
+      <button
+        className='absolute text-sm transition-all top-2 right-3 text-slate-400 hover:text-pink-400 '
+        onClick={reset}>
+        Reset
+      </button>
       <WidgetConverter helperName='Font Weight'>
         <div className='relative w-fit'>
           <StyledInput

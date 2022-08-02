@@ -66,6 +66,15 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
     }
   }
 
+  const reset = () => {
+    if (value === 16 && unit === 'px') return
+
+    setValue(16)
+    setUnit('px')
+    setConvertedFontSize(fontSizes[3])
+    setOutOfBounds(null)
+  }
+
   // updates converted size on value and unit change
   useEffect(() => {
     const closestFontSize = getClosestFontSize(fontSizes, value, unit)
@@ -92,6 +101,11 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
 
   return (
     <WidgetWrapper>
+      <button
+        className='absolute text-sm transition-all top-2 right-3 text-slate-400 hover:text-pink-400 '
+        onClick={reset}>
+        Reset
+      </button>
       <WidgetConverter helperName='Font Size'>
         <div className='relative'>
           <StyledInput
@@ -117,7 +131,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
         </div>
 
         <button
-          className='h-full transition-all w-28 hover:text-pink-400'
+          className='h-full mt-2 transition-all w-28 hover:text-pink-400'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {
