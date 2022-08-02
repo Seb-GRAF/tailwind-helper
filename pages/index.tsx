@@ -3,8 +3,8 @@ import { FontHelper } from '../components'
 
 const Home: NextPage = () => {
   return (
-    <main className='p-4'>
-      <h1 className='mb-12 text-4xl font-bold'>Tailwind Helper</h1>
+    <main className='max-w-5xl p-4 mx-auto'>
+      <h1 className='mb-12 text-4xl font-bold'>Tailwind cheat codes</h1>
       <FontHelper />
     </main>
   )

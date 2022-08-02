@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import CopyToClipboard from '../CopyToClipboard'
-import OutOfBounds from '../OutOfBounds'
+import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
+import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 
 type UnitKey = 'rem' | 'px'
 
@@ -36,9 +36,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
   const [outOfBounds, setOutOfBounds] = useState<'max' | 'min' | 'def' | null>(
     null
   )
-  const [convertedFontSize, setConvertedFontSize] = useState<FontSize | null>(
-    fontSizes[3]
-  )
+  const [convertedFontSize, setConvertedFontSize] = useState(fontSizes[3])
 
   // returns closes size matching with fontSizes array
   const getClosestFontSize = (
@@ -93,40 +91,33 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
   }, [convertedFontSize, setFontSize])
 
   return (
-    <section className='w-full'>
-      {/* CONVERTER */}
-      <form className='flex flex-col justify-center w-full gap-4'>
-        <label htmlFor='fontSize' className='flex items-center gap-4'>
-          Font Size
-          {/* SIZE INPUT*/}
-          <div className='relative'>
-            <input
-              type='number'
-              step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
-              name='fontSize'
-              min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
-              max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}
-              className='p-4 pr-12 w-36'
-              value={value || 0}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
-            />
-            <span className='absolute top-0 right-0 flex items-center w-10 h-full pointer-events-none'>
-              {unit}
-            </span>
-            <input
-              type='range'
-              step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
-              min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
-              max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}
-              className='absolute left-0 w-full -bottom-1'
-              value={value || 0}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
-            />
-          </div>
-        </label>
-        {/* UNIT SWITCH INPUT */}
+    <WidgetWrapper>
+      <WidgetConverter helperName='Font Size'>
+        <div className='relative'>
+          <StyledInput
+            type='number'
+            name='fontSize'
+            step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
+            min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
+            max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}
+            value={value || 0}
+            setValue={setValue}
+            hasUnit={true}
+          />
+          <span className='absolute top-0 right-0 flex items-center w-10 h-full text-pink-400 pointer-events-none'>
+            {unit}
+          </span>
+          <StyledRange
+            step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
+            min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
+            max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}
+            value={value || 0}
+            setValue={setValue}
+          />
+        </div>
+
         <button
-          className='h-full bg-white w-28'
+          className='h-full transition-all w-28 hover:text-pink-400'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {
@@ -139,30 +130,28 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
           }}>
           {unit == 'px' ? 'Switch to rem' : 'Switch to px'}
         </button>
-      </form>
+      </WidgetConverter>
       {/* RESULT */}
-      <div className='inline-block w-full h-full'>
-        {convertedFontSize && (
-          <div className='flex flex-col gap-4'>
-            <div>
-              <p className='flex items-center gap-4'>
-                <CopyToClipboard
-                  valueToCopy={convertedFontSize.class.toString()}>
-                  <span className='font-semibold'>{`'${convertedFontSize.class}'`}</span>
-                </CopyToClipboard>
-                <CopyToClipboard valueToCopy={convertedFontSize.rem.toString()}>
-                  <span>{`${convertedFontSize.rem}rem`}</span>
-                </CopyToClipboard>
-                <CopyToClipboard valueToCopy={convertedFontSize.px.toString()}>
-                  <span>{`${convertedFontSize.px}px`}</span>
-                </CopyToClipboard>
-                {outOfBounds && <OutOfBounds bounds={outOfBounds} />}
-              </p>
-            </div>
+
+      <WidgetResult>
+        <CopyToClipboard valueToCopy={convertedFontSize.class.toString()}>
+          <span className='font-semibold'>{`" ${convertedFontSize.class} "`}</span>
+        </CopyToClipboard>
+        <div className='flex gap-4'>
+          <CopyToClipboard valueToCopy={convertedFontSize.rem.toString()}>
+            <span>{`${convertedFontSize.rem}rem`}</span>
+          </CopyToClipboard>
+          <CopyToClipboard valueToCopy={convertedFontSize.px.toString()}>
+            <span>{`${convertedFontSize.px}px`}</span>
+          </CopyToClipboard>
+        </div>
+        {outOfBounds && (
+          <div className='absolute bottom-0 left-0 w-full text-center'>
+            <OutOfBounds bounds={outOfBounds} />
           </div>
         )}
-      </div>
-    </section>
+      </WidgetResult>
+    </WidgetWrapper>
   )
 }
 

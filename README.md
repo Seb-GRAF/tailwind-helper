@@ -15,16 +15,12 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Font size
 - Font weight
 - Letter spacing
+- Text color
 
 ## Upcoming helpers
 
-### Text
-
-- Line height
-
 ### Colors
 
-- Closest hex color
 - Tailwind color list
 
 ### Layout
@@ -32,3 +28,6 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Padding
 - Margin
 - Gap
+- Border radius
+- width
+- height

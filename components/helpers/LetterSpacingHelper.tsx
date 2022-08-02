@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import OutOfBounds from '../OutOfBounds'
-import CopyToClipboard from '../CopyToClipboard'
+import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
+import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 
 interface Props {
   setLetterSpacing: (value: string) => void
@@ -68,62 +68,49 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
   }, [convertedLetterSpacing, setLetterSpacing])
 
   return (
-    <section className='w-full'>
-      {/* CONVERTER */}
-      <form className='flex items-center w-full gap-4'>
-        <label htmlFor='fontSize' className='flex items-center gap-4'>
-          Letter Spacing
-          {/* SIZE INPUT*/}
-          <div className='relative'>
-            <input
-              type='number'
-              step='0.025'
-              name='fontSize'
-              min='-0.05'
-              max='0.1'
-              className='p-4 pr-12 w-36'
-              value={value || 0}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
-            />
-            <span className='absolute top-0 right-0 flex items-center w-10 h-full pointer-events-none'>
-              em
-            </span>
-            <input
-              type='range'
-              step='0.025'
-              min='-0.05'
-              max='0.1'
-              className='absolute left-0 w-full -bottom-1'
-              value={value || 0}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
-            />
-          </div>
-        </label>
-      </form>
-      {/* RESULT */}
-      <div className='inline-block w-full h-full'>
-        {convertedLetterSpacing && (
-          <div className='flex flex-col gap-4'>
-            <div>
-              <p className='flex items-center gap-4'>
-                <CopyToClipboard
-                  valueToCopy={convertedLetterSpacing!.class.toString()}>
-                  <span className='font-semibold'>{`'${
-                    convertedLetterSpacing!.class
-                  }'`}</span>
-                </CopyToClipboard>
-                <CopyToClipboard
-                  valueToCopy={convertedLetterSpacing!.spacing.toString()}>
-                  <span>{`${convertedLetterSpacing!.spacing}`}</span>
-                </CopyToClipboard>
+    <WidgetWrapper>
+      <WidgetConverter helperName='Letter Spacing'>
+        <div className='relative'>
+          <StyledInput
+            type='number'
+            step={0.025}
+            name='fontSize'
+            min={-0.05}
+            max={0.1}
+            value={value || 0}
+            setValue={setValue}
+            hasUnit={true}
+          />
+          <span className='absolute top-0 right-0 flex items-center w-10 h-full pointer-events-none'>
+            em
+          </span>
+          <StyledRange
+            step={0.025}
+            min={-0.05}
+            max={0.1}
+            value={value || 0}
+            setValue={setValue}
+          />
+        </div>
+      </WidgetConverter>
+      <WidgetResult>
+        <CopyToClipboard valueToCopy={convertedLetterSpacing!.class.toString()}>
+          <span className='font-semibold'>{`" ${
+            convertedLetterSpacing!.class
+          } "`}</span>
+        </CopyToClipboard>
+        <CopyToClipboard
+          valueToCopy={convertedLetterSpacing!.spacing.toString()}>
+          <span>{`${convertedLetterSpacing!.spacing}`}</span>
+        </CopyToClipboard>
 
-                {outOfBounds && <OutOfBounds bounds={outOfBounds} />}
-              </p>
-            </div>
+        {outOfBounds && (
+          <div className='absolute bottom-0 left-0 w-full text-center'>
+            <OutOfBounds bounds={outOfBounds} />
           </div>
         )}
-      </div>
-    </section>
+      </WidgetResult>
+    </WidgetWrapper>
   )
 }
 

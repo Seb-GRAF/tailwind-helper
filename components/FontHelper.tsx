@@ -3,23 +3,29 @@ import {
   FontSizeHelper,
   FontWeightHelper,
   LetterSpacingHelper,
-} from './converters'
+  ColorHelper,
+} from './helpers'
 import { FontExample } from '.'
 
 const FontHelper = () => {
   const [fontSize, setFontSize] = useState('text-base')
   const [fontWeight, setFontWeight] = useState('font-normal')
   const [letterSpacing, setLetterSpacing] = useState('tracking-normal')
+  const [textColor, setTextColor] = useState('text-slate-200')
   return (
-    <div className='flex flex-col gap-12 px-4 py-8 bg-gray-200'>
-      <h2 className='text-3xl font-medium tracking-normal'>Font Helper</h2>
-      <FontSizeHelper setFontSize={setFontSize} />
-      <FontWeightHelper setFontWeight={setFontWeight} />
-      <LetterSpacingHelper setLetterSpacing={setLetterSpacing} />
+    <div className='flex flex-col gap-4'>
+      <h2 className='pl-2 text-3xl font-medium tracking-normal'>Font Helper</h2>
+      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+        <FontSizeHelper setFontSize={setFontSize} />
+        <FontWeightHelper setFontWeight={setFontWeight} />
+        <LetterSpacingHelper setLetterSpacing={setLetterSpacing} />
+        <ColorHelper setTextColor={setTextColor} />
+      </div>
       <FontExample
         fontSize={fontSize}
         fontWeight={fontWeight}
         letterSpacing={letterSpacing}
+        textColor={textColor}
       />
     </div>
   )

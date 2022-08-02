@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import OutOfBounds from '../OutOfBounds'
-import CopyToClipboard from '../CopyToClipboard'
+import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
+import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 
 interface Props {
   setFontWeight: (value: string) => void
@@ -48,9 +48,9 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
 
   // updates converted size on value and unit change
   useEffect(() => {
-    const closestFontSize = getClosestFontWeight(fontWeight, value)
-    if (closestFontSize) {
-      setConvertedFontWeight(closestFontSize)
+    const closestFontWeight = getClosestFontWeight(fontWeight, value)
+    if (closestFontWeight) {
+      setConvertedFontWeight(closestFontWeight)
     }
   }, [value])
 
@@ -71,59 +71,45 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
   }, [convertedFontWeight, setFontWeight])
 
   return (
-    <section className='w-full'>
-      {/* CONVERTER */}
-      <form className='flex items-center w-full gap-4'>
-        <label htmlFor='fontSize' className='flex items-center gap-4'>
-          Font Weight
-          {/* SIZE INPUT*/}
-          <div className='relative'>
-            <input
-              type='number'
-              step='100'
-              name='fontSize'
-              min='100'
-              max='900'
-              className='p-4 w-36'
-              value={value || 400}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
-            />
-            <input
-              type='range'
-              step='100'
-              min='100'
-              max='900'
-              className='absolute left-0 w-full -bottom-1'
-              value={value || 400}
-              onChange={(e) => setValue(parseFloat(e.target.value))}
-            />
-          </div>
-        </label>
-      </form>
-      {/* RESULT */}
-      <div className='inline-block w-full h-full'>
-        {convertedFontWeight && (
-          <div className='flex flex-col gap-4'>
-            <div>
-              <p className='flex items-center gap-4'>
-                <CopyToClipboard
-                  valueToCopy={convertedFontWeight!.class.toString()}>
-                  <span className='font-semibold'>{`'${
-                    convertedFontWeight!.class
-                  }'`}</span>
-                </CopyToClipboard>
-                <CopyToClipboard
-                  valueToCopy={convertedFontWeight!.weight.toString()}>
-                  <span>{`${convertedFontWeight!.weight}`}</span>
-                </CopyToClipboard>
+    <WidgetWrapper>
+      <WidgetConverter helperName='Font Weight'>
+        <div className='relative w-fit'>
+          <StyledInput
+            name='fontWeight'
+            type='number'
+            step={100}
+            min={100}
+            max={900}
+            value={value || 400}
+            setValue={setValue}
+            hasUnit={false}
+          />
+          <StyledRange
+            step={100}
+            min={100}
+            max={900}
+            value={value || 400}
+            setValue={setValue}
+          />
+        </div>
+      </WidgetConverter>
+      <WidgetResult>
+        <CopyToClipboard valueToCopy={convertedFontWeight!.class.toString()}>
+          <span className='font-semibold'>{`" ${
+            convertedFontWeight!.class
+          } "`}</span>
+        </CopyToClipboard>
+        <CopyToClipboard valueToCopy={convertedFontWeight!.weight.toString()}>
+          <span>{`${convertedFontWeight!.weight}`}</span>
+        </CopyToClipboard>
 
-                {outOfBounds && <OutOfBounds bounds={outOfBounds} />}
-              </p>
-            </div>
+        {outOfBounds && (
+          <div className='absolute bottom-0 left-0 w-full text-center'>
+            <OutOfBounds bounds={outOfBounds} />
           </div>
         )}
-      </div>
-    </section>
+      </WidgetResult>
+    </WidgetWrapper>
   )
 }
 

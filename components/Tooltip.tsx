@@ -9,10 +9,10 @@ interface Props {
 const Tooltip = ({ color, message, children }: Props): JSX.Element => {
   return (
     <div className='relative flex flex-col items-center group'>
-      <p className='underline underline-offset-4 decoration-black/20 decoration-dotted'>
+      <p className='w-full underline underline-offset-4 decoration-1 decoration-white/30 decoration-dotted'>
         {children}
       </p>
-      <div className='absolute bottom-0 flex-col items-center hidden mb-6 group-hover:flex'>
+      <div className='absolute bottom-0 flex-col items-center hidden mb-6 pointer-events-none group-hover:flex '>
         <span
           className={`relative z-10 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-lg ${color}`}>
           {message}
