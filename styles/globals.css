@@ -22,18 +22,18 @@ input[type='range'] {
 
 /***** Chrome, Safari, Opera and Edge Chromium styles *****/
 input[type='range']::-webkit-slider-runnable-track {
-  @apply bg-slate-100 dark:bg-slate-700 rounded-xl;
+  @apply h-2 rounded-md bg-slate-100 dark:bg-slate-700;
 }
 
 input[type='range']::-webkit-slider-thumb {
-  @apply w-4 h-3 bg-indigo-700 appearance-none dark:bg-indigo-300 rounded-xl;
+  @apply relative w-4 h-4 bg-indigo-700 rounded-full appearance-none -top-1 dark:bg-indigo-300;
 }
 
 /******** Firefox styles ********/
 input[type='range']::-moz-range-track {
-  @apply h-2 bg-slate-100 dark:bg-slate-700 rounded-xl;
+  @apply h-2 rounded-md bg-slate-100 dark:bg-slate-700;
 }
 
 input[type='range']::-moz-range-thumb {
-  @apply w-4 h-8 bg-indigo-700 border-none dark:bg-indigo-300 rounded-xl;
+  @apply relative w-4 h-4 bg-indigo-700 rounded-full appearance-none -top-1 dark:bg-indigo-300;
 }

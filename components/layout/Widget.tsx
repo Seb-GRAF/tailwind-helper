@@ -11,7 +11,7 @@ interface WidgetConverterProps {
 
 export const WidgetWrapper = ({ children }: Props): JSX.Element => {
   return (
-    <section className='relative flex flex-col items-center justify-between flex-grow gap-8 p-8 transition-all bg-white shadow-sm min-w-fit dark:shadow-inset-sm dark:shadow-white/5 rounded-xl dark:bg-slate-800 dark:hover:bg-slate-800/90'>
+    <section className='relative flex flex-col items-center justify-between flex-grow gap-8 p-8 bg-white shadow-sm min-w-fit dark:shadow-inset-sm dark:shadow-white/5 rounded-xl dark:bg-slate-800'>
       {children}
     </section>
   )

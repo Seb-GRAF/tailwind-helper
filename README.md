@@ -17,16 +17,19 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Letter spacing
 - Text color
 
-## Upcoming helpers
+### Layout
+
+- Margin
+- Padding
 
 ### Colors
 
 - Tailwind color list
 
+## Upcoming helpers
+
 ### Layout
 
-- Padding
-- Margin
 - Gap
 - Border radius
 - width

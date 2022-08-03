@@ -67,7 +67,7 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
       </button>
       <WidgetConverter helperName='Color Helper'>
         <div className='flex flex-col gap-2'>
-          <div className='relative overflow-hidden h-14 w-44 rounded-xl'>
+          <div className='relative overflow-hidden rounded-md h-14 w-44'>
             <input
               type='color'
               name='color'
@@ -91,7 +91,7 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
             id='hex-value'
             placeholder='#000000'
             maxLength={7}
-            className='p-1 text-center w-44 bg-slate-100 dark:bg-slate-700 rounded-xl'
+            className='p-1 text-center rounded-md w-44 bg-slate-100 dark:bg-slate-700'
             onChange={(e) => {
               if (e.target.value.length === 7 && e.target.value[0] === '#') {
                 setValue(e.target.value)
