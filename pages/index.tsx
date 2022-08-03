@@ -1,12 +1,19 @@
 import type { NextPage } from 'next'
-import { FontHelper, Header } from '../components'
+import { useState } from 'react'
+import { FontHelper, Header, Colors, CategoryButton } from '../components'
 
 const Home: NextPage = () => {
+  const [selectedCategory, SetSelectedCategory] = useState('font helper')
+
+  const setCategory = (category: string): void => {
+    SetSelectedCategory(category.toLowerCase())
+  }
+
   return (
-    <main className='max-w-4xl px-4 py-12 mx-auto'>
+    <main className='max-w-4xl p-4 pb-12 mx-auto'>
       <Header />
       <div className='mb-12 text-lg text-center text-slate-600 dark:text-slate-400'>
-        <h1 className='mb-4 text-5xl font-extrabold text-transparent md:text-7xl sm:text-6xl bg-clip-text bg-gradient-to-r from-pink-600 dark:from-pink-400 dark:to-indigo-400 to-indigo-600'>
+        <h1 className='mb-6 text-5xl font-extrabold text-transparent md:text-7xl sm:text-6xl bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-500 to-indigo-600'>
           Tailwind Helper
         </h1>
         <p>
@@ -15,7 +22,24 @@ const Home: NextPage = () => {
           Then this tool might come in handy!
         </p>
       </div>
-      <FontHelper />
+      <nav className='flex w-full gap-4 mb-4 border-b sm:mb-8 border-slate-300 dark:border-slate-800'>
+        <CategoryButton
+          selectedCategory={selectedCategory}
+          setCategory={setCategory}
+          name={'Font Helper'}
+        />
+        <CategoryButton
+          selectedCategory={selectedCategory}
+          setCategory={setCategory}
+          name={'Colors'}
+        />
+      </nav>
+      <div className={`${selectedCategory !== 'font helper' && 'hidden'}`}>
+        <FontHelper />
+      </div>
+      <div className={`${selectedCategory !== 'colors' && 'hidden'}`}>
+        <Colors />
+      </div>
     </main>
   )
 }

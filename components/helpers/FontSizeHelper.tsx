@@ -31,12 +31,16 @@ const fontSizes: FontSize[] = [
 ]
 
 const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
-  const [value, setValue] = useState(16)
+  const [value, setValue] = useState(48)
   const [unit, setUnit] = useState<UnitKey>('px')
   const [outOfBounds, setOutOfBounds] = useState<'max' | 'min' | 'def' | null>(
     null
   )
-  const [convertedFontSize, setConvertedFontSize] = useState(fontSizes[3])
+  const [convertedFontSize, setConvertedFontSize] = useState({
+    class: 'text-5xl',
+    rem: 3,
+    px: 48,
+  })
 
   // returns closes size matching with fontSizes array
   const getClosestFontSize = (
@@ -102,7 +106,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
   return (
     <WidgetWrapper>
       <button
-        className='absolute text-sm transition-all top-2 right-3 text-slate-400 hover:text-pink-400 '
+        className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
         onClick={reset}>
         Reset
       </button>
@@ -118,7 +122,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
             setValue={setValue}
             hasUnit={true}
           />
-          <span className='absolute top-0 right-0 flex items-center w-10 h-full text-pink-400 pointer-events-none'>
+          <span className='absolute top-0 right-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none dark:text-indigo-300'>
             {unit}
           </span>
           <StyledRange
@@ -131,7 +135,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
         </div>
 
         <button
-          className='h-full mt-2 transition-all w-28 hover:text-pink-400'
+          className='h-full mt-2 transition-all w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {

@@ -77,7 +77,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
   return (
     <WidgetWrapper>
       <button
-        className='absolute text-sm transition-all top-2 right-3 text-slate-400 hover:text-pink-400 '
+        className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
         onClick={reset}>
         Reset
       </button>
@@ -93,7 +93,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
             setValue={setValue}
             hasUnit={true}
           />
-          <span className='absolute top-0 right-0 flex items-center w-10 h-full text-pink-400 pointer-events-none'>
+          <span className='absolute top-0 right-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none dark:text-indigo-300'>
             em
           </span>
           <StyledRange

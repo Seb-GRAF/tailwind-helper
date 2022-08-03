@@ -80,7 +80,7 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
   return (
     <WidgetWrapper>
       <button
-        className='absolute text-sm transition-all top-2 right-3 text-slate-400 hover:text-pink-400 '
+        className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
         onClick={reset}>
         Reset
       </button>

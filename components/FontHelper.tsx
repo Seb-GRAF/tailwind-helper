@@ -14,7 +14,6 @@ const FontHelper = () => {
   const [textColor, setTextColor] = useState('text-slate-200')
   return (
     <div className='flex flex-col gap-4'>
-      <h2 className='pl-2 text-3xl font-medium tracking-normal'>Font Helper</h2>
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
         <FontSizeHelper setFontSize={setFontSize} />
         <FontWeightHelper setFontWeight={setFontWeight} />

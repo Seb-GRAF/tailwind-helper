@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const Header = (): JSX.Element => {
+  const router = useRouter()
   const [isDark, setIsDark] = useState(false)
 
   const isLocalStorageEmpty = () => {
@@ -54,9 +57,9 @@ const Header = (): JSX.Element => {
   }, [])
 
   return (
-    <header className='relative w-full'>
+    <header className='relative flex justify-end w-full pb-6'>
       <button
-        className='absolute right-0 w-8 h-8 rounded-full bg-slate-800 dark:bg-slate-600'
+        className='w-8 h-8 rounded-full bg-slate-800 dark:bg-slate-600'
         onClick={toggleThemeHandler}>
         {isDark ? '🌞' : '🌙'}
       </button>
