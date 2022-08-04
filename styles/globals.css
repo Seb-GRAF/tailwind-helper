@@ -16,6 +16,26 @@ html {
   color-scheme: dark;
 }
 
+.padding {
+  background: repeating-linear-gradient(
+    45deg,
+    #a5b4fc,
+    #a5b4fc 10px,
+    #9dabf5 10px,
+    #9dabf5 20px
+  );
+}
+
+.dark .padding {
+  background: repeating-linear-gradient(
+    45deg,
+    #4f46e5,
+    #4f46e5 10px,
+    #453de3 10px,
+    #453de3 20px
+  );
+}
+
 input[type='range'] {
   @apply h-2 bg-transparent appearance-none cursor-ew-resize;
 }

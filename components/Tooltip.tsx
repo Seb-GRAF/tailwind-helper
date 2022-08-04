@@ -4,23 +4,47 @@ interface Props {
   message: string
   children: ReactNode
   color?: string
+  side: string
 }
 
-const Tooltip = ({ color, message, children }: Props): JSX.Element => {
-  return (
-    <div className='relative flex flex-col items-center group'>
-      <p className='w-full underline-none underline-offset-4 decoration-1 dark:decoration-slate-500 decoration-slate-800 decoration-dotted'>
-        {children}
-      </p>
-      <div className='absolute bottom-0 flex-col items-center hidden mb-6 pointer-events-none group-hover:flex '>
-        <span
-          className={`relative z-10 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-lg ${color}`}>
-          {message}
-        </span>
-        <div className={`w-3 h-3 -mt-2 rotate-45 ${color}`}></div>
+const Tooltip = ({
+  color,
+  message,
+  children,
+  side = 'top',
+}: Props): JSX.Element => {
+  if (side === 'top')
+    return (
+      <div className='relative flex flex-col items-center group'>
+        <p className='w-full cursor-pointer underline-none underline-offset-4 decoration-1 dark:decoration-slate-500 decoration-slate-800 decoration-dotted'>
+          {children}
+        </p>
+        <div className='absolute bottom-0 flex-col items-center hidden mb-6 pointer-events-none group-hover:flex '>
+          <span
+            className={`relative z-10 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-lg ${color}`}>
+            {message}
+          </span>
+          <div className={`w-3 h-3 -mt-2 rotate-45 ${color}`}></div>
+        </div>
       </div>
-    </div>
-  )
+    )
+
+  if (side === 'left')
+    return (
+      <div className='relative z-20 flex flex-col items-center group'>
+        <p className='w-full underline-none underline-offset-4 decoration-1 dark:decoration-slate-500 decoration-slate-800 decoration-dotted'>
+          {children}
+        </p>
+        <div className='absolute right-[calc(100%+1rem)] flex-col items-center hidden -translate-y-1/2 pointer-events-none top-1/2 group-hover:flex '>
+          <span
+            className={`w-32 flex-grow relative z-10 p-2 text-xs text-white rounded-md shadow-lg ${color}`}>
+            {message}
+          </span>
+          <div
+            className={`absolute top-1/2 -right-1 w-3 h-3 -translate-y-1/2 rotate-45 ${color}`}></div>
+        </div>
+      </div>
+    )
 }
 
 export default Tooltip

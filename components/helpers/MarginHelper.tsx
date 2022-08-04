@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CopyToClipboard, StyledRange, StyledInput } from '..'
+import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 
 type UnitKey = 'rem' | 'px'
@@ -200,15 +200,13 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
         </button>
         <button
           onClick={() => toggleOrientation('left')}
-          className={`absolute transition-all left-0 py-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400 ${
+          className={`-rotate-90 absolute transition-all -left-5 px-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400 ${
             orientation.left === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
           }
           `}>
-          <span className='w-full text-center [writing-mode:vertical-rl] -rotate-180'>
-            Left
-          </span>
+          <span className='w-full text-center'>Left</span>
         </button>
         <button
           onClick={() => toggleOrientation('bottom')}
@@ -223,18 +221,26 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
         </button>
         <button
           onClick={() => toggleOrientation('right')}
-          className={`absolute transition-all right-0 py-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400
+          className={`absolute transition-all -right-6 px-4 -translate-y-1/2 rotate-90 rounded-md pointer-events-auto top-1/2 text-slate-400
           ${
             orientation.right === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
           }
           `}>
-          <span className='w-full text-center [writing-mode:vertical-rl]'>
-            Right
-          </span>
+          <span className='w-full text-center'>Right</span>
         </button>
       </div>
+      {/* INFO TOOLTIP */}
+      <div className='absolute bottom-1 right-2'>
+        <Tooltip
+          message='Click on the side buttons to change the orientation of the margin.'
+          color='bg-slate-900'
+          side='left'>
+          <div className='cursor-help opacity-70'>ⓘ</div>
+        </Tooltip>
+      </div>
+      {/* CONVERTER */}
       <WidgetConverter helperName='Margin'>
         <div className='relative'>
           <StyledInput

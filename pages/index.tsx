@@ -66,10 +66,10 @@ const Home: NextPage = () => {
       </Head>
       <Header />
       <div className='mb-12 text-lg text-center text-slate-600 dark:text-slate-400'>
-        <h1 className='flex items-center justify-center pr-1 mb-6 text-4xl font-extrabold text-transparent sm:gap-4 sm:flex-row md:text-7xl sm:text-6xl bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-500 to-indigo-600'>
+        <h1 className='items-center justify-center hidden pr-1 text-4xl font-extrabold text-transparent sm:flex sm:gap-4 sm:flex-row md:text-7xl sm:text-6xl bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-400 to-indigo-600'>
           <span className='flex items-center'>
             <svg
-              className='w-8 h-8 mr-2 text-pink-400 sm:w-14 sm:h-14 md:h-18 md:w-18'
+              className='w-12 h-12 mr-2 text-pink-500 md:w-14 md:h-14'
               width='54'
               height='54'
               viewBox='0 0 54 54'
@@ -81,13 +81,13 @@ const Home: NextPage = () => {
           </span>
           <span>Helper</span>
         </h1>
-        <p>
+        <p className='mt-6'>
           You are learning Tailwind CSS, you always forget Tailwind class names,
           or you simply want to convert a unit to the closest tailwind class?
           Then this tool might come in handy!
         </p>
       </div>
-      <nav className='flex w-full gap-4 mb-4 border-b sm:mb-8 border-slate-300 dark:border-slate-800'>
+      <nav className='flex w-full gap-4 mb-4 border-b sm:mb-8 border-slate-300 dark:border-slate-700'>
         <CategoryButton
           selectedCategory={selectedCategory}
           setCategory={setCategory}

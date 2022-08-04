@@ -21,6 +21,7 @@ const CopyToClipboard = ({ children, valueToCopy }: Props): JSX.Element => {
       onMouseLeave={() => setDisplaySuccessMessage(false)}
       className='flex'>
       <Tooltip
+        side='top'
         message={displaySuccessMessage ? 'Copied ✓' : 'Copy'}
         color={
           displaySuccessMessage
