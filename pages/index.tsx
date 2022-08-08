@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import type { NextPage } from 'next'
 import { useState } from 'react'
-import { FontHelper, Header, Colors, CategoryButton } from '../components'
+import { FontHelper, Layout, Colors, CategoryButton } from '../components'
 import LayoutHelper from '../components/LayoutHelper'
 
 const Home: NextPage = () => {
@@ -12,56 +12,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <main className='max-w-4xl min-h-screen p-4 pb-12 mx-auto'>
-      <Head>
-        <title key='title'>Tailwind Helper</title>
-        <meta
-          name='description'
-          content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
-        />
-        <meta key='og_type' property='og:type' content='website' />
-        <meta key='og_title' property='og:title' content='Tailwind Helper' />
-        <meta
-          key='og_description'
-          property='og:description'
-          content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
-        />
-        <meta key='og_locale' property='og:locale' content='en_IE' />
-        <meta
-          key='og_site_name'
-          property='og:site_name'
-          content='Tailwind Helper'
-        />
-        {/* <meta key='og_url' property='og:url' content={canonical ?? DOMAIN} /> */}
-        <meta
-          key='og_site_name'
-          property='og:site_name'
-          content='Tailwind Helper'
-        />
-
-        <meta name='robots' content='index,follow' />
-
-        <meta
-          key='twitter:card'
-          name='twitter:card'
-          content='summary_large_image'
-        />
-        <meta
-          key='twitter:title'
-          property='twitter:title'
-          content='Tailwind Helper'
-        />
-        <meta
-          key='twitter:description'
-          property='twitter:description'
-          content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
-        />
-
-        {/* <link rel='canonical' href={canonical ?? DOMAIN} /> */}
-
-        <link rel='icon' href='/favicon.svg' type='image/svg+xml' />
-      </Head>
-      <Header />
+    <Layout>
       <div className='mb-12 text-lg text-center text-slate-600 dark:text-slate-400'>
         <h1 className='items-center justify-center hidden pr-1 text-4xl font-extrabold text-transparent sm:flex sm:gap-4 sm:flex-row md:text-7xl sm:text-6xl bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-400 to-indigo-600'>
           <span className='flex items-center'>
@@ -111,7 +62,7 @@ const Home: NextPage = () => {
       <div className={`${selectedCategory !== 'colors' && 'hidden'}`}>
         <Colors />
       </div>
-    </main>
+    </Layout>
   )
 }
 

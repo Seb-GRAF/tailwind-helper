@@ -2,60 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-const Header = (): JSX.Element => {
-  const router = useRouter()
-  const [isDark, setIsDark] = useState(false)
+interface Props {
+  toggleThemeHandler: () => void
+  isDark: boolean
+}
 
-  const isLocalStorageEmpty = () => {
-    return !localStorage.getItem('isDarkTheme')
-  }
-
-  const setValueToLocal = (value: boolean) => {
-    localStorage.setItem('isDarkTheme', `${value}`)
-  }
-
-  const toggleThemeHandler = () => {
-    const currentTheme = JSON.parse(localStorage.getItem('isDarkTheme'))
-
-    setIsDark(() => !currentTheme)
-    document.querySelector('html').classList.toggle('dark')
-    setValueToLocal(!currentTheme)
-  }
-
-  useEffect(() => {
-    // toggles theme based on system theme
-    const systemThemeToggle = () => {
-      // true if dark theme
-      const systemTheme = window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      ).matches
-
-      if (systemTheme) document.querySelector('html').classList.add('dark')
-      if (!systemTheme) document.querySelector('html').classList.remove('dark')
-
-      setIsDark(systemTheme)
-      setValueToLocal(systemTheme)
-    }
-
-    if (isLocalStorageEmpty()) systemThemeToggle()
-    else {
-      const isDarkTheme = JSON.parse(localStorage.getItem('isDarkTheme'))
-      isDarkTheme && document.querySelector('html').classList.add('dark')
-      setIsDark(() => isDarkTheme)
-    }
-
-    // watches for system theme change
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', systemThemeToggle)
-
-    return () => {
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', systemThemeToggle)
-    }
-  }, [])
-
+const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
   return (
     <header className='relative flex items-center justify-between w-full sm:justify-end'>
       <h1 className='flex items-center justify-center pr-1 text-2xl font-extrabold text-transparent sm:hidden bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-400 to-indigo-600'>

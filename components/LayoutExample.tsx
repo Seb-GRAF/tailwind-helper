@@ -16,16 +16,16 @@ const LayoutExample = ({
   const [toPrint, setToPrint] = useState('')
 
   useEffect(() => {
-    setToPrint(margin + ' ' + padding + ' ' + borderRadius)
+    setToPrint(`${margin} ${padding} ${borderRadius}`)
   }, [margin, padding, borderRadius])
 
   return (
     <div className='bg-white shadow-md dark:bg-slate-800 dark:hover:bg-slate-800/90 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       <div className={`mb-2 flex items-center justify-center w-full min-h-96`}>
         <div
-          className={`padding ${margin} ${padding} ${borderRadius} flex justify-center item-center transition-[margin, padding] duration-75 bg-indigo-200 dark:bg-indigo-700 w-full shadow-lg h-auto`}>
+          className={`padding  overflow-hidden ${borderRadius} ${margin} ${padding} flex justify-center item-center transition-all duration-75 bg-indigo-200 dark:bg-indigo-700 w-full shadow-lg h-auto`}>
           <div
-            className={`w-full h-24 bg-indigo-200 ${borderRadius} dark:bg-indigo-500`}></div>
+            className={`${borderRadius} w-full h-24 transition-all duration-75 bg-indigo-200 dark:bg-indigo-500`}></div>
         </div>
       </div>
       <div className='flex items-center justify-between mx-3 mb-2'>

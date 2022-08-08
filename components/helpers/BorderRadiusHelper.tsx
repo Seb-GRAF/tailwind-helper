@@ -57,7 +57,6 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
         ? curr
         : prev
     })
-    console.log(closest)
     return closest
   }
 
@@ -216,7 +215,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
       {/* INFO TOOLTIP */}
       <div className='absolute bottom-2 right-3'>
         <Tooltip
-          message='Click on the side buttons to change the side of the border radius.'
+          message='Click on the side buttons to change the direction of the border radius (maximum two at a time).'
           color='bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
           side='left'>
           <span className='cursor-help opacity-70'>ⓘ</span>

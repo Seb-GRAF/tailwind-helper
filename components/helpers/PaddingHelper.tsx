@@ -234,7 +234,7 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
       {/* INFO TOOLTIP */}
       <div className='absolute bottom-2 right-3'>
         <Tooltip
-          message='Click on the side buttons to change the orientation of the padding.'
+          message='Click on the side buttons to change the orientation of the padding. (maximum two at a time)'
           color='bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
           side='left'>
           <span className='cursor-help opacity-70'>ⓘ</span>

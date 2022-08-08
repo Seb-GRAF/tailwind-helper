@@ -36,6 +36,10 @@ html {
   );
 }
 
+/* .widget:nth-of-type(odd):last-of-type {
+  @apply sm:col-span-2;
+} */
+
 input[type='range'] {
   @apply h-2 bg-transparent appearance-none cursor-ew-resize;
 }

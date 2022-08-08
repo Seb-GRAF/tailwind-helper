@@ -1,4 +1,11 @@
-export { WidgetConverter, WidgetResult, WidgetWrapper, Header } from './layout'
+export {
+  WidgetConverter,
+  WidgetResult,
+  WidgetWrapper,
+  Header,
+  Footer,
+  Layout,
+} from './layout'
 
 export { FontSizeHelper } from './helpers'
 export { FontWeightHelper } from './helpers'
