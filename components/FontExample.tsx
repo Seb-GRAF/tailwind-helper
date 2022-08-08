@@ -36,35 +36,39 @@ const FontSizeExample = ({
       <input
         id='text-example'
         type='text'
-        defaultValue='lorem Ipsum Dolor Sit Amet'
+        defaultValue='Lorem Ipsum'
         placeholder='Enter your text'
         className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 p-8 pb-6 overflow-x-auto w-full bg-transparent `}
       />
       <div className='flex items-center justify-between mx-4 mb-3'>
         <CopyToClipboard valueToCopy={toPrint}>
-          <span className='flex gap-2 font-semibold'>
+          <span className='flex flex-wrap gap-2 font-semibold whitespace-nowrap'>
             {fontSize !== 'text-base' && <span>{fontSize}</span>}
             {fontWeight !== 'font-normal' && <span>{fontWeight}</span>}
             {letterSpacing !== 'tracking-normal' && (
               <span>{letterSpacing}</span>
             )}
-            <span>text-{textColor}</span>
-            <svg
-              width='24'
-              height='24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='1.5'>
-              <path d='M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8'></path>
-            </svg>
+            <span className='flex gap-2'>
+              text-{textColor}
+              <svg
+                width='24'
+                height='24'
+                fill='none'
+                stroke='currentColor'
+                strokeWidth='1.5'>
+                <path d='M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8'></path>
+              </svg>
+            </span>
           </span>
         </CopyToClipboard>
-        <Tooltip
-          message='Example of your settings'
-          color='bg-slate-900'
-          side='left'>
-          <div className='cursor-help opacity-70'>ⓘ</div>
-        </Tooltip>
+        <div className='self-end'>
+          <Tooltip
+            message='Example of your settings'
+            color='bg-slate-900'
+            side='left'>
+            <span className='cursor-help opacity-70'>ⓘ</span>
+          </Tooltip>
+        </div>
       </div>
     </div>
   )

@@ -17,16 +17,14 @@ const Home: NextPage = () => {
         <title key='title'>Tailwind Helper</title>
         <meta
           name='description'
-          content='You are learning Tailwind CSS, you always forget Tailwind class names, or you simply want to convert a unit to the closest tailwind class?
-          Then this tool might come in handy!'
+          content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
         />
         <meta key='og_type' property='og:type' content='website' />
         <meta key='og_title' property='og:title' content='Tailwind Helper' />
         <meta
           key='og_description'
           property='og:description'
-          content='You are learning Tailwind CSS, you always forget Tailwind class names, or you simply want to convert a unit to the closest tailwind class?
-          Then this tool might come in handy!'
+          content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
         />
         <meta key='og_locale' property='og:locale' content='en_IE' />
         <meta
@@ -56,8 +54,7 @@ const Home: NextPage = () => {
         <meta
           key='twitter:description'
           property='twitter:description'
-          content='You are learning Tailwind CSS, you always forget Tailwind class names, or you simply want to convert a unit to the closest tailwind class?
-          Then this tool might come in handy!'
+          content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
         />
 
         {/* <link rel='canonical' href={canonical ?? DOMAIN} /> */}
@@ -82,9 +79,10 @@ const Home: NextPage = () => {
           <span>Helper</span>
         </h1>
         <p className='mt-6'>
-          You are learning Tailwind CSS, you always forget Tailwind class names,
-          or you simply want to convert a unit to the closest tailwind class?
-          Then this tool might come in handy!
+          You want to convert a unit to the corresponding tailwind class? You
+          always forget property names? Or you are simply learning tailwind and
+          would like a bit of help visualizing classes? Then this tool might
+          come in handy!
         </p>
       </div>
       <nav className='flex w-full gap-4 mb-4 border-b sm:mb-8 border-slate-300 dark:border-slate-700'>

@@ -232,12 +232,12 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
         </button>
       </div>
       {/* INFO TOOLTIP */}
-      <div className='absolute bottom-1 right-2'>
+      <div className='absolute bottom-2 right-3'>
         <Tooltip
           message='Click on the side buttons to change the orientation of the margin.'
-          color='bg-slate-900'
+          color='bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
           side='left'>
-          <div className='cursor-help opacity-70'>ⓘ</div>
+          <span className='cursor-help opacity-70'>ⓘ</span>
         </Tooltip>
       </div>
       {/* CONVERTER */}

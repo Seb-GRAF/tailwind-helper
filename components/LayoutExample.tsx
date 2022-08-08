@@ -5,28 +5,35 @@ import { Tooltip } from './'
 interface Props {
   margin: string
   padding: string
+  borderRadius: string
 }
 
-const LayoutExample = ({ margin, padding }: Props): JSX.Element => {
+const LayoutExample = ({
+  margin,
+  padding,
+  borderRadius,
+}: Props): JSX.Element => {
   const [toPrint, setToPrint] = useState('')
 
   useEffect(() => {
-    setToPrint(margin + ' ' + padding)
-  }, [margin, padding])
+    setToPrint(margin + ' ' + padding + ' ' + borderRadius)
+  }, [margin, padding, borderRadius])
 
   return (
-    <div className='overflow-hidden bg-white shadow-md dark:bg-slate-800 dark:hover:bg-slate-800/90 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+    <div className='bg-white shadow-md dark:bg-slate-800 dark:hover:bg-slate-800/90 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       <div className={`mb-2 flex items-center justify-center w-full min-h-96`}>
         <div
-          className={`padding ${margin} ${padding} flex justify-center item-center transition-[margin, padding] duration-75 bg-indigo-200 dark:bg-indigo-700 w-full rounded-xl shadow-lg h-auto`}>
-          <div className='w-full h-24 bg-indigo-200 rounded-xl dark:bg-indigo-500'></div>
+          className={`padding ${margin} ${padding} ${borderRadius} flex justify-center item-center transition-[margin, padding] duration-75 bg-indigo-200 dark:bg-indigo-700 w-full shadow-lg h-auto`}>
+          <div
+            className={`w-full h-24 bg-indigo-200 ${borderRadius} dark:bg-indigo-500`}></div>
         </div>
       </div>
-      <div className='flex items-center justify-between mx-4 mb-2'>
+      <div className='flex items-center justify-between mx-3 mb-2'>
         <CopyToClipboard valueToCopy={toPrint}>
           <span className='flex gap-2 font-semibold'>
             <span>{margin}</span>
             <span>{padding}</span>
+            <span>{borderRadius}</span>
             <svg
               width='24'
               height='24'
@@ -39,9 +46,9 @@ const LayoutExample = ({ margin, padding }: Props): JSX.Element => {
         </CopyToClipboard>
         <Tooltip
           message='Example of your settings'
-          color='bg-slate-900'
+          color='bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
           side='left'>
-          <div className='cursor-help opacity-70'>ⓘ</div>
+          <span className='cursor-help opacity-70'>ⓘ</span>
         </Tooltip>
       </div>
     </div>

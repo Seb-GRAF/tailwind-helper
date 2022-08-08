@@ -74,7 +74,7 @@ const Header = (): JSX.Element => {
         <span>Helper</span>
       </h1>
       <button
-        className='w-10 h-10 text-indigo-600 dark:text-indigo-400'
+        className='text-indigo-600 w-9 h-9 dark:text-indigo-400'
         onClick={toggleThemeHandler}>
         {isDark ? (
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>

@@ -6,52 +6,29 @@ type UnitKey = 'rem' | 'px'
 type OrientationKey = 'top' | 'right' | 'bottom' | 'left'
 
 interface Props {
-  setPadding: (value: string) => void
+  setBorderRadius: (value: string) => void
 }
 
-interface Padding {
+interface Border {
   class: string
   rem: number
   px: number
 }
 
-const padding: Padding[] = [
-  { class: '0', rem: 0, px: 0 },
-  { class: '0.5', rem: 0.125, px: 2 },
-  { class: '1', rem: 0.25, px: 4 },
-  { class: '1.5', rem: 0.375, px: 6 },
-  { class: '2', rem: 0.5, px: 8 },
-  { class: '2.5', rem: 0.625, px: 10 },
-  { class: '3', rem: 0.75, px: 12 },
-  { class: '3.5', rem: 0.875, px: 14 },
-  { class: '4', rem: 1, px: 16 },
-  { class: '5', rem: 1.25, px: 20 },
-  { class: '6', rem: 1.5, px: 24 },
-  { class: '8', rem: 2, px: 32 },
-  { class: '10', rem: 2.5, px: 40 },
-  { class: '11', rem: 2.75, px: 44 },
-  { class: '12', rem: 3, px: 48 },
-  { class: '14', rem: 3.5, px: 56 },
-  { class: '16', rem: 4, px: 64 },
-  { class: '20', rem: 5, px: 80 },
-  { class: '24', rem: 6, px: 96 },
-  { class: '28', rem: 7, px: 112 },
-  { class: '32', rem: 8, px: 128 },
-  { class: '36', rem: 9, px: 144 },
-  { class: '40', rem: 10, px: 160 },
-  { class: '44', rem: 11, px: 176 },
-  { class: '48', rem: 12, px: 192 },
-  { class: '52', rem: 13, px: 208 },
-  { class: '56', rem: 14, px: 224 },
-  { class: '64', rem: 16, px: 256 },
-  { class: '72', rem: 18, px: 288 },
-  { class: '80', rem: 20, px: 320 },
-  { class: '96', rem: 24, px: 384 },
-  { class: 'px', rem: 0.0625, px: 1 },
+const borders: Border[] = [
+  { class: '-none', rem: 0, px: 0 },
+  { class: '-sm', rem: 0.125, px: 2 },
+  { class: '', rem: 0.25, px: 4 },
+  { class: '-md', rem: 0.375, px: 6 },
+  { class: '-lg', rem: 0.5, px: 8 },
+  { class: '-xl', rem: 0.75, px: 12 },
+  { class: '-2xl', rem: 1, px: 16 },
+  { class: '-3xl', rem: 1.5, px: 24 },
+  { class: '-full', rem: 625, px: 9999 },
 ]
 
-const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
-  const [value, setValue] = useState(16)
+const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
+  const [value, setValue] = useState(12)
   const [unit, setUnit] = useState<UnitKey>('px')
   const [orientation, setOrientation] = useState({
     left: false,
@@ -59,24 +36,28 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
     top: false,
     bottom: false,
   })
-  const [orientationOutput, setOrientationOutput] = useState('p')
-  const [convertedPadding, setConvertedPadding] = useState({
-    class: '4',
-    rem: 1,
-    px: 16,
+  const [orientationOutput, setOrientationOutput] = useState('rounded')
+
+  const [convertedBorderRadius, setConvertedBorderRadius] = useState({
+    class: '-xl',
+    rem: 0.75,
+    px: 12,
   })
 
   // returns closes size matching with fontSizes array
-  const getClosestPadding = (
-    padding: Padding[],
+  const getClosestBorderRadius = (
+    borders: Border[],
     value: number,
     unit: UnitKey
-  ): Padding => {
-    let closest = padding.reduce((prev: Padding, curr: Padding): Padding => {
+  ): Border => {
+    if ((value >= 32 && unit === 'px') || (value >= 2 && unit === 'rem'))
+      return { class: '-full', rem: 625, px: 9999 }
+    let closest = borders.reduce((prev: Border, curr: Border): Border => {
       return Math.abs(curr[unit] - value) < Math.abs(prev[unit] - value)
         ? curr
         : prev
     })
+    console.log(closest)
     return closest
   }
 
@@ -97,13 +78,9 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
   }
 
   const reset = () => {
-    setValue(16)
+    setValue(12)
     setUnit('px')
-    setConvertedPadding({
-      class: '4',
-      rem: 1,
-      px: 16,
-    })
+    setConvertedBorderRadius({ class: '-xl', rem: 0.75, px: 12 })
     setOrientation({
       left: false,
       right: false,
@@ -112,46 +89,51 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
     })
   }
 
-  // defines the prefix of class when changing orientation
   useEffect(() => {
     const { left, right, top, bottom } = orientation
 
     switch (true) {
       case left === true && right === true && top === true && bottom === true:
-        setOrientationOutput('p')
+        setOrientationOutput('rounded')
         break
-      case left === true && right === true && top === false && bottom === false:
-        setOrientationOutput('px')
+      case left === true && right === false && top === true && bottom === false:
+        setOrientationOutput('rounded-tl')
         break
-      case left === false && right === false && top === true && bottom === true:
-        setOrientationOutput('py')
+      case left === true && right === false && top === false && bottom === true:
+        setOrientationOutput('rounded-bl')
+        break
+      case left === false && right === true && top === true && bottom === false:
+        setOrientationOutput('rounded-tr')
+        break
+      case left === false && right === true && top === false && bottom === true:
+        setOrientationOutput('rounded-br')
         break
       case left === false &&
         right === false &&
         top === true &&
         bottom === false:
-        setOrientationOutput('pt')
+        setOrientationOutput('rounded-t')
         break
       case left === false &&
         right === false &&
         top === false &&
         bottom === true:
-        setOrientationOutput('pb')
+        setOrientationOutput('rounded-b')
         break
       case left === false &&
         right === true &&
         top === false &&
         bottom === false:
-        setOrientationOutput('pr')
+        setOrientationOutput('rounded-r')
         break
       case left === true &&
         right === false &&
         top === false &&
         bottom === false:
-        setOrientationOutput('pl')
+        setOrientationOutput('rounded-l')
         break
-      case (left === true || right === true) &&
-        (bottom === true || top === true):
+      case (left === true && right === true) ||
+        (bottom === true && top === true):
         setOrientation({
           left: false,
           right: false,
@@ -160,23 +142,23 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
         })
         break
       default:
-        setOrientationOutput('p')
+        setOrientationOutput('rounded')
         break
     }
   }, [orientation, orientationOutput])
 
   // updates converted size on value and unit change
   useEffect(() => {
-    const closestMargin = getClosestPadding(padding, value, unit)
-    if (closestMargin) {
-      setConvertedPadding(closestMargin)
+    const closestBorderRadius = getClosestBorderRadius(borders, value, unit)
+    if (closestBorderRadius) {
+      setConvertedBorderRadius(closestBorderRadius)
     }
   }, [value, unit])
 
   useEffect(() => {
     // sets parent font size to converted size
-    setPadding(`${orientationOutput}-${convertedPadding!.class}`)
-  }, [convertedPadding, setPadding, orientationOutput])
+    setBorderRadius(`${orientationOutput}${convertedBorderRadius!.class}`)
+  }, [convertedBorderRadius, setBorderRadius, orientationOutput])
 
   return (
     <WidgetWrapper>
@@ -186,7 +168,7 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
         Reset
       </button>
       {/* ORIENTATION PICKER */}
-      <div className='absolute top-2 left-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] text-xs pointer-events-none'>
+      <div className='pointer-events-none absolute top-2 left-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] text-xs'>
         <button
           onClick={() => toggleOrientation('top')}
           className={`absolute transition-all top-0 px-4 -translate-x-1/2 rounded-md pointer-events-auto left-1/2 text-slate-400
@@ -234,21 +216,21 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
       {/* INFO TOOLTIP */}
       <div className='absolute bottom-2 right-3'>
         <Tooltip
-          message='Click on the side buttons to change the orientation of the padding.'
+          message='Click on the side buttons to change the side of the border radius.'
           color='bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
           side='left'>
           <span className='cursor-help opacity-70'>ⓘ</span>
         </Tooltip>
       </div>
       {/* CONVERTER */}
-      <WidgetConverter helperName='Padding'>
+      <WidgetConverter helperName='Border Radius'>
         <div className='relative'>
           <StyledInput
             type='number'
-            name='padding'
+            name='margin'
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={0}
-            max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
+            max={unit === 'px' ? 32 : unit === 'rem' ? 2 : 0}
             value={value || 0}
             setValue={setValue}
             hasUnit={true}
@@ -259,7 +241,7 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
           <StyledRange
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={0}
-            max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
+            max={unit === 'px' ? 32 : unit === 'rem' ? 2 : 0}
             value={value || 0}
             setValue={setValue}
           />
@@ -281,17 +263,16 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
         </button>
       </WidgetConverter>
       {/* RESULT */}
-
       <WidgetResult>
-        <CopyToClipboard valueToCopy={convertedPadding.class.toString()}>
-          <span className='font-semibold'>{`" ${orientationOutput}-${convertedPadding.class} "`}</span>
+        <CopyToClipboard valueToCopy={convertedBorderRadius.class.toString()}>
+          <span className='font-semibold'>{`"${orientationOutput}${convertedBorderRadius.class} "`}</span>
         </CopyToClipboard>
         <div className='flex gap-4'>
-          <CopyToClipboard valueToCopy={convertedPadding.rem.toString()}>
-            <span>{`${convertedPadding.rem}rem`}</span>
+          <CopyToClipboard valueToCopy={convertedBorderRadius.rem.toString()}>
+            <span>{`${convertedBorderRadius.rem}rem`}</span>
           </CopyToClipboard>
-          <CopyToClipboard valueToCopy={convertedPadding.px.toString()}>
-            <span>{`${convertedPadding.px}px`}</span>
+          <CopyToClipboard valueToCopy={convertedBorderRadius.px.toString()}>
+            <span>{`${convertedBorderRadius.px}px`}</span>
           </CopyToClipboard>
         </div>
       </WidgetResult>
@@ -299,4 +280,4 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
   )
 }
 
-export default PaddingHelper
+export default BorderRadiusHelper
