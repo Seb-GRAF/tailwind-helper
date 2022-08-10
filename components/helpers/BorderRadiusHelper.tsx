@@ -1,35 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
+import { borderRadiuses, BorderRadius } from '../../utils/tailwindClasses'
+import { unitConverter } from '../../utils/unitConverter';
+import { getClosestItem } from '../../utils/getClosestItem';
 
-type UnitKey = 'rem' | 'px'
 type OrientationKey = 'top' | 'right' | 'bottom' | 'left'
 
 interface Props {
   setBorderRadius: (value: string) => void
 }
 
-interface Border {
-  class: string
-  rem: number
-  px: number
-}
-
-const borders: Border[] = [
-  { class: '-none', rem: 0, px: 0 },
-  { class: '-sm', rem: 0.125, px: 2 },
-  { class: '', rem: 0.25, px: 4 },
-  { class: '-md', rem: 0.375, px: 6 },
-  { class: '-lg', rem: 0.5, px: 8 },
-  { class: '-xl', rem: 0.75, px: 12 },
-  { class: '-2xl', rem: 1, px: 16 },
-  { class: '-3xl', rem: 1.5, px: 24 },
-  { class: '-full', rem: 625, px: 9999 },
-]
-
 const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
-  const [value, setValue] = useState(12)
-  const [unit, setUnit] = useState<UnitKey>('px')
+  const [value, setValue] = useState(borderRadiuses[5].px)
+  const [unit, setUnit] = useState('px')
   const [orientation, setOrientation] = useState({
     left: false,
     right: false,
@@ -37,49 +21,16 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
     bottom: false,
   })
   const [orientationOutput, setOrientationOutput] = useState('rounded')
-
-  const [convertedBorderRadius, setConvertedBorderRadius] = useState({
-    class: '-xl',
-    rem: 0.75,
-    px: 12,
-  })
-
-  // returns closes size matching with fontSizes array
-  const getClosestBorderRadius = (
-    borders: Border[],
-    value: number,
-    unit: UnitKey
-  ): Border => {
-    if ((value >= 32 && unit === 'px') || (value >= 2 && unit === 'rem'))
-      return { class: '-full', rem: 625, px: 9999 }
-    let closest = borders.reduce((prev: Border, curr: Border): Border => {
-      return Math.abs(curr[unit] - value) < Math.abs(prev[unit] - value)
-        ? curr
-        : prev
-    })
-    return closest
-  }
-
-  // switches between rem and px
-  const unitConverter = (value: number, unit: UnitKey): number => {
-    switch (unit) {
-      case 'rem':
-        return parseFloat((value * 16).toFixed())
-      case 'px':
-        return parseFloat((Math.round((value / 16) * 8) / 8).toFixed(3))
-      default:
-        return value
-    }
-  }
+  const [convertedBorderRadius, setConvertedBorderRadius] = useState(borderRadiuses[5])
 
   const toggleOrientation = (value: OrientationKey): void => {
     setOrientation({ ...orientation, [value]: !orientation[value] })
   }
 
   const reset = () => {
-    setValue(12)
+    setValue(borderRadiuses[5].px)
     setUnit('px')
-    setConvertedBorderRadius({ class: '-xl', rem: 0.75, px: 12 })
+    setConvertedBorderRadius(borderRadiuses[5])
     setOrientation({
       left: false,
       right: false,
@@ -148,10 +99,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
 
   // updates converted size on value and unit change
   useEffect(() => {
-    const closestBorderRadius = getClosestBorderRadius(borders, value, unit)
-    if (closestBorderRadius) {
-      setConvertedBorderRadius(closestBorderRadius)
-    }
+    setConvertedBorderRadius(getClosestItem(borderRadiuses, value, unit))
   }, [value, unit])
 
   useEffect(() => {
@@ -171,43 +119,39 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
         <button
           onClick={() => toggleOrientation('top')}
           className={`absolute transition-all top-0 px-4 -translate-x-1/2 rounded-md pointer-events-auto left-1/2 text-slate-400
-          ${
-            orientation.top === true
+          ${orientation.top === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+            }
           `}>
           Top
         </button>
         <button
           onClick={() => toggleOrientation('left')}
-          className={`-rotate-90 absolute transition-all -left-5 px-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400 ${
-            orientation.left === true
-              ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
-              : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+          className={`-rotate-90 absolute transition-all -left-5 px-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400 ${orientation.left === true
+            ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
+            : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
+            }
           `}>
           <span className='w-full text-center'>Left</span>
         </button>
         <button
           onClick={() => toggleOrientation('bottom')}
           className={`absolute transition-all bottom-0 px-4 -translate-x-1/2 rounded-md pointer-events-auto left-1/2 text-slate-400
-          ${
-            orientation.bottom === true
+          ${orientation.bottom === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+            }
           `}>
           Bottom
         </button>
         <button
           onClick={() => toggleOrientation('right')}
           className={`absolute transition-all -right-6 px-4 -translate-y-1/2 rotate-90 rounded-md pointer-events-auto top-1/2 text-slate-400
-          ${
-            orientation.right === true
+          ${orientation.right === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+            }
           `}>
           <span className='w-full text-center'>Right</span>
         </button>

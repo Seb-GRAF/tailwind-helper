@@ -1,58 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
+import { margins } from '../../utils/tailwindClasses';
+import { unitConverter } from '../../utils/unitConverter';
+import { getClosestItem } from '../../utils/getClosestItem';
 
-type UnitKey = 'rem' | 'px'
 type OrientationKey = 'top' | 'right' | 'bottom' | 'left'
 
 interface Props {
   setMargin: (value: string) => void
 }
 
-interface Margin {
-  class: string
-  rem: number
-  px: number
-}
-
-const margins: Margin[] = [
-  { class: '0', rem: 0, px: 0 },
-  { class: '0.5', rem: 0.125, px: 2 },
-  { class: '1', rem: 0.25, px: 4 },
-  { class: '1.5', rem: 0.375, px: 6 },
-  { class: '2', rem: 0.5, px: 8 },
-  { class: '2.5', rem: 0.625, px: 10 },
-  { class: '3', rem: 0.75, px: 12 },
-  { class: '3.5', rem: 0.875, px: 14 },
-  { class: '4', rem: 1, px: 16 },
-  { class: '5', rem: 1.25, px: 20 },
-  { class: '6', rem: 1.5, px: 24 },
-  { class: '8', rem: 2, px: 32 },
-  { class: '10', rem: 2.5, px: 40 },
-  { class: '11', rem: 2.75, px: 44 },
-  { class: '12', rem: 3, px: 48 },
-  { class: '14', rem: 3.5, px: 56 },
-  { class: '16', rem: 4, px: 64 },
-  { class: '20', rem: 5, px: 80 },
-  { class: '24', rem: 6, px: 96 },
-  { class: '28', rem: 7, px: 112 },
-  { class: '32', rem: 8, px: 128 },
-  { class: '36', rem: 9, px: 144 },
-  { class: '40', rem: 10, px: 160 },
-  { class: '44', rem: 11, px: 176 },
-  { class: '48', rem: 12, px: 192 },
-  { class: '52', rem: 13, px: 208 },
-  { class: '56', rem: 14, px: 224 },
-  { class: '64', rem: 16, px: 256 },
-  { class: '72', rem: 18, px: 288 },
-  { class: '80', rem: 20, px: 320 },
-  { class: '96', rem: 24, px: 384 },
-  { class: 'px', rem: 0.0625, px: 1 },
-]
-
 const MarginHelper = ({ setMargin }: Props): JSX.Element => {
-  const [value, setValue] = useState(16)
-  const [unit, setUnit] = useState<UnitKey>('px')
+  const [value, setValue] = useState(margins[8].px)
+  const [unit, setUnit] = useState('px')
   const [orientation, setOrientation] = useState({
     left: false,
     right: false,
@@ -60,51 +21,16 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
     bottom: false,
   })
   const [orientationOutput, setOrientationOutput] = useState('m')
-
-  const [convertedMargin, setConvertedMargin] = useState({
-    class: '4',
-    rem: 1,
-    px: 16,
-  })
-
-  // returns closes size matching with fontSizes array
-  const getClosestMargin = (
-    margins: Margin[],
-    value: number,
-    unit: UnitKey
-  ): Margin => {
-    let closest = margins.reduce((prev: Margin, curr: Margin): Margin => {
-      return Math.abs(curr[unit] - value) < Math.abs(prev[unit] - value)
-        ? curr
-        : prev
-    })
-    return closest
-  }
-
-  // switches between rem and px
-  const unitConverter = (value: number, unit: UnitKey): number => {
-    switch (unit) {
-      case 'rem':
-        return parseFloat((value * 16).toFixed())
-      case 'px':
-        return parseFloat((Math.round((value / 16) * 8) / 8).toFixed(3))
-      default:
-        return value
-    }
-  }
+  const [convertedMargin, setConvertedMargin] = useState(margins[8])
 
   const toggleOrientation = (value: OrientationKey): void => {
     setOrientation({ ...orientation, [value]: !orientation[value] })
   }
 
   const reset = () => {
-    setValue(16)
+    setValue(margins[8].px)
     setUnit('px')
-    setConvertedMargin({
-      class: '4',
-      rem: 1,
-      px: 16,
-    })
+    setConvertedMargin(margins[8])
     setOrientation({
       left: false,
       right: false,
@@ -167,10 +93,7 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
 
   // updates converted size on value and unit change
   useEffect(() => {
-    const closestMargin = getClosestMargin(margins, value, unit)
-    if (closestMargin) {
-      setConvertedMargin(closestMargin)
-    }
+    setConvertedMargin(getClosestItem(margins, value, unit))
   }, [value, unit])
 
   useEffect(() => {
@@ -190,43 +113,39 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
         <button
           onClick={() => toggleOrientation('top')}
           className={`absolute transition-all top-0 px-4 -translate-x-1/2 rounded-md pointer-events-auto left-1/2 text-slate-400
-          ${
-            orientation.top === true
+          ${orientation.top === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+            }
           `}>
           Top
         </button>
         <button
           onClick={() => toggleOrientation('left')}
-          className={`-rotate-90 absolute transition-all -left-5 px-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400 ${
-            orientation.left === true
-              ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
-              : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+          className={`-rotate-90 absolute transition-all -left-5 px-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400 ${orientation.left === true
+            ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
+            : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
+            }
           `}>
           <span className='w-full text-center'>Left</span>
         </button>
         <button
           onClick={() => toggleOrientation('bottom')}
           className={`absolute transition-all bottom-0 px-4 -translate-x-1/2 rounded-md pointer-events-auto left-1/2 text-slate-400
-          ${
-            orientation.bottom === true
+          ${orientation.bottom === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+            }
           `}>
           Bottom
         </button>
         <button
           onClick={() => toggleOrientation('right')}
           className={`absolute transition-all -right-6 px-4 -translate-y-1/2 rotate-90 rounded-md pointer-events-auto top-1/2 text-slate-400
-          ${
-            orientation.right === true
+          ${orientation.right === true
               ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
               : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-          }
+            }
           `}>
           <span className='w-full text-center'>Right</span>
         </button>

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { CopyToClipboard, StyledRange, StyledInput } from '..'
+import { CopyToClipboard } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-import { colors, color } from '../../utils/colors'
+import { colors, Color } from '../../utils/tailwindClasses'
 
 interface Props {
-  setTextColor: (value: string) => void
+  setTextColor?: (value: string) => void
 }
 
 const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
   const [value, setValue] = useState('#ec4899')
-  const [closestColor, setClosestColor] = useState<color>({
+  const [closestColor, setClosestColor] = useState<Color>({
     class: 'pink-500',
     hex: '#ec4899',
   })
@@ -32,30 +32,29 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
       .match(/.{2}/g)
       ?.map((value) => parseInt(value, 16))
   }
-
   // Distance between 2 colors (in RGB)
   // https://stackoverflow.com/questions/23990802/find-nearest-color-from-a-colors-list
   const distance = (a: number[], b: number[]): number => {
     return Math.sqrt(
       Math.pow(a[0] - b[0], 2) +
-        Math.pow(a[1] - b[1], 2) +
-        Math.pow(a[2] - b[2], 2)
+      Math.pow(a[1] - b[1], 2) +
+      Math.pow(a[2] - b[2], 2)
     )
   }
-
-  const nearestColor = (colorHex: string): any | color => {
+  const nearestColor = (colorHex: string): any | Color => {
     return colors.reduce(
       (a, b) =>
-        (a =
-          distance(hexToRgb(colorHex), hexToRgb(b.hex)) < a[0]
-            ? [distance(hexToRgb(colorHex), hexToRgb(b.hex)), b]
-            : a),
+      (a =
+        distance(hexToRgb(colorHex), hexToRgb(b.hex)) < a[0]
+          ? [distance(hexToRgb(colorHex), hexToRgb(b.hex)), b]
+          : a),
       [Number.POSITIVE_INFINITY, colors[0]]
     )[1]
   }
 
   useEffect(() => {
-    setTextColor(closestColor.class)
+    if (setTextColor)
+      setTextColor(closestColor.class)
   }, [closestColor, setTextColor])
 
   return (

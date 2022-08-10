@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { colors } from '../utils/colors'
+import { colors } from '../utils/tailwindClasses'
 import { CopyToClipboard } from '.'
+import { ColorHelper } from './helpers'
 
 const Colors = (): JSX.Element => {
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
@@ -12,16 +13,16 @@ const Colors = (): JSX.Element => {
   }
 
   return (
-    <section className='mx-auto'>
+    <section className='flex flex-col gap-4 mx-auto'>
+      <ColorHelper />
       <div className='relative grid grid-cols-5 gap-2 p-0 pb-0 md:shadow-md dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-sm md:dark:shadow-white/5 md:rounded-xl md:dark:bg-slate-800 shadow-slate-200 md:ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
         {colors.map((color, index) => {
           if (color.class === 'white' || color.class === 'black') return
           return (
             <div
               key={color.class}
-              className={`flex items-center justify-center flex-col ${
-                (index - 2) % 10 > 4 && 'mb-8 md:mb-12'
-              }`}>
+              className={`flex items-center justify-center flex-col ${(index - 2) % 10 > 4 && 'mb-8 md:mb-12'
+                }`}>
               <button
                 className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-sm`}
                 onClick={() => copyToClipboard(color.class)}

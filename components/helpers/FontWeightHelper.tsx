@@ -1,81 +1,51 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
+import { fontWeights } from '../../utils/tailwindClasses';
+import { getClosestItem } from '../../utils/getClosestItem';
 
 interface Props {
   setFontWeight: (value: string) => void
 }
-
-interface FontWeight {
-  class: string
-  weight: number
-}
-
-const fontWeight: FontWeight[] = [
-  { class: 'font-thin', weight: 100 },
-  { class: 'font-extralight', weight: 200 },
-  { class: 'font-light', weight: 300 },
-  { class: 'font-normal', weight: 400 },
-  { class: 'font-medium', weight: 500 },
-  { class: 'font-semibold', weight: 600 },
-  { class: 'font-bold', weight: 700 },
-  { class: 'font-extrabold', weight: 800 },
-  { class: 'font-black', weight: 900 },
-]
 
 const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
   const [value, setValue] = useState(400)
   const [outOfBounds, setOutOfBounds] = useState<'max' | 'min' | 'def' | null>(
     null
   )
-  const [convertedFontWeight, setConvertedFontWeight] =
-    useState<FontWeight | null>(fontWeight[4])
-
-  // returns closes size matching with fontWeight array
-  const getClosestFontWeight = (
-    fontWeight: FontWeight[],
-    value: number
-  ): FontWeight => {
-    let closest = fontWeight.reduce(
-      (prev: FontWeight, curr: FontWeight): FontWeight => {
-        return Math.abs(curr.weight - value) < Math.abs(prev.weight - value)
-          ? curr
-          : prev
-      }
-    )
-    return closest
-  }
+  const [weight, setWeight] =
+    useState(fontWeights[3])
 
   const reset = () => {
-    if (value === 400) return
-    setValue(400)
+    if (value === fontWeights[3].weight) return // prevents reset bug
+
+    setValue(fontWeights[3].weight)
+    setWeight(fontWeights[3])
     setOutOfBounds(null)
-    setConvertedFontWeight(fontWeight[4])
   }
 
-  // updates converted size on value and unit change
+  // updates converted weight on value and unit change
   useEffect(() => {
-    const closestFontWeight = getClosestFontWeight(fontWeight, value)
-    if (closestFontWeight) {
-      setConvertedFontWeight(closestFontWeight)
-    }
+    setWeight(
+      getClosestItem(fontWeights, value, 'weight')
+    )
   }, [value])
 
   // check if converted font weight is at upper/lower limit
   useEffect(() => {
-    if (convertedFontWeight?.class === 'font-thin') {
+    if (weight.class === 'font-thin') {
       setOutOfBounds('min')
-    } else if (convertedFontWeight?.class === 'font-black') {
+    } else if (weight.class === 'font-black') {
       setOutOfBounds('max')
-    } else if (convertedFontWeight?.class === 'font-normal') {
+    } else if (weight.class === 'font-normal') {
       setOutOfBounds('def')
     } else {
       setOutOfBounds(null)
     }
 
     // sets parent font weight to converted size
-    setFontWeight(convertedFontWeight!.class)
-  }, [convertedFontWeight, setFontWeight])
+    setFontWeight(weight!.class)
+  }, [weight, setFontWeight])
 
   return (
     <WidgetWrapper>
@@ -106,13 +76,12 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
         </div>
       </WidgetConverter>
       <WidgetResult>
-        <CopyToClipboard valueToCopy={convertedFontWeight!.class.toString()}>
-          <span className='font-semibold'>{`" ${
-            convertedFontWeight!.class
-          } "`}</span>
+        <CopyToClipboard valueToCopy={weight.class.toString()}>
+          <span className='font-semibold'>{`" ${weight!.class
+            } "`}</span>
         </CopyToClipboard>
-        <CopyToClipboard valueToCopy={convertedFontWeight!.weight.toString()}>
-          <span>{`${convertedFontWeight!.weight}`}</span>
+        <CopyToClipboard valueToCopy={weight.weight.toString()}>
+          <span>{`${weight.weight}`}</span>
         </CopyToClipboard>
 
         {outOfBounds && (

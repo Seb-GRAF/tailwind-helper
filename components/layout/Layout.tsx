@@ -63,8 +63,9 @@ const Layout = ({ children }: Props) => {
   }, [])
 
   return (
-    <div className='max-w-4xl min-h-screen p-4 pb-12 mx-auto'>
+    <div className='max-w-4xl min-h-screen p-4 pb-8 mx-auto'>
       <Head>
+        <meta name='theme-color' content='auto' />
         <title key='title'>Tailwind Helper</title>
         <meta
           name='description'

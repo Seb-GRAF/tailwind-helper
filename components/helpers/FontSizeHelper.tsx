@@ -1,74 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-
-type UnitKey = 'rem' | 'px'
+import { fontSizes } from '../../utils/tailwindClasses'
+import { unitConverter } from '../../utils/unitConverter'
+import { getClosestItem } from '../../utils/getClosestItem';
 
 interface Props {
   setFontSize: (value: string) => void
 }
 
-interface FontSize {
-  class: string
-  rem: number
-  px: number
-}
-
-const fontSizes: FontSize[] = [
-  { class: 'text-xs', rem: 0.75, px: 12 },
-  { class: 'text-sm', rem: 0.875, px: 14 },
-  { class: 'text-base', rem: 1, px: 16 },
-  { class: 'text-lg', rem: 1.125, px: 18 },
-  { class: 'text-xl', rem: 1.25, px: 20 },
-  { class: 'text-2xl', rem: 1.5, px: 24 },
-  { class: 'text-3xl', rem: 1.875, px: 30 },
-  { class: 'text-4xl', rem: 2.25, px: 36 },
-  { class: 'text-5xl', rem: 3, px: 48 },
-  { class: 'text-6xl', rem: 3.75, px: 60 },
-  { class: 'text-7xl', rem: 4.5, px: 72 },
-  { class: 'text-8xl', rem: 6, px: 96 },
-  { class: 'text-9xl', rem: 8, px: 128 },
-]
-
 const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
   const [value, setValue] = useState(48)
-  const [unit, setUnit] = useState<UnitKey>('px')
+  const [unit, setUnit] = useState('px')
   const [outOfBounds, setOutOfBounds] = useState<'max' | 'min' | 'def' | null>(
     null
   )
-  const [convertedFontSize, setConvertedFontSize] = useState({
-    class: 'text-5xl',
-    rem: 3,
-    px: 48,
-  })
-
-  // returns closes size matching with fontSizes array
-  const getClosestFontSize = (
-    fontSizes: FontSize[],
-    value: number,
-    unit: UnitKey
-  ): FontSize => {
-    let closest = fontSizes.reduce(
-      (prev: FontSize, curr: FontSize): FontSize => {
-        return Math.abs(curr[unit] - value) < Math.abs(prev[unit] - value)
-          ? curr
-          : prev
-      }
-    )
-    return closest
-  }
-
-  // switches between rem and px
-  const unitConverter = (value: number, unit: UnitKey): number => {
-    switch (unit) {
-      case 'rem':
-        return parseFloat((value * 16).toFixed())
-      case 'px':
-        return parseFloat((Math.round((value / 16) * 8) / 8).toFixed(3))
-      default:
-        return value
-    }
-  }
+  const [convertedFontSize, setConvertedFontSize] = useState(fontSizes[3])
 
   const reset = () => {
     if (value === 16 && unit === 'px') return
@@ -81,10 +28,10 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
 
   // updates converted size on value and unit change
   useEffect(() => {
-    const closestFontSize = getClosestFontSize(fontSizes, value, unit)
-    if (closestFontSize) {
-      setConvertedFontSize(closestFontSize)
-    }
+    // const closestFontSize = getClosestFontSize(fontSizes, value, unit)
+    setConvertedFontSize(
+      getClosestItem(fontSizes, value, unit)
+    )
   }, [value, unit])
 
   useEffect(() => {

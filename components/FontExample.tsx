@@ -64,7 +64,7 @@ const FontSizeExample = ({
         <div className='self-end'>
           <Tooltip
             message='Example of your settings'
-            color='bg-slate-900'
+            color='bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
             side='left'>
             <span className='cursor-help opacity-70'>ⓘ</span>
           </Tooltip>

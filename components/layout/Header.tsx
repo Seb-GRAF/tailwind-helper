@@ -13,7 +13,7 @@ const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
       <h1 className='flex items-center justify-center pr-1 text-2xl font-extrabold text-transparent sm:hidden bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-400 to-indigo-600'>
         <span className='flex items-center'>
           <svg
-            className='mr-1 text-pink-500 w-7 h-7'
+            className='w-6 h-6 mr-1 text-pink-500'
             width='54'
             height='54'
             viewBox='0 0 54 54'
@@ -26,7 +26,7 @@ const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
         <span>Helper</span>
       </h1>
       <button
-        className='text-indigo-600 w-9 h-9 dark:text-indigo-400'
+        className='w-10 h-10 text-indigo-600 sm:w-11 sm:h-11 dark:text-indigo-400'
         onClick={toggleThemeHandler}>
         {isDark ? (
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
@@ -37,7 +37,10 @@ const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
             />
           </svg>
         ) : (
-          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 26 26'
+            className='pl-1'>
             <path
               d='M18.9 14.4c-.2-.2-.4-.2-.6-.1-.9.4-1.8.7-2.8.7-3.5 0-6.4-2.9-6.4-6.4 0-1 .2-1.9.7-2.8.1-.2.1-.4-.1-.6-.2-.2-.5-.2-.6-.1A7.19 7.19 0 0 0 5 11.6c0 4.1 3.3 7.4 7.4 7.4 2.8 0 5.3-1.6 6.6-4.1 0-.1 0-.4-.1-.5zM12.4 18C8.9 18 6 15.1 6 11.6c0-1.9.9-3.6 2.3-4.8C8.1 7.4 8 8 8 8.6c0 4.1 3.3 7.4 7.4 7.4.6 0 1.2-.1 1.8-.2-1.2 1.3-2.9 2.2-4.8 2.2z'
               opacity='1'

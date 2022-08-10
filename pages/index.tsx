@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <Layout>
+    <div>
       <div className='mb-12 text-lg text-center text-slate-600 dark:text-slate-400'>
         <h1 className='items-center justify-center hidden pr-1 text-4xl font-extrabold text-transparent sm:flex sm:gap-4 sm:flex-row md:text-7xl sm:text-6xl bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-400 to-indigo-600'>
           <span className='flex items-center'>
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
       <div className={`${selectedCategory !== 'colors' && 'hidden'}`}>
         <Colors />
       </div>
-    </Layout>
+    </div>
   )
 }
 
