@@ -1,6 +1,7 @@
 import CopyToClipboard from './CopyToClipboard'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Tooltip, FavoriteButton } from './'
+import { FavoritesCtx } from '../contexts/FavoritesProvider'
 
 interface Props {
   fontSize: string
@@ -17,7 +18,9 @@ const FontSizeExample = ({
 }: Props): JSX.Element => {
   const [toPrint, setToPrint] = useState('')
   const [customName, setCustomName] = useState('')
+  const [showInput, setShowInput] = useState(false)
 
+  const favoritesContext = useContext(FavoritesCtx)
 
   // removes default styles from value to print
   useEffect(() => {
@@ -34,12 +37,52 @@ const FontSizeExample = ({
     setToPrint(valueToPrint)
   }, [fontSize, fontWeight, letterSpacing, textColor])
 
+  useEffect(() => {
+    if (favoritesContext.isAlreadyFavorite(toPrint)) {
+      favoritesContext.updateFavorite({
+        class: toPrint,
+        name: customName,
+        category: 'layouts',
+      })
+    }
+  }, [customName])
+
   return (
-    <div className='relative pt-10 bg-white shadow-md sm:pt-4 dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
-      {/* CUSTOM NAME */}
-      <input type="text" placeholder='Name you property' className='absolute px-2 rounded-md top-2 w-15 right-8 bg-slate-100 dark:bg-slate-700' onChange={(e) => setCustomName(e.target.value)} />
+    <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       {/* FAVORITE  */}
-      <FavoriteButton favoriteClass={toPrint} category='fonts' favoriteName={customName.length > 0 && customName} />
+      {!showInput && (
+        <button
+          className='absolute z-20 text-xl right-2 top-1'
+          onClick={() => setShowInput(true)}>
+          {favoritesContext?.isAlreadyFavorite(toPrint) ? '★' : '☆'}
+        </button>
+      )}
+      {showInput && (
+        <div className='absolute top-0 right-0 z-10 w-10'>
+          <input
+            type='text'
+            placeholder='Name your property'
+            defaultValue={
+              favoritesContext?.isAlreadyFavorite(toPrint)
+                ? favoritesContext?.favorites?.find((e) => e.class === toPrint)
+                    ?.name
+                : ''
+            }
+            className='absolute z-10 px-2 rounded-md shadow-md top-1 right-1 w-15 h-7 bg-slate-100 dark:bg-slate-700'
+            onChange={(e) => setCustomName(e.target.value)}
+          />
+          <FavoriteButton
+            favoriteClass={toPrint}
+            category='fonts'
+            favoriteName={customName.length > 0 ? customName : 'Custom Font'}
+          />
+          <div
+            className='fixed top-0 right-0 w-full h-full'
+            onClick={() => {
+              setShowInput(false)
+            }}></div>
+        </div>
+      )}
       {/* TEXT INPUT */}
       <input
         id='text-example'

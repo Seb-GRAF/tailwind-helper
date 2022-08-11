@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { CopyToClipboard } from '..'
-import { WidgetWrapper, WidgetConverter, WidgetResult, FavoriteButton } from '..'
+import {
+  WidgetWrapper,
+  WidgetConverter,
+  WidgetResult,
+  FavoriteButton,
+} from '..'
 import { colors, Color } from '../../utils/tailwindClasses'
 import { FavoritesCtx } from '../../contexts/FavoritesProvider'
 
@@ -14,7 +19,6 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
     class: 'pink-500',
     hex: '#ec4899',
   })
-
 
   const reset = () => {
     const input = document.getElementById('hex-value') as HTMLInputElement
@@ -38,25 +42,36 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
   const distance = (a: number[], b: number[]): number => {
     return Math.sqrt(
       Math.pow(a[0] - b[0], 2) +
-      Math.pow(a[1] - b[1], 2) +
-      Math.pow(a[2] - b[2], 2)
+        Math.pow(a[1] - b[1], 2) +
+        Math.pow(a[2] - b[2], 2)
     )
   }
   const nearestColor = (colorHex: string): any | Color => {
     return colors.reduce(
       (a, b) =>
-      (a =
-        distance(hexToRgb(colorHex), hexToRgb(b.hex)) < a[0]
-          ? [distance(hexToRgb(colorHex), hexToRgb(b.hex)), b]
-          : a),
+        (a =
+          distance(hexToRgb(colorHex), hexToRgb(b.hex)) < a[0]
+            ? [distance(hexToRgb(colorHex), hexToRgb(b.hex)), b]
+            : a),
       [Number.POSITIVE_INFINITY, colors[0]]
     )[1]
   }
 
+  const isTooDark = (color: string): boolean => {
+    const hex = color.substring(1)
+    const rgb = parseInt(hex, 16)
+
+    const red = (rgb >> 16) & 0xff
+    const green = (rgb >> 8) & 0xff
+    const blue = (rgb >> 0) & 0xff
+
+    const brightness = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+    return brightness < 120
+  }
 
   useEffect(() => {
-    if (setColor)
-      setColor(closestColor.class)
+    if (setColor) setColor(closestColor.class)
   }, [closestColor, setColor])
 
   return (
@@ -90,8 +105,13 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
             />
 
             {/* ADD/REMOVE FAVORITE */}
-            <FavoriteButton favoriteClass={closestColor.class} category='colors' />
-
+            <FavoriteButton
+              favoriteClass={closestColor.class}
+              category='colors'
+              color={
+                isTooDark(closestColor.hex) ? 'text-white/80' : 'text-black/80'
+              }
+            />
           </div>
           <input
             type='text'
@@ -117,7 +137,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
           <span>{`${closestColor.hex}`}</span>
         </CopyToClipboard>
       </WidgetResult>
-    </WidgetWrapper >
+    </WidgetWrapper>
   )
 }
 

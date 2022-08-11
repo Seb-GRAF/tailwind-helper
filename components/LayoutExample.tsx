@@ -1,6 +1,7 @@
 import CopyToClipboard from './CopyToClipboard'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Tooltip, FavoriteButton } from './'
+import { FavoritesCtx } from '../contexts/FavoritesProvider'
 
 interface Props {
   margin: string
@@ -14,15 +15,61 @@ const LayoutExample = ({
   borderRadius,
 }: Props): JSX.Element => {
   const [toPrint, setToPrint] = useState('')
+  const [customName, setCustomName] = useState('')
+  const [showInput, setShowInput] = useState(false)
+
+  const favoritesContext = useContext(FavoritesCtx)
 
   useEffect(() => {
     setToPrint(`${margin} ${padding} ${borderRadius}`)
   }, [margin, padding, borderRadius])
 
+  useEffect(() => {
+    if (favoritesContext.isAlreadyFavorite(toPrint)) {
+      favoritesContext.updateFavorite({
+        class: toPrint,
+        name: customName,
+        category: 'layouts',
+      })
+    }
+  }, [customName])
+
   return (
     <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       {/* FAVORITE  */}
-      <FavoriteButton favoriteClass={toPrint} category='layouts' />
+      {!showInput && (
+        <button
+          className='absolute z-20 text-xl right-2 top-1'
+          onClick={() => setShowInput(true)}>
+          {favoritesContext?.isAlreadyFavorite(toPrint) ? '★' : '☆'}
+        </button>
+      )}
+      {showInput && (
+        <div className='absolute top-0 right-0 z-10 w-10'>
+          <input
+            type='text'
+            placeholder='Name your property'
+            defaultValue={
+              favoritesContext?.isAlreadyFavorite(toPrint)
+                ? favoritesContext?.favorites?.find((e) => e.class === toPrint)
+                    ?.name
+                : ''
+            }
+            className='absolute z-10 px-2 rounded-md shadow-md top-1 right-1 w-15 h-7 bg-slate-100 dark:bg-slate-700'
+            onChange={(e) => setCustomName(e.target.value)}
+          />
+          <FavoriteButton
+            favoriteClass={toPrint}
+            category='layouts'
+            favoriteName={customName.length > 0 ? customName : 'Custom Layout'}
+          />
+          <div
+            className='fixed top-0 right-0 w-full h-full'
+            onClick={() => {
+              setShowInput(false)
+            }}></div>
+        </div>
+      )}
       {/* EXAMPLE */}
       <div className={`mb-2 flex items-center justify-center w-full min-h-96`}>
         <div

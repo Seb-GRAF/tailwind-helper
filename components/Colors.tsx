@@ -7,7 +7,8 @@ import { FavoriteButton } from '.'
 
 const Colors = (): JSX.Element => {
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
-  const [color, setColor] = useState(null)
+
+  const favoritesContext = useContext(FavoritesCtx)
 
   const copyToClipboard = async (text: string | null): Promise<void> => {
     if (!text) return
@@ -15,32 +16,57 @@ const Colors = (): JSX.Element => {
     setDisplaySuccessMessage(true)
   }
 
-  const favoritesContext = useContext(FavoritesCtx)
+  const isTooDark = (color: string): boolean => {
+    const hex = color.substring(1)
+    const rgb = parseInt(hex, 16)
 
+    const red = (rgb >> 16) & 0xff
+    const green = (rgb >> 8) & 0xff
+    const blue = (rgb >> 0) & 0xff
+
+    const brightness = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+    return brightness < 120
+  }
 
   return (
     <section className='mx-auto space-y-4'>
-      <ColorHelper setColor={setColor} />
+      <ColorHelper />
       <div className='relative grid grid-cols-5 gap-2 p-0 pb-0 md:shadow-md dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-sm md:dark:shadow-white/5 md:rounded-xl md:dark:bg-slate-800 shadow-slate-200 md:ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
         {colors.map((color, index) => {
           if (color.class === 'white' || color.class === 'black') return
           return (
             <div
               key={color.class}
-              className={`relative flex items-center justify-center flex-col ${(index - 2) % 10 > 4 && 'mb-8 md:mb-12'
-                }`}>
+              className={`relative flex items-center justify-center flex-col ${
+                (index - 2) % 10 > 4 && 'mb-8 md:mb-12'
+              }`}>
               {/* COLOR SQUARE */}
-              <div className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-sm`}>
+              <div
+                className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-sm`}>
                 <button
                   className='absolute top-0 left-0 w-full h-full group'
                   onClick={() => copyToClipboard(color.class)}
                   onMouseLeave={() => setDisplaySuccessMessage(false)}>
-                  <div className='relative flex items-center justify-center w-full h-full text-sm transition-all opacity-0 bg-white/40 dark:bg-black/30 group-hover:opacity-100'>
+                  <div className='relative flex items-end justify-center w-full h-full pb-1 text-xs transition-all opacity-0 sm:pb-0 sm:items-center sm:text-sm bg-white/40 dark:bg-black/30 group-hover:opacity-100'>
                     {displaySuccessMessage ? 'Copied ✓' : 'Copy'}
                   </div>
                 </button>
-                <div className={`group-hover:opacity-100 transition-all ${favoritesContext.isAlreadyFavorite(color.class) ? 'opacity-100' : 'opacity-0'}`}>
-                  <FavoriteButton favoriteClass={color.class} category={'colors'} />
+
+                {/* FAVORITE */}
+                <div
+                  className={`absolute -top-1.5 -right-1.5 sm:top-0 sm:right-0 group-hover:opacity-100 transition-all ${
+                    favoritesContext.isAlreadyFavorite(color.class)
+                      ? 'opacity-100'
+                      : 'opacity-0'
+                  }`}>
+                  <FavoriteButton
+                    favoriteClass={color.class}
+                    category={'colors'}
+                    color={
+                      isTooDark(color.hex) ? 'text-white/40' : 'text-black/40'
+                    }
+                  />
                 </div>
               </div>
 
@@ -55,7 +81,6 @@ const Colors = (): JSX.Element => {
                   <span className='text-xs opacity-50'>{color.hex}</span>
                 </CopyToClipboard>
               </div>
-
             </div>
           )
         })}
