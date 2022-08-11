@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { Header, Footer } from './'
 import { ReactNode } from 'react'
@@ -9,7 +8,6 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  const router = useRouter()
   const [isDark, setIsDark] = useState(false)
 
   const isLocalStorageEmpty = () => {
@@ -65,14 +63,14 @@ const Layout = ({ children }: Props) => {
   return (
     <div className='max-w-4xl min-h-screen p-4 pb-8 mx-auto'>
       <Head>
-        <meta name='theme-color' content='auto' />
-        <title key='title'>Tailwind Helper</title>
+        <meta name='theme-color' content={isDark ? '#151E32' : '#f1f5f9'} />
+        <title key='title'>Tailwindhelper</title>
         <meta
           name='description'
           content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
         />
         <meta key='og_type' property='og:type' content='website' />
-        <meta key='og_title' property='og:title' content='Tailwind Helper' />
+        <meta key='og_title' property='og:title' content='Tailwindhelper' />
         <meta
           key='og_description'
           property='og:description'
@@ -82,13 +80,13 @@ const Layout = ({ children }: Props) => {
         <meta
           key='og_site_name'
           property='og:site_name'
-          content='Tailwind Helper'
+          content='Tailwindhelper'
         />
-        {/* <meta key='og_url' property='og:url' content={canonical ?? DOMAIN} /> */}
+        <meta key='og_url' property='og:url' content='https://tailwindhelper.com' />
         <meta
           key='og_site_name'
           property='og:site_name'
-          content='Tailwind Helper'
+          content='Tailwindhelper'
         />
 
         <meta name='robots' content='index,follow' />
@@ -101,7 +99,7 @@ const Layout = ({ children }: Props) => {
         <meta
           key='twitter:title'
           property='twitter:title'
-          content='Tailwind Helper'
+          content='Tailwindhelper'
         />
         <meta
           key='twitter:description'
@@ -109,7 +107,7 @@ const Layout = ({ children }: Props) => {
           content='You want to convert a unit to the corresponding tailwind class? You always forget property names? Or you are simply learning tailwind and would like a bit of help visualizing classes? Then this tool might come in handy!'
         />
 
-        {/* <link rel='canonical' href={canonical ?? DOMAIN} /> */}
+        <link rel='canonical' href='https://tailwindhelper.com' />
 
         <link rel='icon' href='/favicon.svg' type='image/svg+xml' />
       </Head>

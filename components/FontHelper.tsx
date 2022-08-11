@@ -18,7 +18,7 @@ const FontHelper = () => {
         <FontSizeHelper setFontSize={setFontSize} />
         <FontWeightHelper setFontWeight={setFontWeight} />
         <LetterSpacingHelper setLetterSpacing={setLetterSpacing} />
-        <ColorHelper setTextColor={setTextColor} />
+        <ColorHelper setColor={setTextColor} />
       </div>
       <FontExample
         fontSize={fontSize}

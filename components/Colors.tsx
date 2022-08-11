@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { colors } from '../utils/tailwindClasses'
 import { CopyToClipboard } from '.'
 import { ColorHelper } from './helpers'
+import { FavoritesCtx } from '../contexts/FavoritesProvider'
 
 const Colors = (): JSX.Element => {
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
+  const [color, setColor] = useState(null)
 
   const copyToClipboard = async (text: string | null): Promise<void> => {
     if (!text) return
@@ -12,9 +14,12 @@ const Colors = (): JSX.Element => {
     setDisplaySuccessMessage(true)
   }
 
+  const favoritesContext = useContext(FavoritesCtx)
+
+
   return (
-    <section className='flex flex-col gap-4 mx-auto'>
-      <ColorHelper />
+    <section className='mx-auto space-y-4'>
+      <ColorHelper setColor={setColor} />
       <div className='relative grid grid-cols-5 gap-2 p-0 pb-0 md:shadow-md dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-sm md:dark:shadow-white/5 md:rounded-xl md:dark:bg-slate-800 shadow-slate-200 md:ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
         {colors.map((color, index) => {
           if (color.class === 'white' || color.class === 'black') return

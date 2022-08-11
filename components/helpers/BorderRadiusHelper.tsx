@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-import { borderRadiuses, BorderRadius } from '../../utils/tailwindClasses'
+import { borderRadiuses } from '../../utils/tailwindClasses';
 import { unitConverter } from '../../utils/unitConverter';
 import { getClosestItem } from '../../utils/getClosestItem';
 
@@ -99,7 +99,9 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
 
   // updates converted size on value and unit change
   useEffect(() => {
-    setConvertedBorderRadius(getClosestItem(borderRadiuses, value, unit))
+    if (unit === 'px' && value >= 32 || unit === 'rem' && value >= 1) setConvertedBorderRadius(borderRadiuses[borderRadiuses.length - 1])
+    else
+      setConvertedBorderRadius(getClosestItem(borderRadiuses, value, unit))
   }, [value, unit])
 
   useEffect(() => {

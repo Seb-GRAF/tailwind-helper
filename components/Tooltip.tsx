@@ -4,7 +4,7 @@ interface Props {
   message: string
   children: ReactNode
   color?: string
-  side: string
+  side?: string
 }
 
 const Tooltip = ({

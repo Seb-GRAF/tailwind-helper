@@ -1,6 +1,6 @@
 import CopyToClipboard from './CopyToClipboard'
 import { useState, useEffect } from 'react'
-import { Tooltip } from './'
+import { Tooltip, FavoriteButton } from './'
 
 interface Props {
   fontSize: string
@@ -17,6 +17,8 @@ const FontSizeExample = ({
 }: Props): JSX.Element => {
   const [toPrint, setToPrint] = useState('')
 
+
+  // removes default styles from value to print
   useEffect(() => {
     let valueToPrint = ''
 
@@ -32,15 +34,19 @@ const FontSizeExample = ({
   }, [fontSize, fontWeight, letterSpacing, textColor])
 
   return (
-    <div className='bg-white shadow-md dark:bg-slate-800 dark:hover:bg-slate-800/90 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+    <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+      <FavoriteButton favoriteClass={toPrint} category='fonts' />
+      {/* TEXT INPUT */}
       <input
         id='text-example'
         type='text'
         defaultValue='Lorem Ipsum'
         placeholder='Enter your text'
-        className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 p-8 pb-6 overflow-x-auto w-full bg-transparent `}
+        className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 py-4 px-6 overflow-x-auto  
+         bg-transparent w-full`}
       />
-      <div className='flex items-center justify-between mx-4 mb-3'>
+      {/* TAILWIND CLASSES */}
+      <div className='flex items-center justify-between mx-4 my-3'>
         <CopyToClipboard valueToCopy={toPrint}>
           <span className='flex flex-wrap gap-2 font-semibold whitespace-nowrap'>
             {fontSize !== 'text-base' && <span>{fontSize}</span>}

@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { CopyToClipboard } from '..'
-import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
+import { WidgetWrapper, WidgetConverter, WidgetResult, FavoriteButton } from '..'
 import { colors, Color } from '../../utils/tailwindClasses'
+import { FavoritesCtx } from '../../contexts/FavoritesProvider'
 
 interface Props {
-  setTextColor?: (value: string) => void
+  setColor?: (value: string) => void
 }
 
-const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
+const ColorHelper = ({ setColor }: Props): JSX.Element => {
   const [value, setValue] = useState('#ec4899')
   const [closestColor, setClosestColor] = useState<Color>({
     class: 'pink-500',
     hex: '#ec4899',
   })
+
 
   const reset = () => {
     const input = document.getElementById('hex-value') as HTMLInputElement
@@ -23,7 +25,6 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
       hex: '#ec4899',
     })
   }
-
   // Converts hex to array of rgb
   const hexToRgb = (hex: string): number[] => {
     return hex
@@ -52,19 +53,23 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
     )[1]
   }
 
+
   useEffect(() => {
-    if (setTextColor)
-      setTextColor(closestColor.class)
-  }, [closestColor, setTextColor])
+    if (setColor)
+      setColor(closestColor.class)
+  }, [closestColor, setColor])
 
   return (
     <WidgetWrapper>
+      {/* RESET */}
       <button
         className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
         onClick={reset}>
         Reset
       </button>
-      <WidgetConverter helperName='Color Helper'>
+
+      {/* INPUT */}
+      <WidgetConverter helperName='Color Picker'>
         <div className='flex flex-col gap-2'>
           <div className='relative overflow-hidden rounded-md h-14 w-44'>
             <input
@@ -83,6 +88,10 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
                 }
               }}
             />
+
+            {/* ADD/REMOVE FAVORITE */}
+            <FavoriteButton favoriteClass={closestColor.class} category='colors' />
+
           </div>
           <input
             type='text'
@@ -108,7 +117,7 @@ const ColorHelper = ({ setTextColor }: Props): JSX.Element => {
           <span>{`${closestColor.hex}`}</span>
         </CopyToClipboard>
       </WidgetResult>
-    </WidgetWrapper>
+    </WidgetWrapper >
   )
 }
 

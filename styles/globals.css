@@ -8,10 +8,10 @@
 
 html {
   @apply text-slate-700 bg-gradient-to-tl from-slate-200 via-slate-100 to-slate-100;
+  @apply antialiased;
 }
 
 .dark {
-  /* @apply bg-slate-900 text-slate-200; */
   @apply bg-gradient-to-bl from-slate-800 via-slate-900 to-slate-900 text-slate-200;
   color-scheme: dark;
 }
@@ -36,21 +36,17 @@ html {
   );
 }
 
-/* .widget:nth-of-type(odd):last-of-type {
-  @apply sm:col-span-2;
-} */
-
 input[type='range'] {
   @apply h-2 bg-transparent appearance-none cursor-ew-resize;
 }
 
-/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/***** Chromium styles *****/
 input[type='range']::-webkit-slider-runnable-track {
   @apply h-2 rounded-md bg-slate-100 dark:bg-slate-700;
 }
 
 input[type='range']::-webkit-slider-thumb {
-  @apply relative w-4 h-4 bg-indigo-700 rounded-full appearance-none -top-1 dark:bg-indigo-300;
+  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1 dark:bg-indigo-300;
 }
 
 /******** Firefox styles ********/
