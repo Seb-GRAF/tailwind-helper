@@ -16,6 +16,7 @@ const FontSizeExample = ({
   textColor,
 }: Props): JSX.Element => {
   const [toPrint, setToPrint] = useState('')
+  const [customName, setCustomName] = useState('')
 
 
   // removes default styles from value to print
@@ -34,15 +35,18 @@ const FontSizeExample = ({
   }, [fontSize, fontWeight, letterSpacing, textColor])
 
   return (
-    <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
-      <FavoriteButton favoriteClass={toPrint} category='fonts' />
+    <div className='relative pt-10 bg-white shadow-md sm:pt-4 dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+      {/* CUSTOM NAME */}
+      <input type="text" placeholder='Name you property' className='absolute px-2 rounded-md top-2 w-15 right-8 bg-slate-100 dark:bg-slate-700' onChange={(e) => setCustomName(e.target.value)} />
+      {/* FAVORITE  */}
+      <FavoriteButton favoriteClass={toPrint} category='fonts' favoriteName={customName.length > 0 && customName} />
       {/* TEXT INPUT */}
       <input
         id='text-example'
         type='text'
         defaultValue='Lorem Ipsum'
         placeholder='Enter your text'
-        className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 py-4 px-6 overflow-x-auto  
+        className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 py-0 sm:py-4 px-6 overflow-x-auto  
          bg-transparent w-full`}
       />
       {/* TAILWIND CLASSES */}

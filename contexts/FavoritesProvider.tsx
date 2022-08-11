@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { AppContextType } from "next/dist/shared/lib/utils";
 import { createContext } from "react";
 
 export interface Favorite {

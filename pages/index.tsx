@@ -37,22 +37,25 @@ const Home: NextPage = () => {
       </div>
 
       {/* CATEGORIES */}
-      <nav className='flex w-full gap-4 mb-4 border-b sm:mb-8 border-slate-300 dark:border-slate-700'>
-        <CategoryButton
-          selectedCategory={selectedCategory}
-          setCategory={setCategory}
-          name={'Font'}
-        />
-        <CategoryButton
-          selectedCategory={selectedCategory}
-          setCategory={setCategory}
-          name={'Layout'}
-        />
-        <CategoryButton
-          selectedCategory={selectedCategory}
-          setCategory={setCategory}
-          name={'Colors'}
-        />
+      <nav className='relative flex w-full gap-2 mb-4 border-b justify-evenly sm:justify-between sm:gap-4 sm:mb-8 border-slate-300 dark:border-slate-700'>
+        <div className='flex flex-grow gap-2 sm:flex-grow-0 sm:gap-4 justify-evenly'>
+
+          <CategoryButton
+            selectedCategory={selectedCategory}
+            setCategory={setCategory}
+            name={'Font'}
+          />
+          <CategoryButton
+            selectedCategory={selectedCategory}
+            setCategory={setCategory}
+            name={'Layout'}
+          />
+          <CategoryButton
+            selectedCategory={selectedCategory}
+            setCategory={setCategory}
+            name={'Colors'}
+          />
+        </div>
         <CategoryButton
           selectedCategory={selectedCategory}
           setCategory={setCategory}

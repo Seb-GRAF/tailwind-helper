@@ -1,7 +1,7 @@
 const Footer = (): JSX.Element => {
   return (
-    <footer className='flex flex-col items-center pt-8 mt-16 border-t border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-500'>
-      <div className='flex items-center gap-2'>
+    <footer className='flex flex-col items-center justify-end flex-grow mt-16 justify-self-end text-slate-500 dark:text-slate-500'>
+      <div className='flex items-center justify-center w-full gap-2 pt-8 border-t border-slate-300 dark:border-slate-700'>
         <div>&copy; {new Date().getFullYear()} -</div>
         Made with{' '}
         <svg

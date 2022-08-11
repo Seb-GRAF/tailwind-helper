@@ -27,15 +27,16 @@ const FavoriteButton = ({ favoriteClass, favoriteName = favoriteClass, category 
 
     useEffect(() => {
         const isAlreadyFavorite = favoritesContext?.isAlreadyFavorite(favoriteClass)
-
         setIsFavorite(isAlreadyFavorite ? true : false)
 
     }, [favoritesContext, favoriteClass])
 
     return isFavorite ? (
-        <button className='absolute text-xl text-white top-1 right-2' onClick={onClick}>★</button>
+        <button className='absolute z-10 text-xl pointer-events-auto dark:text-slate-100 text-slate-700 top-1 right-2' onClick={onClick}>
+            ★
+        </button>
     ) : (
-        <button className='absolute text-xl text-white top-1 right-2' onMouseEnter={(e) => e.currentTarget.innerText = '★'} onMouseLeave={(e) => e.currentTarget.innerText = '☆'}
+        <button className='absolute z-10 text-xl pointer-events-auto dark:text-slate-100 text-slate-700 top-1 right-2' onMouseEnter={(e) => e.currentTarget.innerText = '★'} onMouseLeave={(e) => e.currentTarget.innerText = '☆'}
             onClick={onClick}>
             ☆
         </button>

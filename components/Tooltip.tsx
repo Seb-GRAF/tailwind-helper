@@ -19,7 +19,7 @@ const Tooltip = ({
         <p className='w-full cursor-pointer underline-none underline-offset-4 decoration-1 dark:decoration-slate-500 decoration-slate-800 decoration-dotted'>
           {children}
         </p>
-        <div className='absolute bottom-0 flex-col items-center hidden mb-6 pointer-events-none group-hover:flex '>
+        <div className='absolute bottom-0 flex-col items-center hidden mb-6 pointer-events-none group-hover:flex'>
           <span
             className={`relative z-10 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-lg ${color}`}>
             {message}

@@ -12,7 +12,7 @@ interface Props {
 }
 
 const MarginHelper = ({ setMargin }: Props): JSX.Element => {
-  const [value, setValue] = useState(margins[8].px)
+  const [value, setValue] = useState(margins[11].px)
   const [unit, setUnit] = useState('px')
   const [orientation, setOrientation] = useState({
     left: false,
@@ -21,16 +21,16 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
     bottom: false,
   })
   const [orientationOutput, setOrientationOutput] = useState('m')
-  const [convertedMargin, setConvertedMargin] = useState(margins[8])
+  const [convertedMargin, setConvertedMargin] = useState(margins[11])
 
   const toggleOrientation = (value: OrientationKey): void => {
     setOrientation({ ...orientation, [value]: !orientation[value] })
   }
 
   const reset = () => {
-    setValue(margins[8].px)
+    setValue(margins[11].px)
     setUnit('px')
-    setConvertedMargin(margins[8])
+    setConvertedMargin(margins[11])
     setOrientation({
       left: false,
       right: false,

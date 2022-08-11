@@ -1,8 +1,9 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { colors } from '../utils/tailwindClasses'
 import { CopyToClipboard } from '.'
 import { ColorHelper } from './helpers'
 import { FavoritesCtx } from '../contexts/FavoritesProvider'
+import { FavoriteButton } from '.'
 
 const Colors = (): JSX.Element => {
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)
@@ -26,16 +27,24 @@ const Colors = (): JSX.Element => {
           return (
             <div
               key={color.class}
-              className={`flex items-center justify-center flex-col ${(index - 2) % 10 > 4 && 'mb-8 md:mb-12'
+              className={`relative flex items-center justify-center flex-col ${(index - 2) % 10 > 4 && 'mb-8 md:mb-12'
                 }`}>
-              <button
-                className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-sm`}
-                onClick={() => copyToClipboard(color.class)}
-                onMouseLeave={() => setDisplaySuccessMessage(false)}>
-                <div className='relative flex items-center justify-center w-full h-full text-sm transition-all opacity-0 bg-white/40 dark:bg-black/30 group-hover:opacity-100'>
-                  {displaySuccessMessage ? 'Copied ✓' : 'Copy'}
+              {/* COLOR SQUARE */}
+              <div className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-sm`}>
+                <button
+                  className='absolute top-0 left-0 w-full h-full group'
+                  onClick={() => copyToClipboard(color.class)}
+                  onMouseLeave={() => setDisplaySuccessMessage(false)}>
+                  <div className='relative flex items-center justify-center w-full h-full text-sm transition-all opacity-0 bg-white/40 dark:bg-black/30 group-hover:opacity-100'>
+                    {displaySuccessMessage ? 'Copied ✓' : 'Copy'}
+                  </div>
+                </button>
+                <div className={`group-hover:opacity-100 transition-all ${favoritesContext.isAlreadyFavorite(color.class) ? 'opacity-100' : 'opacity-0'}`}>
+                  <FavoriteButton favoriteClass={color.class} category={'colors'} />
                 </div>
-              </button>
+              </div>
+
+              {/* TEXT UNDER COLOR */}
               <div className='flex flex-col justify-between w-full md:flex-row'>
                 <CopyToClipboard valueToCopy={color.class}>
                   <span className='text-xs whitespace-nowrap'>
@@ -46,6 +55,7 @@ const Colors = (): JSX.Element => {
                   <span className='text-xs opacity-50'>{color.hex}</span>
                 </CopyToClipboard>
               </div>
+
             </div>
           )
         })}

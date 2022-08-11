@@ -30,3 +30,4 @@ export { default as CategoryButton } from './CategoryButton'
 
 export { default as Favorites } from './Favorites'
 export { default as FavoriteButton } from './FavoriteButton'
+export { default as DeleteButton } from './DeleteButton'
