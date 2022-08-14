@@ -21,12 +21,14 @@ const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
           <path d='M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z'></path>
         </svg>
 
-
-        <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-400 to-indigo-600'>Tailwindhelper</span>
+        <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 dark:from-pink-500 dark:to-indigo-400 to-indigo-600'>
+          Tailwindhelper
+        </span>
       </h1>
       <button
         className='w-10 h-10 text-indigo-600 sm:w-11 sm:h-11 dark:text-indigo-400'
         onClick={toggleThemeHandler}>
+        <span className='sr-only'>Toggle dark/light theme</span>
         {isDark ? (
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
             <path

@@ -32,7 +32,7 @@ const Colors = (): JSX.Element => {
   return (
     <section className='mx-auto space-y-4'>
       <ColorHelper />
-      <div className='relative grid grid-cols-5 gap-2 p-0 pb-0 md:shadow-md dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-sm md:dark:shadow-white/5 md:rounded-xl md:dark:bg-slate-800 shadow-slate-200 md:ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+      <div className='relative grid grid-cols-5 gap-2 p-0 pt-4 pb-0 md:pt-8 md:shadow-sm dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-sm md:dark:shadow-white/5 md:rounded-xl md:dark:bg-slate-800 shadow-stone-200 md:ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
         {colors.map((color, index) => {
           if (color.class === 'white' || color.class === 'black') return
           return (
@@ -48,7 +48,7 @@ const Colors = (): JSX.Element => {
                   className='absolute top-0 left-0 w-full h-full group'
                   onClick={() => copyToClipboard(color.class)}
                   onMouseLeave={() => setDisplaySuccessMessage(false)}>
-                  <div className='relative flex items-end justify-center w-full h-full pb-1 text-xs transition-all opacity-0 sm:pb-0 sm:items-center sm:text-sm bg-white/40 dark:bg-black/30 group-hover:opacity-100'>
+                  <div className='relative flex items-end justify-center w-full h-full pb-1 text-xs text-transparent transition-all opacity-0 sm:pb-0 sm:items-center sm:text-sm bg-white/40 dark:bg-black/30 group-hover:opacity-100 sm:text-inherit'>
                     {displaySuccessMessage ? 'Copied ✓' : 'Copy'}
                   </div>
                 </button>

@@ -15,6 +15,8 @@ export type Favorites = {
   isAlreadyFavorite: (favorite: string) => boolean
   emptyCategory: (category: string) => void
   isCategoryEmpty: (category: string) => boolean
+  countFavorite: (category: string) => number
+  countDefaultNames: (category: string, defaultName: string) => number
 }
 
 const FavoritesCtx = createContext<Favorites | null>(null)
@@ -65,6 +67,19 @@ const FavoritesProvider = ({
       JSON.stringify(favorites.filter((f) => f.category !== category))
     )
   }
+
+  const countFavorite = (category: string): number => {
+    return favorites?.filter((f) => f.category === category).length ?? 0
+  }
+
+  const countDefaultNames = (category: string, defaultName: string): number => {
+    return (
+      favorites?.filter(
+        (f) => f.category === category && f.name.startsWith(defaultName)
+      ).length ?? 0
+    )
+  }
+
   // restores local storage
   useEffect(() => {
     setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'))
@@ -84,6 +99,8 @@ const FavoritesProvider = ({
         emptyCategory,
         isCategoryEmpty,
         updateFavorite,
+        countFavorite,
+        countDefaultNames,
       }}>
       {children}
     </FavoritesCtx.Provider>

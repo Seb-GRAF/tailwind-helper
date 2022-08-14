@@ -25,7 +25,7 @@ const LayoutExample = ({
   }, [margin, padding, borderRadius])
 
   useEffect(() => {
-    if (favoritesContext.isAlreadyFavorite(toPrint)) {
+    if (favoritesContext.isAlreadyFavorite(toPrint) && customName !== '') {
       favoritesContext.updateFavorite({
         class: toPrint,
         name: customName,
@@ -35,7 +35,7 @@ const LayoutExample = ({
   }, [customName])
 
   return (
-    <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+    <div className='relative bg-white shadow-sm dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-stone-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       {/* FAVORITE  */}
       {!showInput && (
         <button
@@ -61,12 +61,19 @@ const LayoutExample = ({
           <FavoriteButton
             favoriteClass={toPrint}
             category='layouts'
-            favoriteName={customName.length > 0 ? customName : 'Custom Layout'}
+            favoriteName={
+              customName.length > 0
+                ? customName
+                : `Layout ${
+                    favoritesContext.countDefaultNames('layouts', 'Layout') + 1
+                  }`
+            }
           />
           <div
             className='fixed top-0 right-0 w-full h-full'
             onClick={() => {
               setShowInput(false)
+              setCustomName('')
             }}></div>
         </div>
       )}

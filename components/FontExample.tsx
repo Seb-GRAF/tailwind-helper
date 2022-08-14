@@ -38,17 +38,17 @@ const FontSizeExample = ({
   }, [fontSize, fontWeight, letterSpacing, textColor])
 
   useEffect(() => {
-    if (favoritesContext.isAlreadyFavorite(toPrint)) {
+    if (favoritesContext.isAlreadyFavorite(toPrint) && customName !== '') {
       favoritesContext.updateFavorite({
         class: toPrint,
         name: customName,
-        category: 'layouts',
+        category: 'fonts',
       })
     }
   }, [customName])
 
   return (
-    <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-slate-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+    <div className='relative bg-white shadow-sm dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-stone-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       {/* FAVORITE  */}
       {!showInput && (
         <button
@@ -74,12 +74,17 @@ const FontSizeExample = ({
           <FavoriteButton
             favoriteClass={toPrint}
             category='fonts'
-            favoriteName={customName.length > 0 ? customName : 'Custom Font'}
+            favoriteName={
+              customName.length > 0
+                ? customName
+                : `Font ${favoritesContext.countFavorite('fonts') + 1}`
+            }
           />
           <div
             className='fixed top-0 right-0 w-full h-full'
             onClick={() => {
               setShowInput(false)
+              setCustomName('')
             }}></div>
         </div>
       )}
@@ -89,7 +94,7 @@ const FontSizeExample = ({
         type='text'
         defaultValue='Lorem Ipsum'
         placeholder='Enter your text'
-        className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 py-0 sm:py-4 px-6 overflow-x-auto  
+        className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 py-4 px-6 overflow-x-auto  
          bg-transparent w-full`}
       />
       {/* TAILWIND CLASSES */}
