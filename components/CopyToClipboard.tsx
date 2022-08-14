@@ -22,7 +22,7 @@ const CopyToClipboard = ({ children, valueToCopy }: Props): JSX.Element => {
       className='flex'>
       <Tooltip
         side='top'
-        message={displaySuccessMessage ? 'Copied ✓' : 'Copy'}
+        message={displaySuccessMessage ? 'Copied ✓' : 'Click to copy'}
         color={
           displaySuccessMessage
             ? 'bg-pink-500'

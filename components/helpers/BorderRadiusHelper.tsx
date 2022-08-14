@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
-import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-import { borderRadiuses } from '../../utils/tailwindClasses';
-import { unitConverter } from '../../utils/unitConverter';
-import { getClosestItem } from '../../utils/getClosestItem';
+import {
+  WidgetWrapper,
+  WidgetConverter,
+  WidgetResult,
+  OrientationButton,
+} from '..'
+import { borderRadiuses } from '../../utils/tailwindClasses'
+import { unitConverter } from '../../utils/unitConverter'
+import { getClosestItem } from '../../utils/getClosestItem'
 
 type OrientationKey = 'top' | 'right' | 'bottom' | 'left'
 
@@ -21,7 +26,9 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
     bottom: false,
   })
   const [orientationOutput, setOrientationOutput] = useState('rounded')
-  const [convertedBorderRadius, setConvertedBorderRadius] = useState(borderRadiuses[5])
+  const [convertedBorderRadius, setConvertedBorderRadius] = useState(
+    borderRadiuses[5]
+  )
 
   const toggleOrientation = (value: OrientationKey): void => {
     setOrientation({ ...orientation, [value]: !orientation[value] })
@@ -99,9 +106,9 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
 
   // updates converted size on value and unit change
   useEffect(() => {
-    if (unit === 'px' && value >= 32 || unit === 'rem' && value >= 1) setConvertedBorderRadius(borderRadiuses[borderRadiuses.length - 1])
-    else
-      setConvertedBorderRadius(getClosestItem(borderRadiuses, value, unit))
+    if ((unit === 'px' && value >= 32) || (unit === 'rem' && value >= 1))
+      setConvertedBorderRadius(borderRadiuses[borderRadiuses.length - 1])
+    else setConvertedBorderRadius(getClosestItem(borderRadiuses, value, unit))
   }, [value, unit])
 
   useEffect(() => {
@@ -118,45 +125,26 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
       </button>
       {/* ORIENTATION PICKER */}
       <div className='pointer-events-none absolute top-2 left-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] text-xs'>
-        <button
+        <OrientationButton
           onClick={() => toggleOrientation('top')}
-          className={`absolute transition-all top-0 px-4 -translate-x-1/2 rounded-md pointer-events-auto left-1/2 text-slate-400
-          ${orientation.top === true
-              ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
-              : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-            }
-          `}>
-          Top
-        </button>
-        <button
-          onClick={() => toggleOrientation('left')}
-          className={`-rotate-90 absolute transition-all -left-5 px-4 -translate-y-1/2 rounded-md pointer-events-auto top-1/2 text-slate-400 ${orientation.left === true
-            ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
-            : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-            }
-          `}>
-          <span className='w-full text-center'>Left</span>
-        </button>
-        <button
+          orientation={orientation}
+          side={'top'}
+        />
+        <OrientationButton
           onClick={() => toggleOrientation('bottom')}
-          className={`absolute transition-all bottom-0 px-4 -translate-x-1/2 rounded-md pointer-events-auto left-1/2 text-slate-400
-          ${orientation.bottom === true
-              ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
-              : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-            }
-          `}>
-          Bottom
-        </button>
-        <button
+          orientation={orientation}
+          side={'bottom'}
+        />
+        <OrientationButton
+          onClick={() => toggleOrientation('left')}
+          orientation={orientation}
+          side={'left'}
+        />
+        <OrientationButton
           onClick={() => toggleOrientation('right')}
-          className={`absolute transition-all -right-6 px-4 -translate-y-1/2 rotate-90 rounded-md pointer-events-auto top-1/2 text-slate-400
-          ${orientation.right === true
-              ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
-              : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
-            }
-          `}>
-          <span className='w-full text-center'>Right</span>
-        </button>
+          orientation={orientation}
+          side={'right'}
+        />
       </div>
       {/* INFO TOOLTIP */}
       <div className='absolute bottom-2 right-3'>
@@ -210,7 +198,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
       {/* RESULT */}
       <WidgetResult>
         <CopyToClipboard valueToCopy={convertedBorderRadius.class.toString()}>
-          <span className='font-semibold'>{`"${orientationOutput}${convertedBorderRadius.class} "`}</span>
+          <span className='font-semibold'>{`${orientationOutput}${convertedBorderRadius.class}`}</span>
         </CopyToClipboard>
         <div className='flex gap-4'>
           <CopyToClipboard valueToCopy={convertedBorderRadius.rem.toString()}>

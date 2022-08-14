@@ -27,6 +27,7 @@ export { default as OutOfBounds } from './OutOfBounds'
 export { default as StyledRange } from './StyledRange'
 export { default as StyledInput } from './StyledInput'
 export { default as CategoryButton } from './CategoryButton'
+export { default as OrientationButton } from './OrientationButton'
 
 export { default as Favorites } from './Favorites'
 export { default as FavoriteButton } from './FavoriteButton'

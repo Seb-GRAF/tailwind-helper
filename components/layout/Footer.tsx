@@ -16,7 +16,7 @@ const Footer = (): JSX.Element => {
         by{' '}
         <a
           href='https://seb-graf.com'
-          className='underline underline-offset-2 hover:text-indigo-700 dark:hover:text-indigo-400'>
+          className='underline underline-offset-2 decoration-slate-400 dark:decoration-slate-700 hover:text-indigo-700 dark:hover:text-indigo-400'>
           Seb Graf
         </a>
       </div>

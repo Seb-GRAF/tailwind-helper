@@ -25,7 +25,7 @@ const StyledInput = ({
     <input
       className={`p-4 w-44 ${
         hasUnit && 'pr-12'
-      } bg-slate-100 dark:bg-slate-700 rounded-md text-indigo-700 dark:text-indigo-300`}
+      } bg-stone-100 dark:bg-slate-700 rounded-md text-indigo-700 dark:text-indigo-300`}
       name={name}
       type={type}
       step={step}

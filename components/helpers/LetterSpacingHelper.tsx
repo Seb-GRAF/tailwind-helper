@@ -79,8 +79,8 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
       </WidgetConverter>
       <WidgetResult>
         <CopyToClipboard valueToCopy={spacing.class.toString()}>
-          <span className='font-semibold'>{`" ${spacing.class
-            } "`}</span>
+          <span className='font-semibold'>{`${spacing.class
+            }`}</span>
         </CopyToClipboard>
         <CopyToClipboard
           valueToCopy={spacing.spacing.toString()}>

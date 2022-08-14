@@ -74,30 +74,36 @@ const Favorites = () => {
             <DeleteButton category='fonts' />
             <h2 className='text-xl font-semibold'>Fonts</h2>
             <ul className='flex flex-col gap-2'>
-              {favoritesContext?.favorites?.map((favorite, index) => {
-                return (
-                  favorite.category === 'fonts' && (
-                    <li
-                      key={favorite.class + index}
-                      className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
-                      <button
-                        className='flex items-center justify-center w-6 h-4'
-                        onClick={() =>
-                          favoritesContext.removeFavorite(favorite.class)
-                        }>
-                        ⓧ
-                      </button>
-                      <div className='flex flex-col gap-2 sm:flex-row'>
-                        <h3 className='font-bold'>{favorite.name}:</h3>
+              {favoritesContext?.favorites
+                ?.sort((a, b) => {
+                  if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
+                  if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+                  return 0
+                })
+                .map((favorite, index) => {
+                  return (
+                    favorite.category === 'fonts' && (
+                      <li
+                        key={favorite.class + index}
+                        className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
+                        <button
+                          className='flex items-center justify-center w-6 h-4'
+                          onClick={() =>
+                            favoritesContext.removeFavorite(favorite.class)
+                          }>
+                          ⓧ
+                        </button>
+                        <div className='flex flex-col gap-2 sm:flex-row'>
+                          <h3 className='font-bold'>{favorite.name}:</h3>
 
-                        <CopyToClipboard valueToCopy={favorite.class}>
-                          <span className=''>{favorite.class}</span>
-                        </CopyToClipboard>
-                      </div>
-                    </li>
+                          <CopyToClipboard valueToCopy={favorite.class}>
+                            <span className=''>{favorite.class}</span>
+                          </CopyToClipboard>
+                        </div>
+                      </li>
+                    )
                   )
-                )
-              })}
+                })}
             </ul>
           </div>
         </WidgetWrapper>
@@ -110,30 +116,36 @@ const Favorites = () => {
             <DeleteButton category='layouts' />
             <h2 className='text-xl font-semibold'>Layouts</h2>
             <ul className='flex flex-col gap-2'>
-              {favoritesContext?.favorites?.map((favorite, index) => {
-                return (
-                  favorite.category === 'layouts' && (
-                    <li
-                      key={favorite.class + index}
-                      className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
-                      <button
-                        className='flex items-center justify-center w-6 h-4'
-                        onClick={() =>
-                          favoritesContext.removeFavorite(favorite.class)
-                        }>
-                        ⓧ
-                      </button>
-                      <div className='flex flex-col gap-2 sm:flex-row'>
-                        <h3 className='font-bold'>{favorite.name}:</h3>
+              {favoritesContext?.favorites
+                ?.sort((a, b) => {
+                  if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
+                  if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+                  return 0
+                })
+                .map((favorite, index) => {
+                  return (
+                    favorite.category === 'layouts' && (
+                      <li
+                        key={favorite.class + index}
+                        className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
+                        <button
+                          className='flex items-center justify-center w-6 h-4'
+                          onClick={() =>
+                            favoritesContext.removeFavorite(favorite.class)
+                          }>
+                          ⓧ
+                        </button>
+                        <div className='flex flex-col gap-2 sm:flex-row'>
+                          <h3 className='font-bold'>{favorite.name}:</h3>
 
-                        <CopyToClipboard valueToCopy={favorite.class}>
-                          <span className=''>{favorite.class}</span>
-                        </CopyToClipboard>
-                      </div>
-                    </li>
+                          <CopyToClipboard valueToCopy={favorite.class}>
+                            <span className=''>{favorite.class}</span>
+                          </CopyToClipboard>
+                        </div>
+                      </li>
+                    )
                   )
-                )
-              })}
+                })}
             </ul>
           </div>
         </WidgetWrapper>

@@ -98,7 +98,7 @@ const FontSizeExample = ({
          bg-transparent w-full`}
       />
       {/* TAILWIND CLASSES */}
-      <div className='flex items-center justify-between mx-4 my-3'>
+      <div className='flex items-center justify-between mx-3 my-2'>
         <CopyToClipboard valueToCopy={toPrint}>
           <span className='flex flex-wrap gap-2 font-semibold whitespace-nowrap'>
             {fontSize !== 'text-base' && <span>{fontSize}</span>}

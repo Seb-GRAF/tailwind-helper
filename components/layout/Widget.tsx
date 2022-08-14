@@ -24,7 +24,7 @@ export const WidgetConverter = ({
   return (
     <form className='flex flex-col items-center justify-center w-full gap-4'>
       <div className='flex flex-col items-center gap-4'>
-        <label htmlFor='fontWeight' className='text-lg'>
+        <label htmlFor='fontWeight' className='text-lg font-semibold'>
           {helperName}
         </label>
       </div>

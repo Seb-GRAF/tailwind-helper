@@ -7,7 +7,6 @@ import {
   FavoriteButton,
 } from '..'
 import { colors, Color } from '../../utils/tailwindClasses'
-import { FavoritesCtx } from '../../contexts/FavoritesProvider'
 
 interface Props {
   setColor?: (value: string) => void
@@ -131,7 +130,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
       </WidgetConverter>
       <WidgetResult>
         <CopyToClipboard valueToCopy={closestColor.class}>
-          <span className='font-semibold'>{`" ${closestColor.class} "`}</span>
+          <span className='font-semibold'>{`${closestColor.class}`}</span>
         </CopyToClipboard>
         <CopyToClipboard valueToCopy={closestColor.hex}>
           <span>{`${closestColor.hex}`}</span>
