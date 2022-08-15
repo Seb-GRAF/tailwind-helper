@@ -10,7 +10,7 @@ const Favorites = () => {
     <div className='flex flex-col gap-4'>
       {/* MESSAGE WHEN NO FAVORITES */}
       {favoritesContext?.favorites?.length < 1 && (
-        <div className='text-center'>
+        <div className='mt-8 text-center'>
           <h2 className='text-2xl font-semibold'>No favorites yet</h2>
           <p className='text-lg opacity-70'>
             Use the ☆ icon found within the helpers to save properties to your

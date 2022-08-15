@@ -29,7 +29,7 @@ const OrientationButton = ({ orientation, side, onClick }: Props) => {
   return (
     <button
       onClick={onClick}
-      className={`absolute transition-all px-4 rounded-md pointer-events-auto  text-slate-400 ${
+      className={`absolute px-4 rounded-md pointer-events-auto  text-slate-400 ${
         styles[side]
       }
           ${

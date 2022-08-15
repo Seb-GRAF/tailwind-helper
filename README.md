@@ -1,4 +1,4 @@
-![Screenshot 2022-08-03 at 18 07 42](https://user-images.githubusercontent.com/95282692/182868087-fd9e4ec7-b224-4001-895e-93500545b08c.png)
+![tailwindhelper](https://user-images.githubusercontent.com/95282692/184671925-22a70bb6-46e1-4265-9059-ab879bfd6037.jpeg)
 
 [tailwindhelper website](https://www.tailwindhelper.com)
 
@@ -25,16 +25,16 @@ Simply use the Font size helper and then copy and paste the class into your html
 
 - Margin
 - Padding
+- Border radius
+- Box shadow
 
 ### Colors
 
 - Tailwind color list
+- Color picker
 
 # ✍️ Upcoming helpers
 
-### Layout
+### Images
 
-- Gap
-- Border radius
-- width
-- height
+- Filters

@@ -1,11 +1,17 @@
 import { useState } from 'react'
-import { PaddingHelper, MarginHelper, BorderRadiusHelper } from './helpers'
+import {
+  PaddingHelper,
+  MarginHelper,
+  BorderRadiusHelper,
+  ShadowHelper,
+} from './helpers'
 import { LayoutExample } from '.'
 
 const LayoutHelper = () => {
   const [margin, setMargin] = useState('')
   const [padding, setPadding] = useState('')
   const [borderRadius, setBorderRadius] = useState('')
+  const [shadow, setShadow] = useState('')
 
   return (
     <div className='flex flex-col gap-4'>
@@ -13,11 +19,13 @@ const LayoutHelper = () => {
         <MarginHelper setMargin={setMargin} />
         <PaddingHelper setPadding={setPadding} />
         <BorderRadiusHelper setBorderRadius={setBorderRadius} />
+        <ShadowHelper setShadow={setShadow} />
       </div>
       <LayoutExample
         margin={margin}
         padding={padding}
         borderRadius={borderRadius}
+        shadow={shadow}
       />
     </div>
   )

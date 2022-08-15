@@ -3,7 +3,7 @@ import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 import { fontSizes } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
-import { getClosestItem } from '../../utils/getClosestItem';
+import { getClosestItem } from '../../utils/getClosestItem'
 
 interface Props {
   setFontSize: (value: string) => void
@@ -29,9 +29,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
   // updates converted size on value and unit change
   useEffect(() => {
     // const closestFontSize = getClosestFontSize(fontSizes, value, unit)
-    setConvertedFontSize(
-      getClosestItem(fontSizes, value, unit)
-    )
+    setConvertedFontSize(getClosestItem(fontSizes, value, unit))
   }, [value, unit])
 
   useEffect(() => {
@@ -82,7 +80,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
         </div>
 
         <button
-          className='h-full mt-2 transition-all w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
+          className='h-full mt-2 w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {

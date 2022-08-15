@@ -13,6 +13,7 @@ export { FontWeightHelper } from './helpers'
 export { LetterSpacingHelper } from './helpers'
 export { MarginHelper } from './helpers'
 export { PaddingHelper } from './helpers'
+export { ShadowHelper } from './helpers'
 
 export { default as FontHelper } from './FontHelper'
 export { default as LayoutHelper } from './LayoutHelper'

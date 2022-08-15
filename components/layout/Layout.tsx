@@ -61,7 +61,7 @@ const Layout = ({ children }: Props) => {
   }, [])
 
   return (
-    <div className='flex flex-col max-w-4xl min-h-screen p-4 pb-8 mx-auto'>
+    <div className='flex flex-col max-w-4xl min-h-screen p-4 pb-8 mx-auto overflow-x-hidden'>
       <Head>
         <meta name='theme-color' content={isDark ? '#151E32' : '#f1f5f9'} />
         <title key='title'>Tailwindhelper</title>
@@ -117,7 +117,7 @@ const Layout = ({ children }: Props) => {
       </Head>
       <Header isDark={isDark} toggleThemeHandler={toggleThemeHandler} />
       {children}
-      <Footer />
+      <Footer isDark={isDark} />
     </div>
   )
 }

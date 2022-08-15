@@ -7,12 +7,14 @@ interface Props {
   margin: string
   padding: string
   borderRadius: string
+  shadow: string
 }
 
 const LayoutExample = ({
   margin,
   padding,
   borderRadius,
+  shadow,
 }: Props): JSX.Element => {
   const [toPrint, setToPrint] = useState('')
   const [customName, setCustomName] = useState('')
@@ -21,8 +23,12 @@ const LayoutExample = ({
   const favoritesContext = useContext(FavoritesCtx)
 
   useEffect(() => {
-    setToPrint(`${margin} ${padding} ${borderRadius}`)
-  }, [margin, padding, borderRadius])
+    setToPrint(
+      `${margin} ${padding} ${borderRadius} ${
+        shadow !== 'shadow-none' ? shadow : ''
+      }`
+    )
+  }, [margin, padding, borderRadius, shadow])
 
   useEffect(() => {
     if (favoritesContext.isAlreadyFavorite(toPrint) && customName !== '') {
@@ -79,20 +85,23 @@ const LayoutExample = ({
       )}
       {/* EXAMPLE */}
       <div
-        className={`mb-2 flex items-center justify-center w-full min-h-96 overflow-x-hidden`}>
+        className={`mb-2 flex items-center justify-center w-full min-h-96 overflow-xs-hidden`}>
         <div
-          className={`padding  overflow-hidden ${borderRadius} ${margin} ${padding} flex justify-center item-center transition-all duration-75 bg-indigo-300 dark:bg-indigo-700 w-full shadow-lg h-auto`}>
+          className={`padding overflow-x-hidden ${borderRadius} ${margin} ${padding} ${shadow} flex justify-center item-center transition-[margin,padding,border-radius,box-shadow] duration-75 bg-indigo-300 dark:bg-indigo-700 w-full h-auto`}>
           <div
-            className={`${borderRadius} w-full h-24 transition-all duration-75 bg-indigo-300 dark:bg-indigo-500`}></div>
+            className={`${borderRadius} w-full h-24 transition-[margin,padding,border-radius] duration-75 bg-indigo-300 dark:bg-indigo-500`}></div>
         </div>
       </div>
       {/* VALUE TO PRINT */}
-      <div className='flex items-center justify-between mx-3 mb-2'>
+      <div className='flex items-end justify-between mx-3 mb-2'>
         <CopyToClipboard valueToCopy={toPrint}>
-          <span className='flex gap-2 font-semibold'>
-            <span>{margin}</span>
-            <span>{padding}</span>
-            <span>{borderRadius}</span>
+          <span className='flex flex-wrap gap-2 font-semibold'>
+            <span className='whitespace-nowrap'>{margin}</span>
+            <span className='whitespace-nowrap'>{padding}</span>
+            <span className='whitespace-nowrap'>{borderRadius}</span>
+            {shadow !== 'shadow-none ' && (
+              <span className='whitespace-nowrap'>{shadow}</span>
+            )}
             <svg
               width='24'
               height='24'

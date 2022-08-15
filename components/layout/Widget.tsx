@@ -11,7 +11,7 @@ interface WidgetConverterProps {
 
 const WidgetWrapper = ({ children }: Props): JSX.Element => {
   return (
-    <section className='relative flex flex-col items-center justify-between flex-grow gap-8 p-8 bg-white shadow-sm odd:last:sm:col-span-2 widget dark:shadow-inset-sm dark:shadow-white/5 rounded-xl shadow-stone-200 dark:bg-slate-800 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+    <section className='relative flex flex-col items-center flex-grow gap-8 p-8 bg-white shadow-sm justify-evenly odd:last:sm:col-span-2 widget dark:shadow-inset-sm dark:shadow-white/5 rounded-xl shadow-stone-200 dark:bg-slate-800 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       {children}
     </section>
   )
@@ -35,7 +35,7 @@ const WidgetConverter = ({
 
 const WidgetResult = ({ children }: Props): JSX.Element => {
   return (
-    <div className='flex items-center justify-center w-full gap-4 whitespace-nowrap '>
+    <div className='flex items-center justify-center w-full gap-4'>
       {children}
       <svg
         width='24'

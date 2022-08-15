@@ -81,7 +81,6 @@ const Home: NextPage = () => {
           <span className='sr-only'>Hide/Show Description</span>
           <span>{isDescriptionOpen ? '⊖' : '⊕'}</span>
         </button>
-
         <h1 className='absolute top-0 items-end justify-center invisible hidden text-5xl font-semibold origin-left -translate-x-1/2 index-title left-1/2 sm:flex text-slate-700 dark:text-slate-300'>
           <div className='w-16 h-16'>
             <svg
@@ -140,11 +139,11 @@ const Home: NextPage = () => {
         </h1>
 
         <div className='relative'>
-          <p className='invisible mt-4 mb-12 overflow-hidden sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-6'>
+          <p className='invisible mt-4 mb-12 overflow-hidden sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-8'>
             You want to convert a unit to the corresponding tailwind class? You
             always forget property names? Or you are simply learning tailwind
             and would like a bit of help visualizing classes? Then this tool
-            might come in handy
+            might come in handyǃ
           </p>
         </div>
       </div>

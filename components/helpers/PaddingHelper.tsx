@@ -172,7 +172,7 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
         </div>
 
         <button
-          className='h-full mt-2 transition-all w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
+          className='h-full mt-2 w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {

@@ -5,6 +5,7 @@ interface Props {
   min: number
   max: number
   value: number
+  absolute?: boolean
   setValue: (value: number) => void
 }
 
@@ -14,6 +15,7 @@ const StyledRange = ({
   max,
   value,
   setValue,
+  absolute = true,
 }: Props): JSX.Element => {
   return (
     <input
@@ -25,7 +27,9 @@ const StyledRange = ({
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setValue(parseFloat(e.target.value))
       }
-      className='absolute left-0 w-full -bottom-4'
+      className={`${
+        absolute ? 'absolute' : 'relative'
+      } left-0 w-full -bottom-4`}
     />
   )
 }
