@@ -32,7 +32,7 @@ const LayoutExample = ({
         category: 'layouts',
       })
     }
-  }, [customName])
+  }, [customName, favoritesContext, toPrint])
 
   return (
     <div className='relative bg-white shadow-sm dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-stone-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
@@ -48,14 +48,14 @@ const LayoutExample = ({
         <div className='absolute top-0 right-0 z-10 w-10'>
           <input
             type='text'
-            placeholder='Name your property'
+            placeholder='Custom name'
             defaultValue={
               favoritesContext?.isAlreadyFavorite(toPrint)
                 ? favoritesContext?.favorites?.find((e) => e.class === toPrint)
                     ?.name
                 : ''
             }
-            className='absolute z-10 px-2 rounded-md shadow-md top-1 right-1 w-15 h-7 bg-slate-100 dark:bg-slate-700'
+            className='absolute z-10 px-2 pr-6 rounded-md shadow-md shadow-slate-900/20 top-1 right-1 h-7 bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-200/20'
             onChange={(e) => setCustomName(e.target.value)}
           />
           <FavoriteButton
@@ -78,11 +78,12 @@ const LayoutExample = ({
         </div>
       )}
       {/* EXAMPLE */}
-      <div className={`mb-2 flex items-center justify-center w-full min-h-96`}>
+      <div
+        className={`mb-2 flex items-center justify-center w-full min-h-96 overflow-x-hidden`}>
         <div
-          className={`padding  overflow-hidden ${borderRadius} ${margin} ${padding} flex justify-center item-center transition-all duration-75 bg-indigo-200 dark:bg-indigo-700 w-full shadow-lg h-auto`}>
+          className={`padding  overflow-hidden ${borderRadius} ${margin} ${padding} flex justify-center item-center transition-all duration-75 bg-indigo-300 dark:bg-indigo-700 w-full shadow-lg h-auto`}>
           <div
-            className={`${borderRadius} w-full h-24 transition-all duration-75 bg-indigo-200 dark:bg-indigo-500`}></div>
+            className={`${borderRadius} w-full h-24 transition-all duration-75 bg-indigo-300 dark:bg-indigo-500`}></div>
         </div>
       </div>
       {/* VALUE TO PRINT */}

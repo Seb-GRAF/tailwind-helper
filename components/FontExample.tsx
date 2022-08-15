@@ -61,14 +61,14 @@ const FontSizeExample = ({
         <div className='absolute top-0 right-0 z-10 w-10'>
           <input
             type='text'
-            placeholder='Name your property'
+            placeholder='Custom name'
             defaultValue={
               favoritesContext?.isAlreadyFavorite(toPrint)
                 ? favoritesContext?.favorites?.find((e) => e.class === toPrint)
                     ?.name
                 : ''
             }
-            className='absolute z-10 px-2 rounded-md shadow-md top-1 right-1 w-15 h-7 bg-slate-100 dark:bg-slate-700'
+            className='absolute z-10 px-2 pr-6 rounded-md shadow-md top-1 right-1 w-15 h-7 bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-200/20 shadow-slate-900/20'
             onChange={(e) => setCustomName(e.target.value)}
           />
           <FavoriteButton
@@ -93,6 +93,7 @@ const FontSizeExample = ({
         id='text-example'
         type='text'
         defaultValue='Lorem Ipsum'
+        autoCorrect='off'
         placeholder='Enter your text'
         className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 py-4 px-6 overflow-x-auto  
          bg-transparent w-full`}

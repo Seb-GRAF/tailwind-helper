@@ -9,7 +9,7 @@ interface WidgetConverterProps {
   helperName: string
 }
 
-export const WidgetWrapper = ({ children }: Props): JSX.Element => {
+const WidgetWrapper = ({ children }: Props): JSX.Element => {
   return (
     <section className='relative flex flex-col items-center justify-between flex-grow gap-8 p-8 bg-white shadow-sm odd:last:sm:col-span-2 widget dark:shadow-inset-sm dark:shadow-white/5 rounded-xl shadow-stone-200 dark:bg-slate-800 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
       {children}
@@ -17,14 +17,14 @@ export const WidgetWrapper = ({ children }: Props): JSX.Element => {
   )
 }
 
-export const WidgetConverter = ({
+const WidgetConverter = ({
   children,
   helperName,
 }: WidgetConverterProps): JSX.Element => {
   return (
     <form className='flex flex-col items-center justify-center w-full gap-4'>
       <div className='flex flex-col items-center gap-4'>
-        <label htmlFor='fontWeight' className='text-lg font-semibold'>
+        <label htmlFor={helperName} className='text-lg font-semibold'>
           {helperName}
         </label>
       </div>
@@ -33,7 +33,7 @@ export const WidgetConverter = ({
   )
 }
 
-export const WidgetResult = ({ children }: Props): JSX.Element => {
+const WidgetResult = ({ children }: Props): JSX.Element => {
   return (
     <div className='flex items-center justify-center w-full gap-4 whitespace-nowrap '>
       {children}
@@ -48,3 +48,5 @@ export const WidgetResult = ({ children }: Props): JSX.Element => {
     </div>
   )
 }
+
+export { WidgetWrapper, WidgetConverter, WidgetResult }

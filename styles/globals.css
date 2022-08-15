@@ -2,45 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .dark {
-  color-scheme: dark;
-} */
-
 html {
   @apply text-slate-700 bg-gradient-to-tl from-stone-200 via-stone-100 to-stone-100;
-  @apply antialiased;
 }
 
 .dark {
   @apply bg-gradient-to-bl from-slate-800 via-slate-900 to-slate-900 text-stone-200;
   color-scheme: dark;
+  @apply antialiased;
 }
 
 .padding {
   background: repeating-linear-gradient(
     45deg,
-    #a5b4fc,
-    #a5b4fc 10px,
-    #9dabf5 10px,
-    #9dabf5 20px
+    #95a7ff,
+    #95a7ff 5px,
+    #a5b4fc 5px,
+    #a5b4fc 13px
   );
 }
 
 .dark .padding {
   background: repeating-linear-gradient(
     45deg,
-    #4f46e5,
-    #4f46e5 10px,
-    #453de3 10px,
-    #453de3 20px
+    #5659ef,
+    #5659ef 5px,
+    #6366f1 5px,
+    #6366f1 13px
   );
 }
 
 .description {
   direction: rtl;
-}
-
-.description.collapsed {
 }
 
 input[type='range'] {

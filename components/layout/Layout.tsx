@@ -61,7 +61,7 @@ const Layout = ({ children }: Props) => {
   }, [])
 
   return (
-    <div className='flex flex-col max-w-4xl min-h-screen p-4 pb-8 mx-auto' >
+    <div className='flex flex-col max-w-4xl min-h-screen p-4 pb-8 mx-auto'>
       <Head>
         <meta name='theme-color' content={isDark ? '#151E32' : '#f1f5f9'} />
         <title key='title'>Tailwindhelper</title>
@@ -82,7 +82,11 @@ const Layout = ({ children }: Props) => {
           property='og:site_name'
           content='Tailwindhelper'
         />
-        <meta key='og_url' property='og:url' content='https://tailwindhelper.com' />
+        <meta
+          key='og_url'
+          property='og:url'
+          content='https://tailwindhelper.com'
+        />
         <meta
           key='og_site_name'
           property='og:site_name'

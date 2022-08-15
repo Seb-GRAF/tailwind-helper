@@ -40,7 +40,14 @@ const Favorites = () => {
                     favorite.category === 'colors' && (
                       <li
                         key={favorite.class + index}
-                        className='flex items-center gap-2 w-fit group'>
+                        className='flex items-center gap-2 w-fit'>
+                        <button
+                          className='flex items-center justify-center w-6 h-4 '
+                          onClick={() =>
+                            favoritesContext.removeFavorite(favorite.class)
+                          }>
+                          ⓧ
+                        </button>
                         <div className='flex items-center gap-1'>
                           {/* COLOR SQUARE */}
                           <div
@@ -51,13 +58,6 @@ const Favorites = () => {
                             {favorite.name}
                           </CopyToClipboard>
                         </div>
-                        <button
-                          className='items-center justify-center hidden w-6 h-4 group-hover:flex'
-                          onClick={() =>
-                            favoritesContext.removeFavorite(favorite.class)
-                          }>
-                          ⓧ
-                        </button>
                       </li>
                     )
                   )
@@ -85,7 +85,7 @@ const Favorites = () => {
                     favorite.category === 'fonts' && (
                       <li
                         key={favorite.class + index}
-                        className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
+                        className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none last-of-type:border-b-0 last-of-type:pb-0 border-slate-200 dark:border-slate-600 '>
                         <button
                           className='flex items-center justify-center w-6 h-4'
                           onClick={() =>
@@ -95,10 +95,11 @@ const Favorites = () => {
                         </button>
                         <div className='flex flex-col gap-2 sm:flex-row'>
                           <h3 className='font-bold'>{favorite.name}:</h3>
-
-                          <CopyToClipboard valueToCopy={favorite.class}>
-                            <span className=''>{favorite.class}</span>
-                          </CopyToClipboard>
+                          <div className=''>
+                            <CopyToClipboard valueToCopy={favorite.class}>
+                              <span className=''>{favorite.class}</span>
+                            </CopyToClipboard>
+                          </div>
                         </div>
                       </li>
                     )
@@ -127,7 +128,7 @@ const Favorites = () => {
                     favorite.category === 'layouts' && (
                       <li
                         key={favorite.class + index}
-                        className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
+                        className='flex items-center w-full gap-2 pb-2 border-b last-of-type:border-b-0 last-of-type:pb-0 sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
                         <button
                           className='flex items-center justify-center w-6 h-4'
                           onClick={() =>

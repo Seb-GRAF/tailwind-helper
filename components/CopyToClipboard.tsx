@@ -13,20 +13,21 @@ const CopyToClipboard = ({ children, valueToCopy }: Props): JSX.Element => {
     if (!text) return
     await navigator.clipboard.writeText(text)
     setDisplaySuccessMessage(true)
+
+    setTimeout(() => {
+      setDisplaySuccessMessage(false)
+    }, 1500)
   }
 
   return (
-    <button
-      onClick={() => copyToClipboard(valueToCopy)}
-      onMouseLeave={() => setDisplaySuccessMessage(false)}
-      className='flex'>
+    <button onClick={() => copyToClipboard(valueToCopy)} className='flex'>
       <Tooltip
         side='top'
         message={displaySuccessMessage ? 'Copied ✓' : 'Click to copy'}
         color={
           displaySuccessMessage
-            ? 'bg-pink-500'
-            : 'bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
+            ? 'bg-slate-800 dark:bg-stone-200 dark:text-pink-600 text-pink-300 font-semibold'
+            : 'bg-slate-800 dark:bg-stone-200 dark:text-slate-800'
         }>
         {children}
       </Tooltip>

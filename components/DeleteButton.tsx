@@ -21,13 +21,13 @@ const DeleteButton = ({ category }: Props): JSX.Element => {
       {showConfirm && (
         <>
           {/* CONFIRM DELETE */}
-          <div className='absolute top-0 right-0 z-50 flex flex-col items-center justify-center gap-4 p-4 shadow-xl delete dark:bg-stone-100 bg-slate-700 text-slate-100 dark:text-slate-900 rounded-xl'>
+          <div className='absolute top-0 right-0 z-50 flex flex-col items-center justify-center gap-4 p-4 shadow-xl delete dark:bg-stone-100 bg-slate-800 text-slate-100 dark:text-slate-900 rounded-xl '>
             <h1 className='text-center delete'>
               Are you sure you want to delete all <b>{category}</b>?
             </h1>
             <div className='flex justify-center gap-4 delete'>
               <button
-                className='px-3 text-white bg-pink-500 rounded-md'
+                className='px-3 text-white bg-pink-500 rounded-lg shadow-inset-sm shadow-stone-100/20'
                 onClick={() => {
                   setShowConfirm(false)
                   favoritesContext.emptyCategory(category)
@@ -35,7 +35,7 @@ const DeleteButton = ({ category }: Props): JSX.Element => {
                 Delete
               </button>
               <button
-                className='p-2 text-white bg-gray-500 rounded-md'
+                className='p-2 text-white bg-gray-500 rounded-lg shadow-inset-sm shadow-stone-100/20'
                 onClick={() => setShowConfirm(false)}>
                 Cancel
               </button>
