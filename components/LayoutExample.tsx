@@ -99,7 +99,7 @@ const LayoutExample = ({
             <span className='whitespace-nowrap'>{margin}</span>
             <span className='whitespace-nowrap'>{padding}</span>
             <span className='whitespace-nowrap'>{borderRadius}</span>
-            {shadow !== 'shadow-none ' && (
+            {!shadow.includes('shadow-none') && (
               <span className='whitespace-nowrap'>{shadow}</span>
             )}
             <svg

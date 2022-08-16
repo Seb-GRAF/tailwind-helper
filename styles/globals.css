@@ -6,6 +6,10 @@ html {
   @apply text-slate-700 bg-gradient-to-tl from-stone-200 via-stone-100 to-stone-100;
 }
 
+body {
+  @apply overflow-x-hidden;
+}
+
 .dark {
   @apply bg-gradient-to-bl from-slate-800 via-slate-900 to-slate-900 text-stone-200;
   color-scheme: dark;
@@ -42,18 +46,18 @@ input[type='range'] {
 
 /***** Chromium styles *****/
 input[type='range']::-webkit-slider-runnable-track {
-  @apply h-2 rounded-md bg-stone-100 dark:bg-slate-700;
+  @apply h-1 rounded-md bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-600/10 dark:ring-stone-100/10;
 }
 
 input[type='range']::-webkit-slider-thumb {
-  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1 dark:bg-indigo-300;
+  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1.5 dark:bg-indigo-300;
 }
 
 /******** Firefox styles ********/
 input[type='range']::-moz-range-track {
-  @apply h-2 rounded-md bg-slate-100 dark:bg-slate-700;
+  @apply h-1 rounded-md bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-600/10 dark:ring-stone-100/10;
 }
 
 input[type='range']::-moz-range-thumb {
-  @apply relative w-4 h-4 bg-indigo-700 rounded-full appearance-none -top-1 dark:bg-indigo-300;
+  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1.5 dark:bg-indigo-300;
 }

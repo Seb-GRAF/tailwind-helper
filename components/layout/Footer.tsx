@@ -10,7 +10,7 @@ const Footer = ({ isDark }: Props): JSX.Element => {
       <div className='flex flex-col flex-wrap items-center justify-center w-full gap-8 pt-8 border-t sm:flex-row sm:gap-10 whitespace-nowrap border-slate-300 dark:border-slate-700'>
         {/* COPYRIGHT AND NAME */}
         <div className='flex items-center gap-2'>
-          <div>&copy; {new Date().getFullYear()} -</div>
+          <div>&copy; {new Date().getFullYear()} |</div>
           Made with{' '}
           <svg
             viewBox='0 0 1792 1792'
@@ -44,7 +44,10 @@ const Footer = ({ isDark }: Props): JSX.Element => {
         </div>
 
         {/* PRODUCT HUNT */}
-        <a href='https://www.producthunt.com/posts/tailwind-helper?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tailwind-helper'>
+        <a
+          href='https://www.producthunt.com/posts/tailwind-helper?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tailwind-helper'
+          target='_blank'
+          rel='noreferrer'>
           <img
             src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=355963&theme=${
               isDark ? 'dark' : 'neutral'

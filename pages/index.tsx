@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react'
 import {
   FontHelper,
   LayoutHelper,
-  Favorites,
+  PositionHelper,
   Colors,
+  Favorites,
   CategoryButton,
 } from '../components'
 
@@ -26,7 +27,7 @@ const Home: NextPage = () => {
     description.classList.toggle('sm:mt-24')
 
     indexTitle.classList.toggle('top-0')
-    indexTitle.classList.toggle('-top-12')
+    indexTitle.classList.toggle('-top-14')
     indexTitle.classList.toggle('-translate-x-1/2')
     indexTitle.classList.toggle('left-1/2')
     indexTitle.classList.toggle('left-0')
@@ -51,7 +52,7 @@ const Home: NextPage = () => {
       description.classList.remove('sm:mt-24')
 
       indexTitle.classList.remove('top-0')
-      indexTitle.classList.add('-top-12')
+      indexTitle.classList.add('-top-14')
       indexTitle.classList.remove('-translate-x-1/2')
       indexTitle.classList.remove('left-1/2')
       indexTitle.classList.add('left-0')
@@ -163,6 +164,11 @@ const Home: NextPage = () => {
         <CategoryButton
           selectedCategory={selectedCategory}
           setCategory={setCategory}
+          name={'Position'}
+        />
+        <CategoryButton
+          selectedCategory={selectedCategory}
+          setCategory={setCategory}
           name={'Colors'}
         />
         <div className='sm:flex sm:justify-end sm:w-full'>
@@ -180,6 +186,9 @@ const Home: NextPage = () => {
       </div>
       <div className={`${selectedCategory !== 'layout' && 'hidden'}`}>
         <LayoutHelper />
+      </div>
+      <div className={`${selectedCategory !== 'position' && 'hidden'}`}>
+        <PositionHelper />
       </div>
       <div className={`${selectedCategory !== 'colors' && 'hidden'}`}>
         <Colors />

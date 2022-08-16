@@ -27,9 +27,11 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
   })
 
   const reset = () => {
-    const input = document.getElementById('hex-value') as HTMLInputElement
-    setValue('#000000')
+    const input = document.getElementById(
+      'shadow-hex-value'
+    ) as HTMLInputElement
     input.value = '#000000'
+    setValue('#000000')
     setClosestColor({
       class: 'black',
       hex: '#000000',
@@ -37,7 +39,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
     setCurrentShadow(shadows[5])
     setShadowIndex(5)
 
-    setCurrentOpacity(opacities[1])
+    setCurrentOpacity(opacities[2])
     setOpacityIndex(2)
   }
 
@@ -134,7 +136,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
               <input
                 type='color'
                 name='color'
-                className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'
+                className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const input = document.getElementById(
@@ -164,14 +166,14 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
             </div>
 
             {/* HEX INPUT AND OPACITY SLIDER */}
-            <div className='relative z-10'>
+            <div className='relative'>
               <input
                 type='text'
                 defaultValue={value}
                 id='shadow-hex-value'
                 placeholder='#000000'
                 maxLength={7}
-                className='p-1 text-center rounded-md pr-14 w-44 bg-slate-100 dark:bg-slate-700'
+                className='p-1 text-center rounded-md pr-14 w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
                 onChange={(e) => {
                   if (
                     e.target.value.length === 7 &&
@@ -186,7 +188,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
                 {opacities[opacityIndex].class}%
               </span>
             </div>
-            <div className='relative z-20 flex justify-center -top-2'>
+            <div className='relative flex justify-center -top-2'>
               <StyledRange
                 step={1}
                 min={0}
@@ -203,7 +205,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
       <WidgetResult>
         <CopyToClipboard
           valueToCopy={`${currentShadow.class} ${
-            closestColor.class !== 'black' && currentOpacity.class !== '10'
+            closestColor.class !== 'black' || currentOpacity.class !== '10'
               ? `shadow-${closestColor.class}${
                   currentOpacity.class !== '100'
                     ? `/${currentOpacity.class}`
@@ -212,7 +214,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
               : ''
           }`}>
           <span className='font-semibold'>{`${currentShadow.class} ${
-            closestColor.class !== 'black' && currentOpacity.class !== '10'
+            closestColor.class !== 'black' || currentOpacity.class !== '10'
               ? `shadow-${closestColor.class}${
                   currentOpacity.class !== '100'
                     ? `/${currentOpacity.class}`
@@ -221,7 +223,6 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
               : ''
           }`}</span>
         </CopyToClipboard>
-        <div className='flex gap-4'></div>
       </WidgetResult>
     </WidgetWrapper>
   )

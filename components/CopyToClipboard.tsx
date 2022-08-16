@@ -20,7 +20,7 @@ const CopyToClipboard = ({ children, valueToCopy }: Props): JSX.Element => {
   }
 
   return (
-    <button onClick={() => copyToClipboard(valueToCopy)} className='flex'>
+    <button onClick={() => copyToClipboard(valueToCopy)} className='z-10 flex'>
       <Tooltip
         side='top'
         message={displaySuccessMessage ? 'Copied ✓' : 'Click to copy'}

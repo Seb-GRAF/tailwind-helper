@@ -15,13 +15,6 @@ export { MarginHelper } from './helpers'
 export { PaddingHelper } from './helpers'
 export { ShadowHelper } from './helpers'
 
-export { default as FontHelper } from './FontHelper'
-export { default as LayoutHelper } from './LayoutHelper'
-export { default as Colors } from './Colors'
-
-export { default as FontExample } from './FontExample'
-export { default as LayoutExample } from './LayoutExample'
-
 export { default as Tooltip } from './Tooltip'
 export { default as CopyToClipboard } from './CopyToClipboard'
 export { default as OutOfBounds } from './OutOfBounds'
@@ -29,6 +22,17 @@ export { default as StyledRange } from './StyledRange'
 export { default as StyledInput } from './StyledInput'
 export { default as CategoryButton } from './CategoryButton'
 export { default as OrientationButton } from './OrientationButton'
+
+export { default as FontHelper } from './FontHelper'
+export { default as FontExample } from './FontExample'
+
+export { default as LayoutHelper } from './LayoutHelper'
+export { default as LayoutExample } from './LayoutExample'
+
+export { default as PositionHelper } from './PositionHelper'
+export { default as PositionExample } from './PositionExample'
+
+export { default as Colors } from './Colors'
 
 export { default as Favorites } from './Favorites'
 export { default as FavoriteButton } from './FavoriteButton'

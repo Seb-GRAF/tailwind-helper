@@ -28,12 +28,21 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Border radius
 - Box shadow
 
+### Positions
+
+- Positioning
+- Placement
+
 ### Colors
 
 - Tailwind color list
 - Color picker
 
 # ✍️ Upcoming helpers
+
+### Positions
+
+- Translate
 
 ### Images
 

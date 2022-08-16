@@ -7,3 +7,6 @@ export { default as MarginHelper } from './MarginHelper'
 export { default as PaddingHelper } from './PaddingHelper'
 export { default as BorderRadiusHelper } from './BorderRadiusHelper'
 export { default as ShadowHelper } from './ShadowHelper'
+
+export { default as PositioningHelper } from './PositioningHelper'
+export { default as PlacementHelper } from './PlacementHelper'
