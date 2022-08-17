@@ -63,10 +63,10 @@ const Layout = ({ children }: Props): JSX.Element => {
     <div className='flex flex-col max-w-4xl min-h-screen p-4 pb-8 mx-auto overflow-hidden '>
       <SEO isDark={isDark} />
       <Header isDark={isDark} toggleThemeHandler={toggleThemeHandler} />
-      <div className='relative'>
+      <main className='relative'>
         <Title />
         {children}
-      </div>
+      </main>
       <Footer isDark={isDark} />
     </div>
   )

@@ -76,7 +76,7 @@ const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
 
       {/* THEME TOGGLE */}
       <button
-        className='w-10 h-10 text-gray-700 transition-colors sm:w-11 sm:h-11 dark:text-slate-400 hover:text-indigo-600 hover:dark:text-indigo-400'
+        className='w-10 h-10 text-gray-700 sm:w-11 sm:h-11 dark:text-slate-400 hover:text-indigo-600 hover:dark:text-indigo-400'
         onClick={toggleThemeHandler}>
         <span className='sr-only'>Toggle dark/light theme</span>
         {isDark ? (

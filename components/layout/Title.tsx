@@ -64,7 +64,7 @@ const Home = (): JSX.Element => {
       {/* HIDE TITLE AND DESCRIPTION */}
       <button
         onClick={toggleDescription}
-        className='absolute z-10 text-xl transition-colors right-2 sm:right-3 top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
+        className='absolute z-10 text-xl right-2 sm:right-3 top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
         <span className='sr-only'>Hide/Show Description</span>
         <span>{isDescriptionOpen ? '⊖' : '⊕'}</span>
       </button>

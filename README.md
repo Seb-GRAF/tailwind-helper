@@ -1,6 +1,6 @@
-![tailwindhelper](https://user-images.githubusercontent.com/95282692/184671925-22a70bb6-46e1-4265-9059-ab879bfd6037.jpeg)
+![tailwindhelper](https://user-images.githubusercontent.com/95282692/185206088-65cd67c4-d5f9-4f2f-9650-c3475bc8e0ca.jpeg)
 
-[tailwindhelper website](https://www.tailwindhelper.com)
+[https://tailwindhelper.com](https://www.tailwindhelper.com)
 
 # Tailwind Helper
 
@@ -32,6 +32,7 @@ Simply use the Font size helper and then copy and paste the class into your html
 
 - Positioning
 - Placement
+- Translate (x/y)
 
 ### Colors
 
@@ -40,10 +41,7 @@ Simply use the Font size helper and then copy and paste the class into your html
 
 # ✍️ Upcoming helpers
 
-### Positions
-
-- Translate
-
 ### Images
 
 - Filters
+- Object Fit

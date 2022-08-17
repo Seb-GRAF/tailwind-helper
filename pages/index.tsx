@@ -108,21 +108,22 @@ const Home: NextPage = () => {
       </nav>
 
       {/* HELPERS */}
-      <div className={`${selectedCategory !== 'font' && 'hidden'}`}>
+      <section className={`${selectedCategory !== 'font' ? 'hidden' : ''}`}>
         <FontHelper />
-      </div>
-      <div className={`${selectedCategory !== 'layout' && 'hidden'}`}>
+      </section>
+      <section className={`${selectedCategory !== 'layout' ? 'hidden' : ''}`}>
         <LayoutHelper />
-      </div>
-      <div className={`${selectedCategory !== 'position' && 'hidden'}`}>
+      </section>
+      <section className={`${selectedCategory !== 'position' ? 'hidden' : ''}`}>
         <PositionHelper />
-      </div>
-      <div className={`${selectedCategory !== 'colors' && 'hidden'}`}>
+      </section>
+      <section className={`${selectedCategory !== 'colors' ? 'hidden' : ''}`}>
         <Colors />
-      </div>
-      <div className={`${selectedCategory !== 'favorites' && 'hidden'}`}>
+      </section>
+      <section
+        className={`${selectedCategory !== 'favorites' ? 'hidden' : ''}`}>
         <Favorites />
-      </div>
+      </section>
     </div>
   )
 }
