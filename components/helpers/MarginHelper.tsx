@@ -154,7 +154,7 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
         <div className='relative flex w-full gap-2'>
           {/* SWITCH TO NEGATIVE/POSITIVE VALUES */}
           <button
-            className='flex-shrink-0 w-4 rounded hover:text-indigo-600 dark:hover:text-indigo-300 bg-slate-700 h-14'
+            className='flex-shrink-0 w-4 rounded hover:text-indigo-600 dark:hover:text-indigo-300 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10 h-14'
             // {...(unit === 'percent' ? { disabled: true } : {})}
             onClick={(e) => {
               e.preventDefault()

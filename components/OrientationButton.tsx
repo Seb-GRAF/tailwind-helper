@@ -34,8 +34,8 @@ const OrientationButton = ({ orientation, side, onClick }: Props) => {
       }
           ${
             orientation[side] === true
-              ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300'
-              : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700'
+              ? 'bg-indigo-300 dark:bg-indigo-600 text-slate-700 dark:text-slate-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+              : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:text-slate-300 text-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
           }
           `}>
       <span className='capitalize'>{side}</span>

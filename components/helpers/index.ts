@@ -10,3 +10,5 @@ export { default as ShadowHelper } from './ShadowHelper'
 
 export { default as PositioningHelper } from './PositioningHelper'
 export { default as PlacementHelper } from './PlacementHelper'
+export { default as TranslateXHelper } from './TranslateXHelper'
+export { default as TranslateYHelper } from './TranslateYHelper'

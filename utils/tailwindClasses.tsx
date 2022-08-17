@@ -62,6 +62,14 @@ export type Placement = {
   percent?: number
 }
 
+export type Translate = {
+  class: string
+  type?: string
+  rem?: number
+  px?: number
+  percent?: number
+}
+
 /**
  * TAILWIND CLASSES
  */
@@ -470,6 +478,50 @@ export const positionings: Positioning[] = [
 ]
 
 export const placements: Placement[] = [
+  { class: '0', type: 'int', rem: 0, px: 0 },
+  { class: 'px', type: 'int', rem: 0.0625, px: 1 },
+  { class: '0.5', type: 'int', rem: 0.125, px: 2 },
+  { class: '1', type: 'int', rem: 0.25, px: 4 },
+  { class: '1.5', type: 'int', rem: 0.375, px: 6 },
+  { class: '2', type: 'int', rem: 0.5, px: 8 },
+  { class: '2.5', type: 'int', rem: 0.625, px: 10 },
+  { class: '3', type: 'int', rem: 0.75, px: 12 },
+  { class: '3.5', type: 'int', rem: 0.875, px: 14 },
+  { class: '4', type: 'int', rem: 1, px: 16 },
+  { class: '5', type: 'int', rem: 1.25, px: 20 },
+  { class: '6', type: 'int', rem: 1.5, px: 24 },
+  { class: '8', type: 'int', rem: 2, px: 32 },
+  { class: '10', type: 'int', rem: 2.5, px: 40 },
+  { class: '11', type: 'int', rem: 2.75, px: 44 },
+  { class: '12', type: 'int', rem: 3, px: 48 },
+  { class: '14', type: 'int', rem: 3.5, px: 56 },
+  { class: '16', type: 'int', rem: 4, px: 64 },
+  { class: '20', type: 'int', rem: 5, px: 80 },
+  { class: '24', type: 'int', rem: 6, px: 96 },
+  { class: '28', type: 'int', rem: 7, px: 112 },
+  { class: '32', type: 'int', rem: 8, px: 128 },
+  { class: '36', type: 'int', rem: 9, px: 144 },
+  { class: '40', type: 'int', rem: 10, px: 160 },
+  { class: '44', type: 'int', rem: 11, px: 176 },
+  { class: '48', type: 'int', rem: 12, px: 192 },
+  { class: '52', type: 'int', rem: 13, px: 208 },
+  { class: '56', type: 'int', rem: 14, px: 224 },
+  { class: '64', type: 'int', rem: 16, px: 256 },
+  { class: '72', type: 'int', rem: 18, px: 288 },
+  { class: '80', type: 'int', rem: 20, px: 320 },
+  { class: '96', type: 'int', rem: 24, px: 384 },
+
+  { class: 'full', type: 'fraction', percent: 100 },
+  { class: '3/4', type: 'fraction', percent: 75 },
+  { class: '2/3', type: 'fraction', percent: 66.666667 },
+  { class: '2/4', type: 'fraction', percent: 50 },
+  { class: '1/2', type: 'fraction', percent: 50 },
+  { class: '1/3', type: 'fraction', percent: 33.333333 },
+  { class: '1/4', type: 'fraction', percent: 25 },
+  { class: '0', type: 'fraction', percent: 0 },
+]
+
+export const translates: Translate[] = [
   { class: '0', type: 'int', rem: 0, px: 0 },
   { class: 'px', type: 'int', rem: 0.0625, px: 1 },
   { class: '0.5', type: 'int', rem: 0.125, px: 2 },

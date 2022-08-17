@@ -1,223 +1,60 @@
 import React, { useState, useEffect } from 'react'
-import { CopyToClipboard, StyledRange, Tooltip } from '..'
-import {
-  WidgetWrapper,
-  WidgetConverter,
-  WidgetResult,
-  OrientationButton,
-} from '..'
-import { placements } from '../../utils/tailwindClasses'
+import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
+import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
+import { translates } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
 import { getClosestItem } from '../../utils/getClosestItem'
 
-type OrientationKey = 'top' | 'right' | 'bottom' | 'left'
-
 interface Props {
-  setPlacement: (value: string) => void
+  setTranslateY: (value: string) => void
 }
 
-const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
-  const [value, setValue] = useState(placements[0].px)
+const TranslateYHelper = ({ setTranslateY }: Props): JSX.Element => {
+  const [value, setValue] = useState(translates[0].px)
   const [unit, setUnit] = useState('px')
-  const [orientation, setOrientation] = useState({
-    left: false,
-    right: false,
-    top: false,
-    bottom: false,
-  })
-  const [orientationOutput, setOrientationOutput] = useState('inset')
-  const [convertedPlacement, setConvertedPlacement] = useState(placements[0])
-  const [currentPlacement, setCurrentPlacement] = useState('')
   const [isNegative, setIsNegative] = useState(false)
+  const [currentTranslate, setCurrentTranslate] = useState('')
+  const [convertedTranslate, setConvertedTranslate] = useState(translates[0])
 
-  const toggleOrientation = (value: OrientationKey): void => {
-    setOrientation({ ...orientation, [value]: !orientation[value] })
-  }
-
-  const reset = (resetPositive = true): void => {
+  const reset = (resetPositive = true) => {
     if (resetPositive) setIsNegative(false)
+    setValue(translates[0].px)
     setUnit('px')
-    setValue(placements[0].px)
-    setConvertedPlacement(placements[0])
-    setOrientation({
-      left: false,
-      right: false,
-      top: false,
-      bottom: false,
-    })
+    setIsNegative(false)
+    setConvertedTranslate(translates[0])
   }
-
-  // defines the prefix of class when changing orientation
-  useEffect(() => {
-    const { left, right, top, bottom } = orientation
-
-    switch (true) {
-      case left === true && right === true && top === true && bottom === true:
-        setOrientationOutput('inset')
-        break
-      case left === true && right === true && top === false && bottom === false:
-        setOrientationOutput('inset-x')
-        break
-      case left === false && right === false && top === true && bottom === true:
-        setOrientationOutput('inset-y')
-        break
-      case left === false &&
-        right === false &&
-        top === true &&
-        bottom === false:
-        setOrientationOutput('top')
-        break
-      case left === false &&
-        right === false &&
-        top === false &&
-        bottom === true:
-        setOrientationOutput('bottom')
-        break
-      case left === false &&
-        right === true &&
-        top === false &&
-        bottom === false:
-        setOrientationOutput('right')
-        break
-      case left === true &&
-        right === false &&
-        top === false &&
-        bottom === false:
-        setOrientationOutput('left')
-        break
-      case left === true && right === false && top === true && bottom === false:
-        setOrientationOutput('top-left')
-        break
-      case left === false && right === true && top === true && bottom === false:
-        setOrientationOutput('top-right')
-        break
-      case left === true && right === false && top === false && bottom === true:
-        setOrientationOutput('bottom-left')
-        break
-      case left === false && right === true && top === false && bottom === true:
-        setOrientationOutput('bottom-right')
-        break
-      case (left === true || right === true) &&
-        (bottom === true || top === true):
-        setOrientation({
-          left: false,
-          right: false,
-          top: false,
-          bottom: false,
-        })
-        break
-      default:
-        setOrientationOutput('inset')
-        break
-    }
-  }, [orientation, orientationOutput])
 
   // updates converted size on value and unit change
   useEffect(() => {
     if (unit === 'percent') {
-      setConvertedPlacement(placements[value])
+      setConvertedTranslate(translates[value])
     } else {
-      setConvertedPlacement(getClosestItem(placements, value, unit))
+      setConvertedTranslate(getClosestItem(translates, value, unit))
     }
   }, [value, unit])
 
-  // sets placement for parent component
   useEffect(() => {
-    if (orientationOutput === 'top-left') {
-      setPlacement(
-        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }left-${convertedPlacement.class}`
-      )
-      setCurrentPlacement(
-        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }left-${convertedPlacement.class}`
-      )
-    } else if (orientationOutput === 'top-right') {
-      setPlacement(
-        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }right-${convertedPlacement.class}`
-      )
-      setCurrentPlacement(
-        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }right-${convertedPlacement.class}`
-      )
-    } else if (orientationOutput === 'bottom-left') {
-      setPlacement(
-        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }left-${convertedPlacement.class}`
-      )
-      setCurrentPlacement(
-        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }left-${convertedPlacement.class}`
-      )
-    } else if (orientationOutput === 'bottom-right') {
-      setPlacement(
-        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }right-${convertedPlacement.class}`
-      )
-      setCurrentPlacement(
-        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
-          isNegative ? '-' : ''
-        }right-${convertedPlacement.class}`
-      )
-    } else {
-      setPlacement(
-        `${isNegative ? '-' : ''}${orientationOutput}-${
-          convertedPlacement!.class
-        }`
-      )
-      setCurrentPlacement(
-        `${isNegative ? '-' : ''}${orientationOutput}-${
-          convertedPlacement!.class
-        }`
-      )
-    }
-  }, [convertedPlacement, setPlacement, orientationOutput, isNegative])
+    setCurrentTranslate(
+      `${isNegative ? '-' : ''}translate-y-${convertedTranslate!.class}`
+    )
+    // sets parent font size to converted size
+    setTranslateY(
+      `${isNegative ? '-' : ''}translate-y-${convertedTranslate!.class}`
+    )
+  }, [convertedTranslate, setTranslateY, isNegative])
 
   return (
     <WidgetWrapper>
-      {/* RESET BUTTON */}
       <button
         className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
         onClick={() => reset()}>
         Reset
       </button>
 
-      {/* ORIENTATION PICKER */}
-      <div className='absolute top-2 left-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] text-xs pointer-events-none'>
-        <OrientationButton
-          onClick={() => toggleOrientation('top')}
-          orientation={orientation}
-          side={'top'}
-        />
-        <OrientationButton
-          onClick={() => toggleOrientation('bottom')}
-          orientation={orientation}
-          side={'bottom'}
-        />
-        <OrientationButton
-          onClick={() => toggleOrientation('left')}
-          orientation={orientation}
-          side={'left'}
-        />
-        <OrientationButton
-          onClick={() => toggleOrientation('right')}
-          orientation={orientation}
-          side={'right'}
-        />
-      </div>
-
       {/* INFO TOOLTIP */}
       <div className='absolute bottom-2 right-3'>
         <Tooltip
-          message='Click on the side buttons to change the side of the placement.'
+          message='Click on the side buttons to change the orientation of the margin. (maximum two at a time)'
           color='bg-slate-900 dark:bg-slate-200 dark:text-slate-900'
           side='left'>
           <span className='cursor-help opacity-70'>ⓘ</span>
@@ -225,7 +62,7 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
       </div>
 
       {/* CONVERTER */}
-      <WidgetConverter helperName='Placement'>
+      <WidgetConverter helperName='Translate Y'>
         <div className='relative flex flex-col w-full gap-4'>
           {/* INPUT FOR INTEGER VALUES */}
           {(unit === 'px' || unit === 'rem') && (
@@ -288,10 +125,10 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
                   min='0'
                   readOnly
                   max={
-                    placements.filter((item) => item.type === 'fraction')
+                    translates.filter((item) => item.type === 'fraction')
                       .length - 1
                   }
-                  value={placements[value].percent || 0}
+                  value={translates[value].percent || 0}
                 />
                 <span className='absolute top-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none right-10 dark:text-indigo-300'>
                   %
@@ -303,12 +140,12 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
                 step={1}
                 min={0}
                 max={
-                  placements.filter((item) => item.type === 'fraction').length -
+                  translates.filter((item) => item.type === 'fraction').length -
                   1
                 }
                 defaultValue={0}
                 onChange={(e) => {
-                  setValue(placements.length - 1 - parseInt(e.target.value))
+                  setValue(translates.length - 1 - parseInt(e.target.value))
                 }}
               />
             </>
@@ -321,7 +158,7 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
               e.preventDefault()
               if (unit !== 'percent') {
                 setUnit('percent')
-                setValue(placements.length - 1)
+                setValue(translates.length - 1)
               } else {
                 reset(false)
               }
@@ -370,36 +207,36 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
           {unit == 'px' ? 'Switch to rem' : 'Switch to px'}
         </button>
       </WidgetConverter>
-
       {/* RESULT */}
+
       <WidgetResult>
-        <CopyToClipboard valueToCopy={currentPlacement}>
-          <span className='font-semibold'>{currentPlacement}</span>
+        <CopyToClipboard valueToCopy={currentTranslate}>
+          <span className='font-semibold'>{currentTranslate}</span>
         </CopyToClipboard>
         {unit !== 'percent' ? (
           <div className='flex gap-4'>
             <CopyToClipboard
               valueToCopy={`${
                 isNegative ? '-' : ''
-              }${convertedPlacement.rem.toString()}`}>
+              }${convertedTranslate.rem.toString()}`}>
               <span>{`${isNegative ? '-' : ''}${
-                convertedPlacement.rem
+                convertedTranslate.rem
               }rem`}</span>
             </CopyToClipboard>
             <CopyToClipboard
               valueToCopy={`${
                 isNegative ? '-' : ''
-              }${convertedPlacement.px.toString()}`}>
+              }${convertedTranslate.px.toString()}`}>
               <span>{`${isNegative ? '-' : ''}${
-                convertedPlacement.px
+                convertedTranslate.px
               }px`}</span>
             </CopyToClipboard>
           </div>
         ) : (
           <div className='flex gap-4'>
-            <CopyToClipboard valueToCopy={placements[value].percent.toString()}>
+            <CopyToClipboard valueToCopy={translates[value].percent.toString()}>
               <span>{`${isNegative ? '-' : ''}${
-                convertedPlacement.percent
+                convertedTranslate.percent
               }%`}</span>
             </CopyToClipboard>
           </div>
@@ -409,4 +246,4 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
   )
 }
 
-export default PlacementHelper
+export default TranslateYHelper
