@@ -31,7 +31,7 @@ const PositionExample = ({ positioning, placement }: Props): JSX.Element => {
   }, [customName, favoritesContext, toPrint])
 
   return (
-    <div className='relative p-2 bg-white shadow-sm dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-stone-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+    <div className='relative p-2 bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-outset-md shadow-gray-400/30 dark:ring-1 dark:ring-inset dark:ring-slate-700/50'>
       {/* FAVORITE  */}
       {!showInput && (
         <button
@@ -51,7 +51,7 @@ const PositionExample = ({ positioning, placement }: Props): JSX.Element => {
                     ?.name
                 : ''
             }
-            className='absolute z-10 px-2 pr-6 rounded-md shadow-md shadow-slate-900/20 top-1 right-1 h-7 bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-200/20'
+            className='absolute z-10 px-2 pr-6 bg-gray-100 rounded-md shadow-md shadow-slate-900/20 top-1 right-1 h-7 dark:bg-slate-700 ring-1 ring-gray-200/20'
             onChange={(e) => setCustomName(e.target.value)}
           />
           <FavoriteButton
@@ -79,7 +79,7 @@ const PositionExample = ({ positioning, placement }: Props): JSX.Element => {
       {/* EXAMPLE */}
       <div>
         <div className='relative w-full rounded-md rounded-t-xl'>
-          <div className='bg-indigo-300 rounded-md shadow-md dark:bg-indigo-800 h-28' />
+          <div className='rounded-md shadow-md bg-indigo-300/50 dark:bg-indigo-700/50 h-28' />
           <div
             className={`${positioning} ${placement} rounded-md shadow-md shadow-black/20 inline-block w-12 h-12 ring-1 dark:ring-pink-400 ring-pink-300 ring-inset bg-pink-400 dark:bg-pink-500 z-50 pointer-events-none`}
           />

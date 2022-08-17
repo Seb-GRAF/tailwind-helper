@@ -157,7 +157,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
       </div>
       {/* CONVERTER */}
       <WidgetConverter helperName='Border Radius'>
-        <div className='relative'>
+        <div className='relative w-full'>
           <StyledInput
             type='number'
             name='margin'
@@ -171,17 +171,17 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
           <span className='absolute top-0 right-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none dark:text-indigo-300'>
             {unit}
           </span>
-          <StyledRange
-            step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
-            min={0}
-            max={unit === 'px' ? 32 : unit === 'rem' ? 2 : 0}
-            value={value || 0}
-            setValue={setValue}
-          />
         </div>
+        <StyledRange
+          step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
+          min={0}
+          max={unit === 'px' ? 32 : unit === 'rem' ? 2 : 0}
+          value={value || 0}
+          setValue={setValue}
+        />
 
         <button
-          className='h-full mt-2 w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
+          className='w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {

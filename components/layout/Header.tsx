@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import React from 'react'
 
 interface Props {
   toggleThemeHandler: () => void
@@ -65,12 +63,12 @@ const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
             </defs>
           </svg>
         </div>
-        <span className='block text-xl font-semibold dark:text-slate-300 text-stone-700 leading-[1.1]'>
+        <span className='block text-xl font-semibold dark:text-slate-300 text-gray-700 leading-[1.1]'>
           Tailwindhelper
         </span>
       </h1>
       <button
-        className='w-10 h-10 text-stone-700 sm:w-11 sm:h-11 dark:text-slate-400'
+        className='w-10 h-10 text-gray-700 transition-colors sm:w-11 sm:h-11 dark:text-slate-400 hover:text-indigo-600 hover:dark:text-indigo-400'
         onClick={toggleThemeHandler}>
         <span className='sr-only'>Toggle dark/light theme</span>
         {isDark ? (

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
+import { CopyToClipboard, StyledRange, Tooltip } from '..'
 import {
   WidgetWrapper,
   WidgetConverter,
   WidgetResult,
   OrientationButton,
 } from '..'
-import { placements, letterSpacings } from '../../utils/tailwindClasses'
+import { placements } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
 import { getClosestItem } from '../../utils/getClosestItem'
 
@@ -28,14 +28,16 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
   const [orientationOutput, setOrientationOutput] = useState('inset')
   const [convertedPlacement, setConvertedPlacement] = useState(placements[0])
   const [currentPlacement, setCurrentPlacement] = useState('')
+  const [isNegative, setIsNegative] = useState(false)
 
   const toggleOrientation = (value: OrientationKey): void => {
     setOrientation({ ...orientation, [value]: !orientation[value] })
   }
 
-  const reset = () => {
-    setValue(placements[0].px)
+  const reset = (resetPositive = true): void => {
+    if (resetPositive) setIsNegative(false)
     setUnit('px')
+    setValue(placements[0].px)
     setConvertedPlacement(placements[0])
     setOrientation({
       left: false,
@@ -119,48 +121,75 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
     }
   }, [value, unit])
 
+  // sets placement for parent component
   useEffect(() => {
     if (orientationOutput === 'top-left') {
       setPlacement(
-        `top-${convertedPlacement.class} left-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }left-${convertedPlacement.class}`
       )
       setCurrentPlacement(
-        `top-${convertedPlacement.class} left-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }left-${convertedPlacement.class}`
       )
     } else if (orientationOutput === 'top-right') {
       setPlacement(
-        `top-${convertedPlacement.class} right-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }right-${convertedPlacement.class}`
       )
       setCurrentPlacement(
-        `top-${convertedPlacement.class} right-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}top-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }right-${convertedPlacement.class}`
       )
     } else if (orientationOutput === 'bottom-left') {
       setPlacement(
-        `bottom-${convertedPlacement.class} left-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }left-${convertedPlacement.class}`
       )
       setCurrentPlacement(
-        `bottom-${convertedPlacement.class} left-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }left-${convertedPlacement.class}`
       )
     } else if (orientationOutput === 'bottom-right') {
       setPlacement(
-        `bottom-${convertedPlacement.class} right-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }right-${convertedPlacement.class}`
       )
       setCurrentPlacement(
-        `bottom-${convertedPlacement.class} right-${convertedPlacement.class}`
+        `${isNegative ? '-' : ''}bottom-${convertedPlacement.class} ${
+          isNegative ? '-' : ''
+        }right-${convertedPlacement.class}`
       )
     } else {
-      setPlacement(`${orientationOutput}-${convertedPlacement!.class}`)
-      setCurrentPlacement(`${orientationOutput}-${convertedPlacement!.class}`)
+      setPlacement(
+        `${isNegative ? '-' : ''}${orientationOutput}-${
+          convertedPlacement!.class
+        }`
+      )
+      setCurrentPlacement(
+        `${isNegative ? '-' : ''}${orientationOutput}-${
+          convertedPlacement!.class
+        }`
+      )
     }
-  }, [convertedPlacement, setPlacement, orientationOutput])
+  }, [convertedPlacement, setPlacement, orientationOutput, isNegative])
 
   return (
     <WidgetWrapper>
+      {/* RESET BUTTON */}
       <button
         className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
-        onClick={reset}>
+        onClick={() => reset()}>
         Reset
       </button>
+
       {/* ORIENTATION PICKER */}
       <div className='absolute top-2 left-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] text-xs pointer-events-none'>
         <OrientationButton
@@ -184,6 +213,7 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
           side={'right'}
         />
       </div>
+
       {/* INFO TOOLTIP */}
       <div className='absolute bottom-2 right-3'>
         <Tooltip
@@ -193,25 +223,39 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
           <span className='cursor-help opacity-70'>ⓘ</span>
         </Tooltip>
       </div>
+
       {/* CONVERTER */}
       <WidgetConverter helperName='Placement'>
-        <div className='relative'>
+        <div className='relative flex flex-col w-full gap-4'>
           {/* INPUT FOR INTEGER VALUES */}
           {(unit === 'px' || unit === 'rem') && (
-            <div className='relative'>
-              <input
-                type='number'
-                name='placement'
-                step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
-                min={0}
-                max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
-                value={value || 0}
-                onChange={(e) => setValue(parseInt(e.target.value))}
-                className='p-4 text-indigo-700 rounded-md appearance-none w-44 bg-stone-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
-              />
-              <span className='absolute top-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none right-12 dark:text-indigo-300'>
-                {unit}
-              </span>
+            <>
+              <div className='relative flex w-full gap-2'>
+                {/* SWITCH TO NEGATIVE/POSITIVE VALUES */}
+                <button
+                  className='flex-shrink-0 w-4 rounded hover:text-indigo-600 dark:hover:text-indigo-300 bg-slate-700 h-14'
+                  // {...(unit === 'percent' ? { disabled: true } : {})}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsNegative((prev) => !prev)
+                  }}>
+                  {isNegative ? '-' : '+'}
+                </button>
+                <input
+                  type='number'
+                  name='placement'
+                  step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
+                  min={0}
+                  max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
+                  value={value || 0}
+                  onChange={(e) => setValue(parseInt(e.target.value))}
+                  className='w-full p-4 pr-24 text-indigo-700 bg-gray-100 rounded-md appearance-none placement-input dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis'
+                />
+                <span className='absolute top-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none right-12 dark:text-indigo-300'>
+                  {unit}
+                </span>
+              </div>
+
               <StyledRange
                 step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
                 min={0}
@@ -219,29 +263,42 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
                 value={value || 0}
                 setValue={setValue}
               />
-            </div>
+            </>
           )}
-          {/* INPUT FOR FRACTION/PERCENTAGE VALUES */}
+
+          {/* INPUT FOR PERCENTAGE VALUES */}
           {unit === 'percent' && (
-            <div className='relative'>
+            <>
+              <div className='relative flex w-full gap-2'>
+                {/* SWITCH TO NEGATIVE/POSITIVE VALUES */}
+                <button
+                  className='flex-shrink-0 w-4 rounded hover:text-indigo-600 dark:hover:text-indigo-300 bg-slate-700 h-14'
+                  // {...(unit === 'percent' ? { disabled: true } : {})}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsNegative((prev) => !prev)
+                  }}>
+                  {isNegative ? '-' : '+'}
+                </button>
+                <input
+                  className='w-full p-4 pr-20 text-indigo-700 bg-gray-100 rounded-md cursor-not-allowed dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis'
+                  type='text'
+                  name='placement'
+                  step='1'
+                  min='0'
+                  readOnly
+                  max={
+                    placements.filter((item) => item.type === 'fraction')
+                      .length - 1
+                  }
+                  value={placements[value].percent || 0}
+                />
+                <span className='absolute top-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none right-10 dark:text-indigo-300'>
+                  %
+                </span>
+              </div>
               <input
-                className='p-4 text-indigo-700 rounded-md cursor-not-allowed w-44 bg-stone-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
-                type='text'
-                name='placement'
-                step='1'
-                min='0'
-                readOnly
-                max={
-                  placements.filter((item) => item.type === 'fraction').length -
-                  1
-                }
-                value={placements[value].percent || 0}
-              />
-              <span className='absolute top-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none right-10 dark:text-indigo-300'>
-                %
-              </span>
-              <input
-                className='absolute left-0 w-full placement-range -bottom-4'
+                className='-mt-1 w-44'
                 type='range'
                 step={1}
                 min={0}
@@ -254,48 +311,50 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
                   setValue(placements.length - 1 - parseInt(e.target.value))
                 }}
               />
-            </div>
+            </>
           )}
+
+          {/* SWITCH TO PERCENT / INT */}
           <button
-            className='absolute h-full -translate-y-1/2 right-1 w-14 top-1/2 hover:text-indigo-600 dark:hover:text-indigo-300'
+            className='absolute top-4 right-1 w-14 hover:text-indigo-600 dark:hover:text-indigo-300'
             onClick={(e) => {
               e.preventDefault()
               if (unit !== 'percent') {
                 setUnit('percent')
                 setValue(placements.length - 1)
               } else {
-                reset()
+                reset(false)
               }
             }}>
-            <div className='flex items-center h-full gap-2'>
-              <svg
-                className='w-6 h-5 pt-1'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4'
-                />
-              </svg>
+            <Tooltip
+              message={
+                unit == 'percent' ? 'Switch to px' : 'Switch to percentage'
+              }>
+              <div className='flex items-center h-full gap-2'>
+                <svg
+                  className='w-6 h-5 pt-1'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4'
+                  />
+                </svg>
 
-              <Tooltip
-                message={
-                  unit == 'percent' ? 'Switch to px' : 'Switch to percentage'
-                }>
                 <span>{unit == 'percent' ? 'px' : '%'}</span>
-              </Tooltip>
-            </div>
+              </div>
+            </Tooltip>
           </button>
         </div>
 
+        {/* SWITCH TO REM/PX BUTTON */}
         <button
-          className={`${
-            unit === 'percent' ? 'invisible' : ''
-          } h-full mt-2 w-28 hover:text-indigo-600 dark:hover:text-indigo-300`}
+          className='w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
+          // {...(unit === 'percent' ? { disabled: true } : {})}
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {
@@ -304,30 +363,44 @@ const PlacementHelper = ({ setPlacement }: Props): JSX.Element => {
             } else if (unit === 'rem') {
               setUnit('px')
               setValue(unitConverter(value, 'rem'))
+            } else if (unit === 'percent') {
+              reset()
             }
           }}>
           {unit == 'px' ? 'Switch to rem' : 'Switch to px'}
         </button>
       </WidgetConverter>
-      {/* RESULT */}
 
+      {/* RESULT */}
       <WidgetResult>
         <CopyToClipboard valueToCopy={currentPlacement}>
           <span className='font-semibold'>{currentPlacement}</span>
         </CopyToClipboard>
         {unit !== 'percent' ? (
           <div className='flex gap-4'>
-            <CopyToClipboard valueToCopy={convertedPlacement.rem.toString()}>
-              <span>{`${convertedPlacement.rem}rem`}</span>
+            <CopyToClipboard
+              valueToCopy={`${
+                isNegative ? '-' : ''
+              }${convertedPlacement.rem.toString()}`}>
+              <span>{`${isNegative ? '-' : ''}${
+                convertedPlacement.rem
+              }rem`}</span>
             </CopyToClipboard>
-            <CopyToClipboard valueToCopy={convertedPlacement.px.toString()}>
-              <span>{`${convertedPlacement.px}px`}</span>
+            <CopyToClipboard
+              valueToCopy={`${
+                isNegative ? '-' : ''
+              }${convertedPlacement.px.toString()}`}>
+              <span>{`${isNegative ? '-' : ''}${
+                convertedPlacement.px
+              }px`}</span>
             </CopyToClipboard>
           </div>
         ) : (
           <div className='flex gap-4'>
             <CopyToClipboard valueToCopy={placements[value].percent.toString()}>
-              <span>{`${convertedPlacement.percent}%`}</span>
+              <span>{`${isNegative ? '-' : ''}${
+                convertedPlacement.percent
+              }%`}</span>
             </CopyToClipboard>
           </div>
         )}

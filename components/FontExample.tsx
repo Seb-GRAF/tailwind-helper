@@ -48,7 +48,7 @@ const FontSizeExample = ({
   }, [customName])
 
   return (
-    <div className='relative bg-white shadow-sm dark:bg-slate-800 rounded-xl dark:shadow-inset-sm dark:shadow-white/5 shadow-stone-200 ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+    <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-outset-md shadow-gray-400/30 dark:ring-1 dark:ring-inset dark:ring-slate-700/50'>
       {/* FAVORITE  */}
       {!showInput && (
         <button
@@ -68,7 +68,7 @@ const FontSizeExample = ({
                     ?.name
                 : ''
             }
-            className='absolute z-10 px-2 pr-6 rounded-md shadow-md top-1 right-1 w-15 h-7 bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-200/20 shadow-slate-900/20'
+            className='absolute z-10 px-2 pr-6 bg-gray-100 rounded-md shadow-md top-1 right-1 w-15 h-7 dark:bg-slate-700 ring-1 ring-gray-200/20 shadow-slate-900/20'
             onChange={(e) => setCustomName(e.target.value)}
           />
           <FavoriteButton

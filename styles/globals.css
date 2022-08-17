@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply text-slate-700 bg-gradient-to-tl from-stone-200 via-stone-100 to-stone-100;
+  @apply text-slate-700 bg-gradient-to-tl from-gray-100 via-gray-200 to-gray-200;
 }
 
 body {
@@ -11,7 +11,7 @@ body {
 }
 
 .dark {
-  @apply bg-gradient-to-bl from-slate-800 via-slate-900 to-slate-900 text-stone-200;
+  @apply text-gray-200 bg-gradient-to-bl from-slate-800 via-slate-900 to-slate-900;
   color-scheme: dark;
   @apply antialiased;
 }
@@ -40,13 +40,18 @@ body {
   direction: rtl;
 }
 
+.placement-input::-webkit-inner-spin-button,
+.placement-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 input[type='range'] {
   @apply h-2 bg-transparent appearance-none cursor-ew-resize;
 }
 
 /***** Chromium styles *****/
 input[type='range']::-webkit-slider-runnable-track {
-  @apply h-1 rounded-md bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-600/10 dark:ring-stone-100/10;
+  @apply h-1 bg-gray-100 rounded-md dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10;
 }
 
 input[type='range']::-webkit-slider-thumb {
@@ -55,7 +60,7 @@ input[type='range']::-webkit-slider-thumb {
 
 /******** Firefox styles ********/
 input[type='range']::-moz-range-track {
-  @apply h-1 rounded-md bg-stone-100 dark:bg-slate-700 ring-1 ring-stone-600/10 dark:ring-stone-100/10;
+  @apply h-1 bg-gray-100 rounded-md dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10;
 }
 
 input[type='range']::-moz-range-thumb {

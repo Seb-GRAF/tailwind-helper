@@ -52,25 +52,24 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
         Reset
       </button>
       <WidgetConverter helperName='Font Weight'>
-        <div className='relative w-fit'>
-          <StyledInput
-            name='fontWeight'
-            type='number'
-            step={100}
-            min={100}
-            max={900}
-            value={value || 400}
-            setValue={setValue}
-            hasUnit={false}
-          />
-          <StyledRange
-            step={100}
-            min={100}
-            max={900}
-            value={value || 400}
-            setValue={setValue}
-          />
-        </div>
+        <StyledInput
+          name='fontWeight'
+          type='number'
+          step={100}
+          min={100}
+          max={900}
+          value={value || 400}
+          setValue={setValue}
+          hasUnit={false}
+        />
+
+        <StyledRange
+          step={100}
+          min={100}
+          max={900}
+          value={value || 400}
+          setValue={setValue}
+        />
       </WidgetConverter>
       <WidgetResult>
         <CopyToClipboard valueToCopy={weight.class.toString()}>

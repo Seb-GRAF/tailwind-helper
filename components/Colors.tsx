@@ -32,18 +32,18 @@ const Colors = (): JSX.Element => {
   return (
     <section className='mx-auto space-y-4'>
       <ColorHelper />
-      <div className='relative grid grid-cols-5 gap-2 p-0 pt-4 pb-0 md:pt-8 md:shadow-sm dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-sm md:dark:shadow-white/5 md:rounded-xl md:dark:bg-slate-800 shadow-stone-200 md:ring-1 ring-inset dark:ring-slate-700/50 ring-slate-300/30'>
+      <div className='relative grid grid-cols-5 gap-2 p-0 pt-4 pb-0 md:pt-8 md:shadow-md dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-outset-md md:rounded-xl md:dark:bg-slate-800 shadow-gray-400/30 md:dark:ring-1 dark:ring-inset dark:ring-slate-700/50'>
         {colors.map((color, index) => {
           if (color.class === 'white' || color.class === 'black') return
           return (
             <div
-              key={color.class}
+              key={`${color.class}-${index}`}
               className={`relative flex items-center justify-center flex-col ${
                 (index - 2) % 10 > 4 && 'mb-8 md:mb-12'
               }`}>
               {/* COLOR SQUARE */}
               <div
-                className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-md ring-1 ring-stone-100/5`}>
+                className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-md ring-1 ring-gray-100/5`}>
                 <button
                   className='absolute top-0 left-0 w-full h-full group'
                   onClick={() => copyToClipboard(color.class)}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-import { letterSpacings } from '../../utils/tailwindClasses';
-import { getClosestItem } from '../../utils/getClosestItem';
+import { letterSpacings } from '../../utils/tailwindClasses'
+import { getClosestItem } from '../../utils/getClosestItem'
 
 interface Props {
   setLetterSpacing: (value: string) => void
@@ -13,8 +13,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
   const [outOfBounds, setOutOfBounds] = useState<'max' | 'min' | 'def' | null>(
     null
   )
-  const [spacing, setSpacing] =
-    useState(letterSpacings[3])
+  const [spacing, setSpacing] = useState(letterSpacings[3])
 
   const reset = () => {
     if (value === 0) return
@@ -25,9 +24,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
 
   // updates converted spacing on value change
   useEffect(() => {
-    setSpacing(
-      getClosestItem(letterSpacings, value, 'spacing')
-    )
+    setSpacing(getClosestItem(letterSpacings, value, 'spacing'))
   }, [value])
 
   // check if converted letter spacing is at upper/lower limit
@@ -54,7 +51,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
         Reset
       </button>
       <WidgetConverter helperName='Letter Spacing'>
-        <div className='relative'>
+        <div className='relative w-full'>
           <StyledInput
             type='number'
             step={0.025}
@@ -68,22 +65,20 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
           <span className='absolute top-0 right-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none dark:text-indigo-300'>
             em
           </span>
-          <StyledRange
-            step={0.025}
-            min={-0.05}
-            max={0.1}
-            value={value || 0}
-            setValue={setValue}
-          />
         </div>
+        <StyledRange
+          step={0.025}
+          min={-0.05}
+          max={0.1}
+          value={value || 0}
+          setValue={setValue}
+        />
       </WidgetConverter>
       <WidgetResult>
         <CopyToClipboard valueToCopy={spacing.class.toString()}>
-          <span className='font-semibold'>{`${spacing.class
-            }`}</span>
+          <span className='font-semibold'>{`${spacing.class}`}</span>
         </CopyToClipboard>
-        <CopyToClipboard
-          valueToCopy={spacing.spacing.toString()}>
+        <CopyToClipboard valueToCopy={spacing.spacing.toString()}>
           <span>{`${spacing.spacing}`}</span>
         </CopyToClipboard>
 

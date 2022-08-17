@@ -59,7 +59,7 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
           {/* POSITIONING SELECT */}
           <select
             name='positioning'
-            className='relative p-4 text-indigo-700 rounded-md appearance-none cursor-pointer positioning w-44 bg-stone-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
+            className='relative p-4 text-indigo-700 rounded-md appearance-none cursor-pointer positioning w-44 bg-gray-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
             value={value}
             onChange={(e) => {
               setValue(parseInt(e.target.value))

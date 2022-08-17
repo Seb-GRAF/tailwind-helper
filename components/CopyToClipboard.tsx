@@ -26,8 +26,8 @@ const CopyToClipboard = ({ children, valueToCopy }: Props): JSX.Element => {
         message={displaySuccessMessage ? 'Copied ✓' : 'Click to copy'}
         color={
           displaySuccessMessage
-            ? 'bg-slate-800 dark:bg-stone-200 dark:text-pink-600 text-pink-300 font-semibold'
-            : 'bg-slate-800 dark:bg-stone-200 dark:text-slate-800'
+            ? 'bg-slate-800 dark:bg-gray-200 dark:text-pink-600 text-pink-300 font-semibold'
+            : 'bg-slate-800 dark:bg-gray-200 dark:text-slate-800'
         }>
         {children}
       </Tooltip>

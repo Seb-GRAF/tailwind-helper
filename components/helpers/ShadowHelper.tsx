@@ -119,14 +119,13 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
       <WidgetConverter helperName='Box Shadow'>
         <div className='relative'>
           {/* SHADOW SLIDER */}
-          <div className='relative -top-7'>
+          <div className='relative -mt-2 -top-2'>
             <StyledRange
               step={1}
               min={0}
               max={shadows.length - 1}
               value={shadowIndex || 0}
               setValue={setShadowIndex}
-              absolute={false}
             />
           </div>
 
@@ -136,7 +135,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
               <input
                 type='color'
                 name='color'
-                className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
+                className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const input = document.getElementById(
@@ -173,7 +172,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
                 id='shadow-hex-value'
                 placeholder='#000000'
                 maxLength={7}
-                className='p-1 text-center rounded-md pr-14 w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
+                className='p-1 text-center rounded-md pr-14 w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
                 onChange={(e) => {
                   if (
                     e.target.value.length === 7 &&
@@ -188,7 +187,7 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
                 {opacities[opacityIndex].class}%
               </span>
             </div>
-            <div className='relative flex justify-center -top-2'>
+            <div className='relative flex justify-center mt-1'>
               <StyledRange
                 step={1}
                 min={0}

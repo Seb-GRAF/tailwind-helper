@@ -89,7 +89,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
             <input
               type='color'
               name='color'
-              className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
+              className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
               value={value}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const input = document.getElementById(
@@ -118,7 +118,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
             id='hex-value'
             placeholder='#000000'
             maxLength={7}
-            className='p-1 text-center rounded-md w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-stone-600/10 dark:ring-stone-100/10'
+            className='p-1 text-center rounded-md w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
             onChange={(e) => {
               if (e.target.value.length === 7 && e.target.value[0] === '#') {
                 setValue(e.target.value)

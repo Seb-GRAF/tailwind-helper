@@ -5,8 +5,6 @@ import { PositionExample } from '.'
 const PositionHelper = () => {
   const [positioning, setPositioning] = useState('')
   const [placement, setPlacement] = useState('')
-  // const [borderRadius, setBorderRadius] = useState('')
-  // const [shadow, setShadow] = useState('')
 
   return (
     <div className='flex flex-col gap-4'>

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Tooltip = ({
-  color = 'bg-slate-800 dark:bg-stone-200 dark:text-slate-800',
+  color = 'bg-slate-800 dark:bg-gray-200 dark:text-slate-800',
   message,
   side = 'top',
   children,
@@ -16,9 +16,9 @@ const Tooltip = ({
   if (side === 'top')
     return (
       <div className='relative z-20 flex flex-col items-center group'>
-        <p className='w-full text-left cursor-pointer underline-none underline-offset-4 decoration-1 dark:decoration-slate-500 decoration-slate-800 decoration-dotted'>
+        <div className='w-full text-left cursor-pointer underline-none underline-offset-4 decoration-1 dark:decoration-slate-500 decoration-slate-800 decoration-dotted'>
           {children}
-        </p>
+        </div>
         <div className='absolute flex-col items-center hidden mb-6 pointer-events-none bottom-1 group-hover:flex'>
           {/* ARROW */}
           <div
@@ -26,7 +26,7 @@ const Tooltip = ({
           />
           {/* MESSAGE */}
           <span
-            className={`relative z-40 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-md shadow-slate-900/20 ${color}`}>
+            className={`relative z-50 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-md shadow-slate-900/20 ${color}`}>
             {message}
           </span>
         </div>

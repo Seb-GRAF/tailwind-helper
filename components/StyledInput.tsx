@@ -23,9 +23,9 @@ const StyledInput = ({
 }: Props): JSX.Element => {
   return (
     <input
-      className={`p-4 w-44 ${
+      className={`p-4 w-full ${
         hasUnit && 'pr-12'
-      } bg-stone-100 dark:bg-slate-700 rounded-md text-indigo-700 dark:text-indigo-300 ring-1 ring-stone-600/10 dark:ring-stone-100/10`}
+      } bg-slate-100 dark:bg-slate-700 rounded-md text-indigo-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10`}
       name={name}
       type={type}
       step={step}

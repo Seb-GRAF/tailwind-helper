@@ -27,9 +27,7 @@ const StyledRange = ({
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setValue(parseFloat(e.target.value))
       }
-      className={`${
-        absolute ? 'absolute' : 'relative'
-      } left-0 w-full -bottom-4`}
+      className={`w-full -mt-1`}
     />
   )
 }

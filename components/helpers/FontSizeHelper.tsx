@@ -56,7 +56,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
         Reset
       </button>
       <WidgetConverter helperName='Font Size'>
-        <div className='relative'>
+        <div className='relative w-full'>
           <StyledInput
             type='number'
             name='fontSize'
@@ -70,17 +70,17 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
           <span className='absolute top-0 right-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none dark:text-indigo-300'>
             {unit}
           </span>
-          <StyledRange
-            step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
-            min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
-            max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}
-            value={value || 0}
-            setValue={setValue}
-          />
         </div>
+        <StyledRange
+          step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
+          min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
+          max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}
+          value={value || 0}
+          setValue={setValue}
+        />
 
         <button
-          className='h-full mt-2 w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
+          className='w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {

@@ -19,6 +19,7 @@ interface Props {
 const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
   const [value, setValue] = useState(paddings[8].px)
   const [unit, setUnit] = useState('px')
+  const [isNegative, setIsNegative] = useState(false)
   const [orientation, setOrientation] = useState({
     left: false,
     right: false,
@@ -35,6 +36,7 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
   const reset = () => {
     setValue(paddings[8].px)
     setUnit('px')
+    setIsNegative(false)
     setConvertedPadding(paddings[8])
     setOrientation({
       left: false,
@@ -104,8 +106,10 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
 
   useEffect(() => {
     // sets parent font size to converted size
-    setPadding(`${orientationOutput}-${convertedPadding!.class}`)
-  }, [convertedPadding, setPadding, orientationOutput])
+    setPadding(
+      `${isNegative ? '-' : ''}${orientationOutput}-${convertedPadding!.class}`
+    )
+  }, [convertedPadding, setPadding, orientationOutput, isNegative])
 
   return (
     <WidgetWrapper>
@@ -148,7 +152,17 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
       </div>
       {/* CONVERTER */}
       <WidgetConverter helperName='Padding'>
-        <div className='relative'>
+        <div className='relative flex w-full gap-2'>
+          {/* SWITCH TO NEGATIVE/POSITIVE VALUES */}
+          <button
+            className='flex-shrink-0 w-4 rounded hover:text-indigo-600 dark:hover:text-indigo-300 bg-slate-700 h-14'
+            // {...(unit === 'percent' ? { disabled: true } : {})}
+            onClick={(e) => {
+              e.preventDefault()
+              setIsNegative((prev) => !prev)
+            }}>
+            {isNegative ? '-' : '+'}
+          </button>
           <StyledInput
             type='number'
             name='padding'
@@ -162,17 +176,17 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
           <span className='absolute top-0 right-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none dark:text-indigo-300'>
             {unit}
           </span>
-          <StyledRange
-            step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
-            min={0}
-            max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
-            value={value || 0}
-            setValue={setValue}
-          />
         </div>
+        <StyledRange
+          step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
+          min={0}
+          max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
+          value={value || 0}
+          setValue={setValue}
+        />
 
         <button
-          className='h-full mt-2 w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
+          className='w-28 hover:text-indigo-600 dark:hover:text-indigo-300'
           onClick={(e) => {
             e.preventDefault()
             if (unit === 'px') {
@@ -186,18 +200,29 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
           {unit == 'px' ? 'Switch to rem' : 'Switch to px'}
         </button>
       </WidgetConverter>
-      {/* RESULT */}
 
+      {/* RESULT */}
       <WidgetResult>
-        <CopyToClipboard valueToCopy={convertedPadding.class.toString()}>
-          <span className='font-semibold'>{`${orientationOutput}-${convertedPadding.class}`}</span>
+        <CopyToClipboard
+          valueToCopy={`${
+            isNegative ? '-' : ''
+          }${convertedPadding.class.toString()}`}>
+          <span className='font-semibold'>{`${
+            isNegative ? '-' : ''
+          }${orientationOutput}-${convertedPadding.class}`}</span>
         </CopyToClipboard>
         <div className='flex gap-4'>
-          <CopyToClipboard valueToCopy={convertedPadding.rem.toString()}>
-            <span>{`${convertedPadding.rem}rem`}</span>
+          <CopyToClipboard
+            valueToCopy={`${
+              isNegative ? '-' : ''
+            }${convertedPadding.rem.toString()}`}>
+            <span>{`${isNegative ? '-' : ''}${convertedPadding.rem}rem`}</span>
           </CopyToClipboard>
-          <CopyToClipboard valueToCopy={convertedPadding.px.toString()}>
-            <span>{`${convertedPadding.px}px`}</span>
+          <CopyToClipboard
+            valueToCopy={`${
+              isNegative ? '-' : ''
+            }${convertedPadding.px.toString()}`}>
+            <span>{`${isNegative ? '-' : ''}${convertedPadding.px}px`}</span>
           </CopyToClipboard>
         </div>
       </WidgetResult>

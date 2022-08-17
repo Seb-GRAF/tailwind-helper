@@ -42,7 +42,7 @@ const Favorites = () => {
                         key={favorite.class + index}
                         className='flex items-center gap-2 w-fit'>
                         <button
-                          className='flex items-center justify-center w-6 h-4 '
+                          className='flex items-center justify-center w-6 h-4 transition-colors hover:text-pink-500 hover:dark:text-pink-400'
                           onClick={() =>
                             favoritesContext.removeFavorite(favorite.class)
                           }>
@@ -87,7 +87,7 @@ const Favorites = () => {
                         key={favorite.class + index}
                         className='flex items-center w-full gap-2 pb-2 border-b sm:pb-0 sm:border-none last-of-type:border-b-0 last-of-type:pb-0 border-slate-200 dark:border-slate-600 '>
                         <button
-                          className='flex items-center justify-center w-6 h-4'
+                          className='flex items-center justify-center w-6 h-4 transition-colors hover:text-pink-500 hover:dark:text-pink-400'
                           onClick={() =>
                             favoritesContext.removeFavorite(favorite.class)
                           }>
@@ -130,7 +130,7 @@ const Favorites = () => {
                         key={favorite.class + index}
                         className='flex items-center w-full gap-2 pb-2 border-b last-of-type:border-b-0 last-of-type:pb-0 sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
                         <button
-                          className='flex items-center justify-center w-6 h-4'
+                          className='flex items-center justify-center w-6 h-4 transition-colors hover:text-pink-500 hover:dark:text-pink-400'
                           onClick={() =>
                             favoritesContext.removeFavorite(favorite.class)
                           }>
@@ -172,7 +172,7 @@ const Favorites = () => {
                         key={favorite.class + index}
                         className='flex items-center w-full gap-2 pb-2 border-b last-of-type:border-b-0 last-of-type:pb-0 sm:pb-0 sm:border-none border-slate-200 dark:border-slate-600 '>
                         <button
-                          className='flex items-center justify-center w-6 h-4'
+                          className='flex items-center justify-center w-6 h-4 transition-colors hover:text-pink-500 hover:dark:text-pink-400'
                           onClick={() =>
                             favoritesContext.removeFavorite(favorite.class)
                           }>
