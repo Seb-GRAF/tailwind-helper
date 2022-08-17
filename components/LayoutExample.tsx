@@ -41,7 +41,7 @@ const LayoutExample = ({
   }, [customName, favoritesContext, toPrint])
 
   return (
-    <div className='relative bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-outset-md shadow-gray-400/30 dark:ring-1 dark:ring-inset dark:ring-slate-700/50 -z-10'>
+    <div className='relative z-0 bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-outset-md shadow-gray-400/30 dark:ring-1 dark:ring-inset dark:ring-slate-700/50'>
       {/* FAVORITE  */}
       {!showInput && (
         <button
@@ -83,19 +83,21 @@ const LayoutExample = ({
             }}></div>
         </div>
       )}
+
       {/* EXAMPLE */}
       <div
         className={`mb-2 flex items-center justify-center w-full min-h-96 overflow-xs-hidden`}>
         <div
-          className={`padding overflow-x-hidden ${borderRadius} ${margin} ${padding} ${shadow} flex justify-center item-center transition-[margin,padding,border-radius,box-shadow] duration-75 bg-indigo-300 dark:bg-indigo-700 w-full h-auto`}>
+          className={`padding overflow-x-hidden ${borderRadius} ${margin} ${padding} ${shadow} flex justify-center item-center bg-indigo-300 dark:bg-indigo-700 w-full h-auto`}>
           <div
-            className={`${borderRadius} w-full h-24 transition-[margin,padding,border-radius] duration-75 bg-indigo-300 dark:bg-indigo-500`}></div>
+            className={`${borderRadius} w-full h-24 bg-indigo-300 dark:bg-indigo-500`}></div>
         </div>
       </div>
+
       {/* VALUE TO PRINT */}
       <div className='flex items-end justify-between mx-3 mb-2'>
         <CopyToClipboard valueToCopy={toPrint}>
-          <span className='flex flex-wrap gap-2 font-semibold'>
+          <div className='flex flex-wrap gap-2 font-semibold'>
             <span className='whitespace-nowrap'>{margin}</span>
             <span className='whitespace-nowrap'>{padding}</span>
             <span className='whitespace-nowrap'>{borderRadius}</span>
@@ -110,7 +112,7 @@ const LayoutExample = ({
               strokeWidth='1.5'>
               <path d='M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8'></path>
             </svg>
-          </span>
+          </div>
         </CopyToClipboard>
         <Tooltip
           message='Example of your settings'

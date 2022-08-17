@@ -28,7 +28,7 @@ const PositionExample = ({
       `${positioning !== 'static' ? positioning : ''} ${
         placement.includes('inset-0') ? '' : placement
       } ${translateX.includes('translate-x-0') ? '' : translateX} ${
-        translateY.includes('translate-x-0') ? '' : translateY
+        translateY.includes('translate-y-0') ? '' : translateY
       }`
     )
   }, [positioning, placement, translateX, translateY])
@@ -98,7 +98,7 @@ const PositionExample = ({
           />
         </div>
         {/* VALUE TO PRINT */}
-        <div className='flex items-end justify-between w-full pt-2'>
+        <div className='flex items-end justify-between w-full px-1 pt-2'>
           {toPrint === '   ' ? (
             <p className='font-semibold'>This is the default value</p>
           ) : (
@@ -113,7 +113,7 @@ const PositionExample = ({
                 {!translateX.includes('translate-x-0') && (
                   <span className='whitespace-nowrap'>{translateX}</span>
                 )}
-                {!translateY.includes('translate-x-0') && (
+                {!translateY.includes('translate-y-0') && (
                   <span className='whitespace-nowrap'>{translateY}</span>
                 )}
                 <svg

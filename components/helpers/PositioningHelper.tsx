@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { CopyToClipboard, StyledRange, StyledInput } from '..'
+import { CopyToClipboard, OutOfBounds } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 import { positionings } from '../../utils/tailwindClasses'
-import { getClosestItem } from '../../utils/getClosestItem'
 
 interface Props {
   setPositioning: (value: string) => void
@@ -11,6 +10,7 @@ interface Props {
 const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
   const [value, setValue] = useState(0)
   const [currentPositioning, setCurrentPositioning] = useState(positionings[0])
+  const [outOfBounds, setOutOfBounds] = useState<'def' | null>(null)
 
   const reset = () => {
     if (value === 0) return
@@ -28,6 +28,12 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
   }, [value])
 
   useEffect(() => {
+    if (currentPositioning?.class === 'static') {
+      setOutOfBounds('def')
+    } else {
+      setOutOfBounds(null)
+    }
+
     setPositioning(currentPositioning!.class)
   }, [currentPositioning, setPositioning])
 
@@ -59,7 +65,7 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
           {/* POSITIONING SELECT */}
           <select
             name='positioning'
-            className='relative p-4 text-indigo-700 rounded-md appearance-none cursor-pointer positioning w-44 bg-gray-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+            className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer positioning w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
             value={value}
             onChange={(e) => {
               setValue(parseInt(e.target.value))
@@ -76,6 +82,12 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
         <CopyToClipboard valueToCopy={currentPositioning.class.toString()}>
           <span className='font-semibold'>{`${currentPositioning.class}`}</span>
         </CopyToClipboard>
+
+        {outOfBounds && (
+          <div className='absolute bottom-0 left-0 w-full text-center'>
+            <OutOfBounds bounds={outOfBounds} />
+          </div>
+        )}
       </WidgetResult>
     </WidgetWrapper>
   )
