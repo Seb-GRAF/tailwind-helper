@@ -2,7 +2,6 @@ import CopyToClipboard from './CopyToClipboard'
 import { useState, useEffect, useContext } from 'react'
 import { Tooltip, FavoriteButton } from '.'
 import { FavoritesCtx } from '../contexts/FavoritesProvider'
-import { placements } from '../utils/tailwindClasses'
 
 interface Props {
   positioning: string
@@ -36,11 +35,12 @@ const PositionExample = ({
   useEffect(() => {
     if (favoritesContext.isAlreadyFavorite(toPrint) && customName !== '') {
       favoritesContext.updateFavorite({
-        class: toPrint,
+        class: toPrint !== '   ' ? toPrint : 'static',
         name: customName,
-        category: 'layouts',
+        category: 'positions',
       })
     }
+    // console.log(favoritesContext.favorites)
   }, [customName, favoritesContext, toPrint])
 
   return (
@@ -56,7 +56,7 @@ const PositionExample = ({
       {showInput && (
         <div className='absolute top-0 right-0 z-10 w-10'>
           <input
-            type='Position'
+            type='text'
             placeholder='Custom name'
             defaultValue={
               favoritesContext?.isAlreadyFavorite(toPrint)
@@ -68,17 +68,12 @@ const PositionExample = ({
             onChange={(e) => setCustomName(e.target.value)}
           />
           <FavoriteButton
-            favoriteClass={toPrint}
+            favoriteClass={toPrint !== '   ' ? toPrint : 'static'}
             category='positions'
             favoriteName={
               customName.length > 0
                 ? customName
-                : `Position ${
-                    favoritesContext.countDefaultNames(
-                      'positions',
-                      'position'
-                    ) + 1
-                  }`
+                : `Position ${favoritesContext.countFavorite('positions') + 1}`
             }
           />
           <div

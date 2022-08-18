@@ -16,6 +16,10 @@ body {
   @apply antialiased;
 }
 
+.not-draggable {
+  -webkit-user-drag: none;
+}
+
 .padding {
   background: repeating-linear-gradient(
     45deg,

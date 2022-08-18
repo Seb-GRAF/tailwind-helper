@@ -5,15 +5,20 @@ import {
   WidgetConverter,
   WidgetResult,
   FavoriteButton,
+  StyledRange,
 } from '..'
-import { colors, Color } from '../../utils/tailwindClasses'
+import { colors, Color, opacities } from '../../utils/tailwindClasses'
 
 interface Props {
   setColor?: (value: string) => void
 }
 
 const ColorHelper = ({ setColor }: Props): JSX.Element => {
+  const [currentColor, setCurrentColor] = useState('')
   const [value, setValue] = useState('#ec4899')
+  const [opacityIndex, setOpacityIndex] = useState(14)
+  const [currentOpacity, setCurrentOpacity] = useState(opacities[14])
+
   const [closestColor, setClosestColor] = useState<Color>({
     class: 'pink-500',
     hex: '#ec4899',
@@ -27,7 +32,11 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
       class: 'pink-500',
       hex: '#ec4899',
     })
+
+    setCurrentOpacity(opacities[14])
+    setOpacityIndex(14)
   }
+
   // Converts hex to array of rgb
   const hexToRgb = (hex: string): number[] => {
     return hex
@@ -36,6 +45,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
       .match(/.{2}/g)
       ?.map((value) => parseInt(value, 16))
   }
+
   // Distance between 2 colors (in RGB)
   // https://stackoverflow.com/questions/23990802/find-nearest-color-from-a-colors-list
   const distance = (a: number[], b: number[]): number => {
@@ -45,6 +55,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
         Math.pow(a[2] - b[2], 2)
     )
   }
+
   const nearestColor = (colorHex: string): any | Color => {
     return colors.reduce(
       (a, b) =>
@@ -70,8 +81,30 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
   }
 
   useEffect(() => {
-    if (setColor) setColor(closestColor.class)
-  }, [closestColor, setColor])
+    if (setColor)
+      setColor(
+        `${
+          closestColor.class !== 'black' || currentOpacity.class !== '10'
+            ? `${closestColor.class}${
+                currentOpacity.class !== '100' ? `/${currentOpacity.class}` : ''
+              }`
+            : ''
+        }`
+      )
+    setCurrentColor(
+      `${
+        closestColor.class !== 'black' || currentOpacity.class !== '10'
+          ? `${closestColor.class}${
+              currentOpacity.class !== '100' ? `/${currentOpacity.class}` : ''
+            }`
+          : ''
+      }`
+    )
+  }, [closestColor, setColor, currentOpacity])
+
+  useEffect(() => {
+    setCurrentOpacity(opacities[opacityIndex])
+  }, [opacityIndex])
 
   return (
     <WidgetWrapper>
@@ -84,53 +117,81 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
 
       {/* INPUT */}
       <WidgetConverter helperName='Color Picker'>
-        <div className='flex flex-col gap-2'>
-          <div className='relative overflow-hidden rounded-md h-14 w-44'>
-            <input
-              type='color'
-              name='color'
-              className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
-              value={value}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const input = document.getElementById(
-                  'hex-value'
-                ) as HTMLInputElement
-                input.value = e.target.value
-                if (e.target.value.length === 7 && e.target.value[0] === '#') {
-                  setValue(e.target.value)
-                  setClosestColor(nearestColor(value))
-                }
-              }}
-            />
+        <div className='relative'>
+          {/* COLOR  */}
+          <div className='flex flex-col gap-2'>
+            <div className='relative overflow-hidden rounded-md h-14 w-44 ring-1 ring-inset ring-gray-300/50 dark:ring-slate-700/50'>
+              <input
+                type='color'
+                name='color'
+                className={`absolute top-0 left-0 h-24 -m-4 bg-indigo-300 cursor-pointer w-52 ring-1 ring-gray-600/10 dark:ring-gray-100/10 opacity-${currentOpacity.class}`}
+                value={value}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  const input = document.getElementById(
+                    'shadow-hex-value'
+                  ) as HTMLInputElement
+                  input.value = e.target.value
+                  if (
+                    e.target.value.length === 7 &&
+                    e.target.value[0] === '#'
+                  ) {
+                    setValue(e.target.value)
+                    setClosestColor(nearestColor(value))
+                  }
+                }}
+              />
 
-            {/* ADD/REMOVE FAVORITE */}
-            <FavoriteButton
-              favoriteClass={closestColor.class}
-              category='colors'
-              color={
-                isTooDark(closestColor.hex) ? 'text-white/80' : 'text-black/80'
-              }
-            />
+              {/* ADD/REMOVE FAVORITE */}
+              <FavoriteButton
+                favoriteClass={closestColor.class}
+                category='colors'
+                color={
+                  isTooDark(closestColor.hex)
+                    ? 'text-white/80'
+                    : 'text-black/80'
+                }
+              />
+            </div>
+
+            {/* HEX INPUT AND OPACITY SLIDER */}
+            <div className='relative'>
+              <input
+                type='text'
+                defaultValue={value}
+                id='hex-value'
+                placeholder='#000000'
+                maxLength={7}
+                className='p-1 text-center rounded-md pr-14 w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+                onChange={(e) => {
+                  if (
+                    e.target.value.length === 7 &&
+                    e.target.value[0] === '#'
+                  ) {
+                    setValue(e.target.value)
+                    setClosestColor(nearestColor(e.target.value))
+                  }
+                }}
+              />
+              <span className='absolute text-indigo-700 -translate-y-1/2 dark:text-indigo-300 top-1/2 right-7'>
+                {opacities[opacityIndex].class}%
+              </span>
+            </div>
+            <div className='relative flex justify-center mt-1'>
+              <StyledRange
+                step={1}
+                min={0}
+                max={opacities.length - 1}
+                value={opacityIndex || 0}
+                setValue={setOpacityIndex}
+                absolute={true}
+              />
+            </div>
           </div>
-          <input
-            type='text'
-            defaultValue={value}
-            id='hex-value'
-            placeholder='#000000'
-            maxLength={7}
-            className='p-1 text-center rounded-md w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
-            onChange={(e) => {
-              if (e.target.value.length === 7 && e.target.value[0] === '#') {
-                setValue(e.target.value)
-                setClosestColor(nearestColor(e.target.value))
-              }
-            }}
-          />
         </div>
       </WidgetConverter>
       <WidgetResult>
-        <CopyToClipboard valueToCopy={closestColor.class}>
-          <span className='font-semibold'>{`${closestColor.class}`}</span>
+        <CopyToClipboard valueToCopy={currentColor}>
+          <span className='font-semibold whitespace-nowrap'>{`${currentColor}`}</span>
         </CopyToClipboard>
         <CopyToClipboard valueToCopy={closestColor.hex}>
           <span>{`${closestColor.hex}`}</span>

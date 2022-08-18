@@ -17,6 +17,7 @@ export type Favorites = {
   isCategoryEmpty: (category: string) => boolean
   countFavorite: (category: string) => number
   countDefaultNames: (category: string, defaultName: string) => number
+  renameFavorite: (oldClass: string, newClass: string) => void
 }
 
 const FavoritesCtx = createContext<Favorites | null>(null)
@@ -28,7 +29,7 @@ const FavoritesProvider = ({
 }): JSX.Element => {
   const [favorites, setFavorites] = useState<Favorite[]>(null)
 
-  const addFavorite = (favorite: Favorite) => {
+  const addFavorite = (favorite: Favorite): void => {
     // return if class already exists
     if (favorites.some((f) => f.class === favorite.class)) return
 
@@ -36,7 +37,7 @@ const FavoritesProvider = ({
     localStorage.setItem('favorites', JSON.stringify([...favorites, favorite]))
   }
 
-  const removeFavorite = (favorite: string) => {
+  const removeFavorite = (favorite: string): void => {
     setFavorites((prev) => prev.filter((f) => f.class !== favorite))
     localStorage.setItem(
       'favorites',
@@ -44,7 +45,7 @@ const FavoritesProvider = ({
     )
   }
 
-  const updateFavorite = (favorite: Favorite) => {
+  const updateFavorite = (favorite: Favorite): void => {
     setFavorites((prev) =>
       prev.map((f) => (f.class === favorite.class ? favorite : f))
     )
@@ -52,6 +53,20 @@ const FavoritesProvider = ({
       'favorites',
       JSON.stringify(
         favorites.map((f) => (f.class === favorite.class ? favorite : f))
+      )
+    )
+  }
+
+  const renameFavorite = (oldClass: string, newClass: string): void => {
+    setFavorites((prev) =>
+      prev.map((f) => (f.class === oldClass ? { ...f, class: newClass } : f))
+    )
+    localStorage.setItem(
+      'favorites',
+      JSON.stringify(
+        favorites.map((f) =>
+          f.class === oldClass ? { ...f, class: newClass } : f
+        )
       )
     )
   }
@@ -101,6 +116,7 @@ const FavoritesProvider = ({
         updateFavorite,
         countFavorite,
         countDefaultNames,
+        renameFavorite,
       }}>
       {children}
     </FavoritesCtx.Provider>
