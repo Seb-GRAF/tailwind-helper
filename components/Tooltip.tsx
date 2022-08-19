@@ -26,7 +26,7 @@ const Tooltip = ({
           />
           {/* MESSAGE */}
           <span
-            className={`relative z-50 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-md shadow-slate-900/20 ${color}`}>
+            className={`relative z-40 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-md shadow-slate-900/20 ${color}`}>
             {message}
           </span>
         </div>

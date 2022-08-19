@@ -70,6 +70,20 @@ export type Translate = {
   percent?: number
 }
 
+export type GridTemplateColumns = {
+  class: string
+}
+
+export type GridTemplateRows = {
+  class: string
+}
+
+export type Gap = {
+  class: string
+  rem?: number
+  px?: number
+}
+
 /**
  * TAILWIND CLASSES
  */
@@ -563,4 +577,69 @@ export const translates: Translate[] = [
   { class: '1/3', type: 'fraction', percent: 33.333333 },
   { class: '1/4', type: 'fraction', percent: 25 },
   { class: '0', type: 'fraction', percent: 0 },
+]
+
+export const gridTemplateColumns: GridTemplateColumns[] = [
+  { class: 'grid-cols-1' },
+  { class: 'grid-cols-2' },
+  { class: 'grid-cols-3' },
+  { class: 'grid-cols-4' },
+  { class: 'grid-cols-5' },
+  { class: 'grid-cols-6' },
+  { class: 'grid-cols-7' },
+  { class: 'grid-cols-8' },
+  { class: 'grid-cols-9' },
+  { class: 'grid-cols-10' },
+  { class: 'grid-cols-11' },
+  { class: 'grid-cols-12' },
+]
+
+export const gridTemplateRows: GridTemplateRows[] = [
+  { class: 'grid-rows-1' },
+  { class: 'grid-rows-2' },
+  { class: 'grid-rows-3' },
+  { class: 'grid-rows-4' },
+  { class: 'grid-rows-5' },
+  { class: 'grid-rows-6' },
+  { class: 'grid-rows-7' },
+  { class: 'grid-rows-8' },
+  { class: 'grid-rows-9' },
+  { class: 'grid-rows-10' },
+  { class: 'grid-rows-11' },
+  { class: 'grid-rows-12' },
+]
+
+export const gaps: Gap[] = [
+  { class: '0', rem: 0, px: 0 },
+  { class: '0.5', rem: 0.125, px: 2 },
+  { class: '1', rem: 0.25, px: 4 },
+  { class: '1.5', rem: 0.375, px: 6 },
+  { class: '2', rem: 0.5, px: 8 },
+  { class: '2.5', rem: 0.625, px: 10 },
+  { class: '3', rem: 0.75, px: 12 },
+  { class: '3.5', rem: 0.875, px: 14 },
+  { class: '4', rem: 1, px: 16 },
+  { class: '5', rem: 1.25, px: 20 },
+  { class: '6', rem: 1.5, px: 24 },
+  { class: '8', rem: 2, px: 32 },
+  { class: '10', rem: 2.5, px: 40 },
+  { class: '11', rem: 2.75, px: 44 },
+  { class: '12', rem: 3, px: 48 },
+  { class: '14', rem: 3.5, px: 56 },
+  { class: '16', rem: 4, px: 64 },
+  { class: '20', rem: 5, px: 80 },
+  { class: '24', rem: 6, px: 96 },
+  { class: '28', rem: 7, px: 112 },
+  { class: '32', rem: 8, px: 128 },
+  { class: '36', rem: 9, px: 144 },
+  { class: '40', rem: 10, px: 160 },
+  { class: '44', rem: 11, px: 176 },
+  { class: '48', rem: 12, px: 192 },
+  { class: '52', rem: 13, px: 208 },
+  { class: '56', rem: 14, px: 224 },
+  { class: '64', rem: 16, px: 256 },
+  { class: '72', rem: 18, px: 288 },
+  { class: '80', rem: 20, px: 320 },
+  { class: '96', rem: 24, px: 384 },
+  { class: 'px', rem: 0.0625, px: 1 },
 ]

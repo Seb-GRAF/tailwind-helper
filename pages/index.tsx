@@ -4,6 +4,7 @@ import {
   FontHelper,
   LayoutHelper,
   PositionHelper,
+  GridHelper,
   Colors,
   Favorites,
   CategoryButton,
@@ -95,6 +96,11 @@ const Home: NextPage = () => {
           <CategoryButton
             selectedCategory={selectedCategory}
             setCategory={setCategory}
+            name={'Grid'}
+          />
+          <CategoryButton
+            selectedCategory={selectedCategory}
+            setCategory={setCategory}
             name={'Colors'}
           />
           <div className='sm:flex sm:justify-end sm:w-full'>
@@ -116,6 +122,9 @@ const Home: NextPage = () => {
       </section>
       <section className={`${selectedCategory !== 'position' ? 'hidden' : ''}`}>
         <PositionHelper />
+      </section>
+      <section className={`${selectedCategory !== 'grid' ? 'hidden' : ''}`}>
+        <GridHelper />
       </section>
       <section className={`${selectedCategory !== 'colors' ? 'hidden' : ''}`}>
         <Colors />

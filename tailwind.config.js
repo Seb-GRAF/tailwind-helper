@@ -38,7 +38,7 @@ module.exports = {
         /bg-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900)/,
     },
     {
-      pattern: /opacity-(0|5|10|20|25|30|40|50|60|70|80|90|95|100)/,
+      pattern: /opacity-(0|5|10|20|25|30|40|50|60|70|75|80|90|95|100)/,
     },
     {
       pattern:
@@ -139,6 +139,13 @@ module.exports = {
     {
       pattern:
         /translate-(x|y)-(0|0.5|px|1|1.5|2|2.5|3|3.5|4|5|6|8|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96|1&#472|1&#473|2&#473|1&#474|2&#474|3&#474|full)/,
+    },
+    {
+      pattern: /grid-(cols|rows)-(1|2|3|4|5|6|7|8|9|10|11|12|none)/,
+    },
+    {
+      pattern:
+        /gap-(0|0.5|1|1.5|2|2.5|3|3.5|4|5|6|8|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96)/,
     },
   ],
 }
