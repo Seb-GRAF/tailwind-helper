@@ -4,9 +4,9 @@
 
 # Tailwind Helper
 
-Tailwind Helper is meant to assist you in converting your designs into Tailwind friendly values.
+Tailwindhelper assists you in styling with tailwindcss. You can visualize different settings, convert values into tailwind classes, figure out the closest colors with hex values and more.
 
-## 🧐 Example case:
+## Example case:
 
 > You have a figma design and want to know what the Tailwind class of a 26px font size is?
 
