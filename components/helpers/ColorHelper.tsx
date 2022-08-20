@@ -124,7 +124,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
               <input
                 type='color'
                 name='color'
-                className={`absolute top-0 left-0 h-24 -m-4 bg-indigo-300 cursor-pointer w-52 ring-1 ring-gray-600/10 dark:ring-gray-100/10 opacity-${currentOpacity.class}`}
+                className={`absolute -top-0 -left-1/3 h-[200%] -m-4 bg-indigo-300 cursor-pointer w-[200%] ring-1 ring-gray-600/10 dark:ring-gray-100/10 opacity-${currentOpacity.class}`}
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const input = document.getElementById(

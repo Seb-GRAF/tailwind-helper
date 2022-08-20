@@ -132,9 +132,9 @@ const Home = (): JSX.Element => {
       </Link>
       {/* DESCRIPTION */}
       <div className='relative'>
-        <p className='invisible mt-4 mb-12 overflow-hidden sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-8'>
-          You want to convert a unit to the corresponding tailwind class? You
-          always forget property names? Or you are simply learning tailwind and
+        <p className='invisible mt-4 mb-12 overflow-hidden title-description sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-8'>
+          You always forget property names? You want to convert a unit to the
+          corresponding tailwind class? Or you are simply learning tailwind and
           would like a bit of help visualizing classes? Then this tool might
           come in handyǃ
         </p>

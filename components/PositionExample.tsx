@@ -24,10 +24,10 @@ const PositionExample = ({
 
   useEffect(() => {
     setToPrint(
-      `${positioning !== 'static' ? positioning : ''} ${
-        placement.includes('inset-0') ? '' : placement
-      } ${translateX.includes('translate-x-0') ? '' : translateX} ${
-        translateY.includes('translate-y-0') ? '' : translateY
+      `${positioning !== 'static' ? positioning : ''}${
+        placement.includes('inset-0') ? '' : ` ${placement}`
+      }${translateX.includes('translate-x-0') ? '' : ` ${translateX}`}${
+        translateY.includes('translate-y-0') ? '' : ` ${translateY}`
       }`
     )
   }, [positioning, placement, translateX, translateY])
@@ -68,12 +68,17 @@ const PositionExample = ({
             onChange={(e) => setCustomName(e.target.value)}
           />
           <FavoriteButton
-            favoriteClass={toPrint !== '   ' ? toPrint : 'static'}
+            favoriteClass={toPrint}
             category='positions'
             favoriteName={
               customName.length > 0
                 ? customName
-                : `Position ${favoritesContext.countFavorite('positions') + 1}`
+                : `Position ${
+                    favoritesContext.countDefaultNames(
+                      'positions',
+                      'Position'
+                    ) + 1
+                  }`
             }
           />
           <div
@@ -84,17 +89,18 @@ const PositionExample = ({
             }}></div>
         </div>
       )}
+
       {/* EXAMPLE */}
       <div>
         <div className='relative w-full rounded-md rounded-t-xl'>
-          <div className='rounded-md shadow-md bg-indigo-300/50 dark:bg-indigo-700/50 h-28' />
+          <div className='border-2 rounded-md striped-div h-28' />
           <div
             className={`${positioning} ${placement} ${translateX} ${translateY} rounded-md shadow-md shadow-black/20 inline-block w-12 h-12 ring-1 dark:ring-pink-400 ring-pink-300 ring-inset bg-pink-400 dark:bg-pink-500 z-50 pointer-events-none`}
           />
         </div>
         {/* VALUE TO PRINT */}
         <div className='flex items-end justify-between w-full px-1 pt-2'>
-          {toPrint === '   ' ? (
+          {toPrint === '' ? (
             <p className='font-semibold'>This is the default value</p>
           ) : (
             <CopyToClipboard valueToCopy={toPrint}>

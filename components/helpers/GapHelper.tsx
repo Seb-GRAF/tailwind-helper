@@ -10,14 +10,14 @@ interface Props {
 }
 
 const GapHelper = ({ setGap }: Props): JSX.Element => {
-  const [value, setValue] = useState(gaps[11].px)
+  const [value, setValue] = useState(gaps[4].px)
   const [unit, setUnit] = useState('px')
-  const [convertedGap, setConvertedGap] = useState(gaps[11])
+  const [convertedGap, setConvertedGap] = useState(gaps[4])
 
   const reset = () => {
-    setValue(gaps[11].px)
+    setValue(gaps[4].px)
     setUnit('px')
-    setConvertedGap(gaps[11])
+    setConvertedGap(gaps[4])
   }
 
   // updates converted size on value and unit change

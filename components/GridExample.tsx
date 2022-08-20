@@ -23,7 +23,13 @@ const GridExample = ({
   const favoritesContext = useContext(FavoritesCtx)
 
   useEffect(() => {
-    setToPrint(`grid ${gridTemplateColumns} ${gridTemplateRows} ${gap}`)
+    setToPrint(
+      `grid${
+        gridTemplateColumns !== 'grid-cols-1' ? ` ${gridTemplateColumns}` : ''
+      }${gridTemplateRows !== 'grid-rows-1' ? ` ${gridTemplateRows}` : ''}${
+        gap !== 'gap-0' ? ` ${gap}` : ''
+      }`
+    )
   }, [gridTemplateColumns, gridTemplateRows, gap])
 
   useEffect(() => {
@@ -92,13 +98,13 @@ const GridExample = ({
       )}
 
       {/* EXAMPLE */}
-      <div className={`flex flex-col w-full min-h-96 overflow-xs-hidden`}>
+      <div className={`flex flex-col w-full min-h-96`}>
         <div
-          className={`p-1 overflow-x-hidden grid gap-1 ${gridTemplateColumns} ${gridTemplateRows} ${gap} w-full h-auto`}>
+          className={`rounded-xl p-2 overflow-x-hidden grid ${gridTemplateColumns} ${gridTemplateRows} ${gap} w-full h-auto striped`}>
           {divAmount.map((e, i) => (
             <div
               key={`grid-div-${i}`}
-              className='w-full bg-indigo-300 rounded-md dark:bg-indigo-700 h-14'
+              className='w-full bg-indigo-300 rounded-md dark:bg-indigo-700 h-14 shadow-inset-outset-md'
             />
           ))}
         </div>
@@ -108,9 +114,15 @@ const GridExample = ({
           <CopyToClipboard valueToCopy={toPrint}>
             <div className='flex flex-wrap gap-2 font-semibold'>
               <span className='whitespace-nowrap'>grid </span>
-              <span className='whitespace-nowrap'>{gridTemplateColumns}</span>
-              <span className='whitespace-nowrap'>{gridTemplateRows}</span>
-              <span className='whitespace-nowrap'>{gap}</span>
+              {gridTemplateColumns !== 'grid-cols-1' && (
+                <span className='whitespace-nowrap'>{gridTemplateColumns}</span>
+              )}
+              {gridTemplateRows !== 'grid-rows-1' && (
+                <span className='whitespace-nowrap'>{gridTemplateRows}</span>
+              )}
+              {gap !== 'gap-0' && (
+                <span className='whitespace-nowrap'>{gap}</span>
+              )}
               <svg
                 width='24'
                 height='24'

@@ -16,31 +16,92 @@ body {
   @apply antialiased;
 }
 
-.not-draggable {
-  -webkit-user-drag: none;
-}
-
 .padding {
-  background: repeating-linear-gradient(
+  background-image: linear-gradient(
     45deg,
-    #95a7ff,
-    #95a7ff 5px,
-    #a5b4fc 5px,
-    #a5b4fc 13px
+    #8d9ffc 10%,
+    transparent 0,
+    transparent 50%,
+    #8d9ffc 0,
+    #8d9ffc 60%,
+    transparent 0,
+    transparent
   );
+  background-size: 12px 12px;
 }
 
 .dark .padding {
-  background: repeating-linear-gradient(
+  background-image: linear-gradient(
     45deg,
-    #5659ef,
-    #5659ef 5px,
-    #6366f1 5px,
-    #6366f1 13px
+    #302995 10%,
+    transparent 0,
+    transparent 50%,
+    #302995 0,
+    #302995 60%,
+    transparent 0,
+    transparent
   );
+  background-size: 12px 12px;
 }
 
-.description {
+.striped {
+  background-image: linear-gradient(
+    45deg,
+    #95a7ff30 10%,
+    transparent 0,
+    transparent 50%,
+    #95a7ff30 0,
+    #95a7ff30 60%,
+    transparent 0,
+    transparent
+  );
+  background-size: 12px 12px;
+}
+
+.dark .striped {
+  background-image: linear-gradient(
+    45deg,
+    #5659ef20 10%,
+    transparent 0,
+    transparent 50%,
+    #5659ef20 0,
+    #5659ef20 60%,
+    transparent 0,
+    transparent
+  );
+  background-size: 12px 12px;
+}
+.striped-div {
+  @apply border-[#e4e9ff];
+  background-image: linear-gradient(
+    45deg,
+    #95a7ff30 10%,
+    #95a7ff10 0,
+    #95a7ff10 50%,
+    #95a7ff30 0,
+    #95a7ff30 60%,
+    #95a7ff10 0,
+    #95a7ff10
+  );
+  background-size: 12px 12px;
+}
+
+.dark .striped-div {
+  @apply border-[#2c3665];
+  background-image: linear-gradient(
+    45deg,
+    #5659ef40 10%,
+    #7779e910 0,
+    #7779e910 50%,
+    #5659ef40 0,
+    #5659ef40 60%,
+    #7779e910 0,
+    #7779e910
+  );
+  background-size: 12px 12px;
+}
+
+.title-description {
   direction: rtl;
 }
 
