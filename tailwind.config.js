@@ -16,6 +16,19 @@ module.exports = {
   },
   plugins: [],
   safelist: [
+    'no-underline',
+    'underline',
+    'overline',
+    'line-through',
+
+    {
+      pattern:
+        /decoration-(solid|double|dotted|dashed|wavy|from-font|auto|0|1|2|4|8)/,
+    },
+
+    {
+      pattern: /font-(sans|serif|mono)/,
+    },
     {
       pattern: /text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)/,
     },

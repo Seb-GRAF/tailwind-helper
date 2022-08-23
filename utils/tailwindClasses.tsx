@@ -2,10 +2,25 @@
  * TYPES
  */
 
+export type FontFamily = {
+  class: string
+}
+
 export type FontSize = {
   class: string
   rem?: number
   px?: number
+}
+
+export type TextDecoration = {
+  class: string
+}
+
+export type DecorationStyle = {
+  class: string
+}
+export type DecorationThickness = {
+  class: string
 }
 
 export type Color = {
@@ -88,6 +103,12 @@ export type Gap = {
  * TAILWIND CLASSES
  */
 
+export const fontFamilies: FontFamily[] = [
+  { class: 'font-sans' },
+  { class: 'font-serif' },
+  { class: 'font-mono' },
+]
+
 export const fontSizes: FontSize[] = [
   { class: 'text-xs', rem: 0.75, px: 12 },
   { class: 'text-sm', rem: 0.875, px: 14 },
@@ -102,6 +123,31 @@ export const fontSizes: FontSize[] = [
   { class: 'text-7xl', rem: 4.5, px: 72 },
   { class: 'text-8xl', rem: 6, px: 96 },
   { class: 'text-9xl', rem: 8, px: 128 },
+]
+
+export const textDecorations: TextDecoration[] = [
+  { class: 'no-underline' },
+  { class: 'underline' },
+  { class: 'overline' },
+  { class: 'line-through' },
+]
+
+export const decorationStyles: DecorationStyle[] = [
+  { class: 'decoration-solid' },
+  { class: 'decoration-double' },
+  { class: 'decoration-dotted' },
+  { class: 'decoration-dashed' },
+  { class: 'decoration-wavy' },
+]
+
+export const decorationThicknesses: DecorationThickness[] = [
+  { class: 'decoration-auto' },
+  { class: 'decoration-from-font' },
+  { class: 'decoration-0' },
+  { class: 'decoration-1' },
+  { class: 'decoration-2' },
+  { class: 'decoration-4' },
+  { class: 'decoration-8' },
 ]
 
 export const colors: Color[] = [

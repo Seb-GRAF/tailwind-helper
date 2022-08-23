@@ -4,16 +4,24 @@ import { Tooltip, FavoriteButton } from './'
 import { FavoritesCtx } from '../contexts/FavoritesProvider'
 
 interface Props {
+  fontFamily: string
   fontSize: string
   fontWeight: string
   letterSpacing: string
+  textDecoration: string
+  decorationStyle: string
+  decorationThickness: string
   textColor: string
 }
 
 const FontSizeExample = ({
+  fontFamily,
   fontSize,
   fontWeight,
   letterSpacing,
+  textDecoration,
+  decorationStyle,
+  decorationThickness,
   textColor,
 }: Props): JSX.Element => {
   const [pinned, setPinned] = useState(false)
@@ -25,18 +33,29 @@ const FontSizeExample = ({
 
   // removes default styles from value to print
   useEffect(() => {
-    let valueToPrint = ''
-
-    if (fontSize !== 'text-base') valueToPrint = valueToPrint + ' ' + fontSize
-    if (fontWeight !== 'font-normal')
-      valueToPrint = valueToPrint + ' ' + fontWeight
-    if (letterSpacing !== 'tracking-normal')
-      valueToPrint = valueToPrint + ' ' + letterSpacing
-    if (textColor !== 'text-slate-200')
-      valueToPrint = valueToPrint + ' ' + textColor
-
-    setToPrint(valueToPrint)
-  }, [fontSize, fontWeight, letterSpacing, textColor])
+    setToPrint(
+      `${fontFamily !== 'font-sans' ? ` ${fontFamily}` : ''}${
+        fontSize !== 'font-normal' ? ` ${fontSize}` : ''
+      }${fontWeight !== 'font-normal' ? ` ${fontWeight}` : ''}${
+        letterSpacing !== 'tracking-normal' ? ` ${letterSpacing}` : ''
+      }${textDecoration !== 'no-underline' ? ` ${textDecoration}` : ''}${
+        decorationStyle !== 'decoration-solid' ? ` ${decorationStyle}` : ''
+      }${
+        decorationThickness !== 'decoration-auto'
+          ? ` ${decorationThickness}`
+          : ''
+      } text-${textColor}`
+    )
+  }, [
+    fontSize,
+    fontWeight,
+    letterSpacing,
+    textColor,
+    fontFamily,
+    textDecoration,
+    decorationStyle,
+    decorationThickness,
+  ])
 
   useEffect(() => {
     if (favoritesContext.isAlreadyFavorite(toPrint) && customName !== '') {
@@ -46,7 +65,7 @@ const FontSizeExample = ({
         category: 'fonts',
       })
     }
-  }, [customName])
+  }, [customName, toPrint, favoritesContext])
 
   return (
     <div
@@ -135,15 +154,22 @@ const FontSizeExample = ({
         defaultValue='Lorem Ipsum'
         autoCorrect='off'
         placeholder='Enter your text'
-        className={`text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} max-h-34 pt-8 pb-0 px-6 overflow-x-auto  
-         bg-transparent w-full`}
+        className={`${fontFamily} text-${textColor} placeholder:text-${textColor} ${fontSize} ${fontWeight} ${letterSpacing} ${textDecoration} ${decorationStyle} ${decorationThickness} max-h-34 mt-8 px-6 bg-transparent w-full`}
       />
       {/* TAILWIND CLASSES */}
       <div className='flex items-center justify-between mx-3 my-2'>
         <CopyToClipboard valueToCopy={toPrint}>
           <span className='flex flex-wrap gap-2 font-semibold whitespace-nowrap'>
+            {fontFamily !== 'font-sans' && <span>{fontFamily}</span>}
             {fontSize !== 'text-base' && <span>{fontSize}</span>}
             {fontWeight !== 'font-normal' && <span>{fontWeight}</span>}
+            {textDecoration !== 'no-underline' && <span>{textDecoration}</span>}
+            {decorationStyle !== 'decoration-solid' && (
+              <span>{decorationStyle}</span>
+            )}
+            {decorationThickness !== 'decoration-auto' && (
+              <span>{decorationThickness}</span>
+            )}
             {letterSpacing !== 'tracking-normal' && (
               <span>{letterSpacing}</span>
             )}

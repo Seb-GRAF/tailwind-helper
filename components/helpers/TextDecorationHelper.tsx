@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, OutOfBounds } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-import { positionings } from '../../utils/tailwindClasses'
+import { textDecorations } from '../../utils/tailwindClasses'
 
 interface Props {
-  setPositioning: (value: string) => void
+  setTextDecoration: (value: string) => void
 }
 
-const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
+const TextDecorationHelper = ({ setTextDecoration }: Props): JSX.Element => {
   const [value, setValue] = useState(0)
-  const [currentPositioning, setCurrentPositioning] = useState(positionings[0])
+  const [currentFontDecoration, setCurrentTextDecoration] = useState(
+    textDecorations[0]
+  )
   const [outOfBounds, setOutOfBounds] = useState<'def' | null>(null)
 
   const reset = () => {
     if (value === 0) return
 
     setValue(0)
-    setCurrentPositioning({ class: 'relative' })
+    setCurrentTextDecoration({ class: 'relative' })
   }
 
   useEffect(() => {
-    setCurrentPositioning(positionings[value])
+    setCurrentTextDecoration(textDecorations[value])
   }, [value])
 
   useEffect(() => {
-    if (currentPositioning?.class === 'static') {
+    if (currentFontDecoration?.class === 'no-underline') {
       setOutOfBounds('def')
     } else {
       setOutOfBounds(null)
     }
 
-    setPositioning(currentPositioning!.class)
-  }, [currentPositioning, setPositioning])
+    setTextDecoration(currentFontDecoration!.class)
+  }, [currentFontDecoration, setTextDecoration])
 
   return (
     <WidgetWrapper>
@@ -40,7 +42,7 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
         onClick={reset}>
         Reset
       </button>
-      <WidgetConverter helperName='Positioning'>
+      <WidgetConverter helperName='Text Decoration'>
         <div className='relative'>
           {/* CHEVRON DOWN ICON OVERRIDE */}
           <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none right-3 top-1/2'>
@@ -58,15 +60,15 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
             </svg>
           </div>
 
-          {/* POSITIONING SELECT */}
+          {/* FONT FAMILY SELECT */}
           <select
-            name='positioning'
-            className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer positioning w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+            name='Text decoration'
+            className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
             value={value}
             onChange={(e) => {
               setValue(parseInt(e.target.value))
             }}>
-            {positionings.map((positioning, index) => (
+            {textDecorations.map((positioning, index) => (
               <option key={index} value={index}>
                 {positioning.class}
               </option>
@@ -75,8 +77,8 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
         </div>
       </WidgetConverter>
       <WidgetResult>
-        <CopyToClipboard valueToCopy={currentPositioning.class.toString()}>
-          <span className='font-semibold'>{`${currentPositioning.class}`}</span>
+        <CopyToClipboard valueToCopy={currentFontDecoration.class.toString()}>
+          <span className='font-semibold'>{`${currentFontDecoration.class}`}</span>
         </CopyToClipboard>
 
         {outOfBounds && (
@@ -89,4 +91,4 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
   )
 }
 
-export default PositioningHelper
+export default TextDecorationHelper

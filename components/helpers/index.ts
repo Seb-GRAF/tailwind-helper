@@ -1,6 +1,9 @@
 import GridTemplateColumns from './GridTemplateColumnsHelper'
+export { default as FontFamilyHelper } from './FontFamilyHelper'
 export { default as FontSizeHelper } from './FontSizeHelper'
 export { default as FontWeightHelper } from './FontWeightHelper'
+export { default as TextDecorationHelper } from './TextDecorationHelper'
+export { default as DecorationStyleHelper } from './DecorationStyleHelper'
 export { default as LetterSpacingHelper } from './LetterSpacingHelper'
 export { default as ColorHelper } from './ColorHelper'
 

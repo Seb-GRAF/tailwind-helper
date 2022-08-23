@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, OutOfBounds } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-import { positionings } from '../../utils/tailwindClasses'
+import { fontFamilies } from '../../utils/tailwindClasses'
 
 interface Props {
-  setPositioning: (value: string) => void
+  setFontFamily: (value: string) => void
 }
 
-const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
+const FontFamilyHelper = ({ setFontFamily }: Props): JSX.Element => {
   const [value, setValue] = useState(0)
-  const [currentPositioning, setCurrentPositioning] = useState(positionings[0])
+  const [currentFontFamily, setCurrentFontFamily] = useState(fontFamilies[0])
   const [outOfBounds, setOutOfBounds] = useState<'def' | null>(null)
 
   const reset = () => {
     if (value === 0) return
 
     setValue(0)
-    setCurrentPositioning({ class: 'relative' })
+    setCurrentFontFamily({ class: 'relative' })
   }
 
   useEffect(() => {
-    setCurrentPositioning(positionings[value])
+    setCurrentFontFamily(fontFamilies[value])
   }, [value])
 
   useEffect(() => {
-    if (currentPositioning?.class === 'static') {
+    if (currentFontFamily?.class === 'font-sans') {
       setOutOfBounds('def')
     } else {
       setOutOfBounds(null)
     }
 
-    setPositioning(currentPositioning!.class)
-  }, [currentPositioning, setPositioning])
+    setFontFamily(currentFontFamily!.class)
+  }, [currentFontFamily, setFontFamily])
 
   return (
     <WidgetWrapper>
@@ -40,7 +40,7 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
         onClick={reset}>
         Reset
       </button>
-      <WidgetConverter helperName='Positioning'>
+      <WidgetConverter helperName='Font Family'>
         <div className='relative'>
           {/* CHEVRON DOWN ICON OVERRIDE */}
           <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none right-3 top-1/2'>
@@ -58,15 +58,15 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
             </svg>
           </div>
 
-          {/* POSITIONING SELECT */}
+          {/* FONT FAMILY SELECT */}
           <select
-            name='positioning'
-            className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer positioning w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+            name='Font Family'
+            className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
             value={value}
             onChange={(e) => {
               setValue(parseInt(e.target.value))
             }}>
-            {positionings.map((positioning, index) => (
+            {fontFamilies.map((positioning, index) => (
               <option key={index} value={index}>
                 {positioning.class}
               </option>
@@ -75,8 +75,8 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
         </div>
       </WidgetConverter>
       <WidgetResult>
-        <CopyToClipboard valueToCopy={currentPositioning.class.toString()}>
-          <span className='font-semibold'>{`${currentPositioning.class}`}</span>
+        <CopyToClipboard valueToCopy={currentFontFamily.class.toString()}>
+          <span className='font-semibold'>{`${currentFontFamily.class}`}</span>
         </CopyToClipboard>
 
         {outOfBounds && (
@@ -89,4 +89,4 @@ const PositioningHelper = ({ setPositioning }: Props): JSX.Element => {
   )
 }
 
-export default PositioningHelper
+export default FontFamilyHelper

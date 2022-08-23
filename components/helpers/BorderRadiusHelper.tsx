@@ -17,7 +17,7 @@ interface Props {
 }
 
 const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
-  const [value, setValue] = useState(borderRadiuses[5].px)
+  const [value, setValue] = useState(borderRadiuses[4].px)
   const [unit, setUnit] = useState('px')
   const [orientation, setOrientation] = useState({
     left: false,
@@ -27,7 +27,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
   })
   const [orientationOutput, setOrientationOutput] = useState('rounded')
   const [convertedBorderRadius, setConvertedBorderRadius] = useState(
-    borderRadiuses[5]
+    borderRadiuses[4]
   )
 
   const toggleOrientation = (value: OrientationKey): void => {
@@ -35,9 +35,9 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
   }
 
   const reset = () => {
-    setValue(borderRadiuses[5].px)
+    setValue(borderRadiuses[4].px)
     setUnit('px')
-    setConvertedBorderRadius(borderRadiuses[5])
+    setConvertedBorderRadius(borderRadiuses[4])
     setOrientation({
       left: false,
       right: false,
