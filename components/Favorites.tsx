@@ -27,7 +27,7 @@ const Favorites = () => {
           <div className='flex flex-col self-start w-full gap-4'>
             <DeleteButton category='colors' />
             <h2 className='text-xl font-semibold'>Colors</h2>
-            <ul className='grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4'>
+            <ul className='columns-2 sm:columns-3 md:columns-4'>
               {favoritesContext?.favorites
                 ?.sort((a, b) => {
                   if (a.class.toLowerCase() < b.class.toLowerCase()) return -1

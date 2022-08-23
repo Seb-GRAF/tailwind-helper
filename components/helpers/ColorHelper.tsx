@@ -81,6 +81,10 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
   }
 
   useEffect(() => {
+    setClosestColor(nearestColor(value))
+  }, [value])
+
+  useEffect(() => {
     if (setColor)
       setColor(
         `${
@@ -127,17 +131,7 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
                 className={`absolute -top-0 -left-1/3 h-[200%] -m-4 bg-indigo-300 cursor-pointer w-[200%] ring-1 ring-gray-600/10 dark:ring-gray-100/10 opacity-${currentOpacity.class}`}
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const input = document.getElementById(
-                    'shadow-hex-value'
-                  ) as HTMLInputElement
-                  input.value = e.target.value
-                  if (
-                    e.target.value.length === 7 &&
-                    e.target.value[0] === '#'
-                  ) {
-                    setValue(e.target.value)
-                    setClosestColor(nearestColor(value))
-                  }
+                  setValue(e.target.value)
                 }}
               />
 
@@ -168,7 +162,6 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
                     e.target.value[0] === '#'
                   ) {
                     setValue(e.target.value)
-                    setClosestColor(nearestColor(e.target.value))
                   }
                 }}
               />

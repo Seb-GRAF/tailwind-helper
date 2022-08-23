@@ -12,7 +12,7 @@ Tailwindhelper assists you in styling with tailwindcss. You can visualize differ
 
 Simply use the Font size helper and then copy and paste the class into your html element.
 
-# ✅ Current helpers
+# Current helpers
 
 ### Text
 
@@ -34,12 +34,18 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Placement
 - Translate (x/y)
 
+### Grid
+
+- Grid template columns
+- Gris template rows
+- Gap
+
 ### Colors
 
 - Tailwind color list
 - Color picker
 
-# ✍️ Upcoming helpers
+# Upcoming helpers
 
 ### Images
 

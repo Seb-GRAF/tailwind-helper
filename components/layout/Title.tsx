@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-const Home = (): JSX.Element => {
+const Title = (): JSX.Element => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(true)
 
   const toggleDescription = (): void => {
@@ -60,11 +60,11 @@ const Home = (): JSX.Element => {
   }, [])
 
   return (
-    <div className='text-lg text-center text-slate-600 dark:text-slate-400'>
+    <div className='px-4 text-lg text-center text-slate-600 dark:text-slate-400'>
       {/* HIDE TITLE AND DESCRIPTION */}
       <button
         onClick={toggleDescription}
-        className='absolute z-10 text-xl right-2 sm:right-3 top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
+        className='absolute z-50 text-xl right-6 sm:right-7 top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
         <span className='sr-only'>Hide/Show Description</span>
         <span>{isDescriptionOpen ? '⊖' : '⊕'}</span>
       </button>
@@ -131,16 +131,14 @@ const Home = (): JSX.Element => {
         </a>
       </Link>
       {/* DESCRIPTION */}
-      <div className='relative'>
-        <p className='invisible mt-4 mb-12 overflow-hidden title-description sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-8'>
-          You always forget property names? You want to convert a unit to the
-          corresponding tailwind class? Or you are simply learning tailwind and
-          would like a bit of help visualizing classes? Then this tool might
-          come in handyǃ
-        </p>
-      </div>
+      <p className='invisible max-w-3xl mx-auto mt-4 mb-12 overflow-hidden title-description sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-8'>
+        You always forget property names? You want to convert a unit to the
+        corresponding tailwind class? Or you are simply learning tailwind and
+        would like a bit of help visualizing classes? Then this tool might come
+        in handyǃ
+      </p>
     </div>
   )
 }
 
-export default Home
+export default Title

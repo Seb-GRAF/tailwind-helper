@@ -8,8 +8,8 @@ interface Props {
 }
 
 const GridTemplateRows = ({ setGridTemplateRows }: Props): JSX.Element => {
-  const [value, setValue] = useState(0)
-  const [templateRows, setTemplateRows] = useState(gridTemplateRows[0])
+  const [value, setValue] = useState(1)
+  const [templateRows, setTemplateRows] = useState(gridTemplateRows[1])
 
   const reset = () => {
     if (value === 0) return

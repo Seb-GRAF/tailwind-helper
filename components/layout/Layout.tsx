@@ -60,7 +60,7 @@ const Layout = ({ children }: Props): JSX.Element => {
   }, [])
 
   return (
-    <div className='flex flex-col max-w-4xl min-h-screen p-4 pb-8 mx-auto overflow-hidden '>
+    <div className='flex flex-col max-w-4xl min-h-screen pt-4 pb-8 mx-auto'>
       <SEO isDark={isDark} />
       <Header isDark={isDark} toggleThemeHandler={toggleThemeHandler} />
       <main className='relative'>

@@ -43,7 +43,7 @@ const Colors = (): JSX.Element => {
               }`}>
               {/* COLOR SQUARE */}
               <div
-                className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-md ring-1 ring-gray-100/5`}>
+                className={`relative overflow-hidden group h-10 md:h-12 w-full bg-${color.class} rounded-md shadow-inset-outset-md ring-1 dark:ring-slate-700/20 ring-gray-300/20`}>
                 <button
                   className='absolute top-0 left-0 w-full h-full group'
                   onClick={() => copyToClipboard(color.class)}

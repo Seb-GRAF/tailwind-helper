@@ -87,6 +87,10 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
   }
 
   useEffect(() => {
+    setClosestColor(nearestColor(value))
+  }, [value])
+
+  useEffect(() => {
     setCurrentShadow(shadows[shadowIndex])
   }, [shadowIndex])
 
@@ -138,16 +142,11 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
                 className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
                 value={value}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const input = document.getElementById(
-                    'shadow-hex-value'
-                  ) as HTMLInputElement
-                  input.value = e.target.value
                   if (
                     e.target.value.length === 7 &&
                     e.target.value[0] === '#'
                   ) {
                     setValue(e.target.value)
-                    setClosestColor(nearestColor(value))
                   }
                 }}
               />

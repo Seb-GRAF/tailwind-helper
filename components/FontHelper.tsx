@@ -14,7 +14,7 @@ const FontHelper = () => {
   const [textColor, setTextColor] = useState('text-slate-200')
   return (
     <div className='flex flex-col gap-4'>
-      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+      <div className='relative grid grid-cols-1 gap-4 sm:grid-cols-2'>
         <FontSizeHelper setFontSize={setFontSize} />
         <FontWeightHelper setFontWeight={setFontWeight} />
         <LetterSpacingHelper setLetterSpacing={setLetterSpacing} />
