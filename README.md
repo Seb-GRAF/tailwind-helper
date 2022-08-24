@@ -25,7 +25,9 @@ Tailwindhelper assists you in styling with tailwindcss. You can visualize differ
 
 Simply use the Font size helper and then copy and paste the class into your html element.
 
-# Current helpers
+ <br />
+
+# ✅ Current helpers
 
 ### Text
 
@@ -58,7 +60,7 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Tailwind color list
 - Color picker
 
-# Upcoming helpers
+# ✍ Upcoming helpers
 
 ### Images
 
