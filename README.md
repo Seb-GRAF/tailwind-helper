@@ -1,8 +1,21 @@
-![tailwindhelper](https://user-images.githubusercontent.com/95282692/185206088-65cd67c4-d5f9-4f2f-9650-c3475bc8e0ca.jpeg)
+<div align="center">
+ <a href="https://tailwindhelper.com">
+  <img src="https://user-images.githubusercontent.com/95282692/186514182-21972878-c450-498c-8a64-fcc05f1955da.png" width="500">
+ </a>
+</div>
 
-[https://tailwindhelper.com](https://www.tailwindhelper.com)
+<p align="center">
+    A Tailwindcss multi-tool
+    <br />
+    <a href="https://tailwindhelper.com"><strong>Visit the website »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/seb-graf/tailwind-helper/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/seb-graf/tailwind-helper/issues">Request Feature</a>
+</p>
 
-# Tailwind Helper
+# What is it?
 
 Tailwindhelper assists you in styling with tailwindcss. You can visualize different settings, convert values into tailwind classes, figure out the closest colors with hex values and more.
 
