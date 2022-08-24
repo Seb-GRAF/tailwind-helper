@@ -18,16 +18,6 @@ body {
   @apply antialiased;
 }
 
-.nav::after {
-  background: #0f172a;
-  background: linear-gradient(0deg, #ffffff00 0%, #e5e7eb 23%, #e5e7eb 100%);
-}
-
-.dark .nav::after {
-  background: #0f172a;
-  background: linear-gradient(0deg, #ffffff00 0%, #0f172a 23%, #0f172a 100%);
-}
-
 .padding {
   background-image: linear-gradient(
     45deg,
@@ -132,7 +122,7 @@ input[type='range']::-webkit-slider-runnable-track {
 }
 
 input[type='range']::-webkit-slider-thumb {
-  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1.5 dark:bg-indigo-300;
+  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1.5 dark:bg-indigo-300 hover:bg-indigo-600 dark:hover:bg-indigo-200 active:scale-125 transition-transform duration-75;
 }
 
 /******** Firefox styles ********/
@@ -141,5 +131,5 @@ input[type='range']::-moz-range-track {
 }
 
 input[type='range']::-moz-range-thumb {
-  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1.5 dark:bg-indigo-300;
+  @apply relative w-4 h-4 bg-indigo-700 rounded-full shadow-sm appearance-none -top-1.5 dark:bg-indigo-300 hover:bg-indigo-600 dark:hover:bg-indigo-200 active:scale-125 transition-transform duration-75;
 }

@@ -39,7 +39,7 @@ const Favorites = () => {
                     favorite.category === 'colors' && (
                       <li
                         key={favorite.class + index}
-                        className='flex items-center gap-2 w-fit whitespace-nowrap'>
+                        className='flex items-center gap-2 mb-1 w-fit whitespace-nowrap'>
                         <button
                           aria-label='delete item'
                           className='flex items-center justify-center hover:text-pink-500 hover:dark:text-pink-400'

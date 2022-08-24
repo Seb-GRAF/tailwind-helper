@@ -17,7 +17,7 @@ const Title = (): JSX.Element => {
     indexTitle.classList.toggle('-top-14')
     indexTitle.classList.toggle('-translate-x-1/2')
     indexTitle.classList.toggle('left-1/2')
-    indexTitle.classList.toggle('left-0')
+    indexTitle.classList.toggle('left-4')
     indexTitle.classList.toggle('scale-50')
 
     setIsDescriptionOpen((prev) => !prev)
@@ -42,7 +42,7 @@ const Title = (): JSX.Element => {
       indexTitle.classList.add('-top-14')
       indexTitle.classList.remove('-translate-x-1/2')
       indexTitle.classList.remove('left-1/2')
-      indexTitle.classList.add('left-0')
+      indexTitle.classList.add('left-4')
       indexTitle.classList.add('scale-50')
 
       setIsDescriptionOpen(false)
@@ -64,7 +64,7 @@ const Title = (): JSX.Element => {
       {/* HIDE TITLE AND DESCRIPTION */}
       <button
         onClick={toggleDescription}
-        className='absolute z-50 text-xl right-6 sm:right-7 top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
+        className='absolute z-50 text-xl right-[1.6rem] sm:right-7 top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
         <span className='sr-only'>Hide/Show Description</span>
         <span>{isDescriptionOpen ? '⊖' : '⊕'}</span>
       </button>

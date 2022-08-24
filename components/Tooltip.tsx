@@ -26,7 +26,7 @@ const Tooltip = ({
           />
           {/* MESSAGE */}
           <span
-            className={`relative z-40 p-2 text-xs leading-none text-white whitespace-nowrap rounded-md shadow-md shadow-slate-900/20 ${color}`}>
+            className={`relative z-40 p-2 text-xs  text-white whitespace-nowrap rounded-md shadow-md shadow-slate-900/20 ${color}`}>
             {message}
           </span>
         </div>
@@ -46,6 +46,23 @@ const Tooltip = ({
           </span>
           <div
             className={`absolute top-1/2 -right-1 w-3 h-3 -translate-y-1/2 rotate-45 ${color}`}></div>
+        </div>
+      </div>
+    )
+
+  if (side === 'right')
+    return (
+      <div className='relative z-20 flex flex-col items-center group'>
+        <p className='w-full underline-none underline-offset-4 decoration-1 dark:decoration-slate-500 decoration-slate-800 decoration-dotted'>
+          {children}
+        </p>
+        <div className='absolute left-[calc(100%+1rem)] flex-col items-center hidden -translate-y-1/2 pointer-events-none top-1/2 group-hover:flex '>
+          <span
+            className={`w-32 flex-grow relative z-10 p-2 text-xs text-white rounded-md shadow-lg ${color}`}>
+            {message}
+          </span>
+          <div
+            className={`absolute top-1/2 -left-1 w-3 h-3 -translate-y-1/2 rotate-45 ${color}`}></div>
         </div>
       </div>
     )

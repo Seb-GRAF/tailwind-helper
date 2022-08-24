@@ -20,8 +20,8 @@ const Home: NextPage = () => {
   return (
     <div className='relative'>
       {/* CATEGORIES */}
-      <nav className='nav sticky z-30 w-full top-4 after:contents-[""] after:w-full after:h-auto after:-bottom-0 after:absolute after:-top-4 after:-z-20 '>
-        <div className='w-full px-4 pb-3 mb-2 overflow-x-auto sm:mb-4 sm:pb-4'>
+      <nav className='after:backdrop-blur-xl sticky z-30 w-full lg:w-[calc(100%+2rem)] lg:-ml-4 top-4 after:contents-[""] after:w-full after:h-auto after:bottom-2 after:sm:bottom-4 after:absolute after:-top-6 after:-z-20 after:bg-gray-200/70 after:dark:bg-slate-900/70'>
+        <div className='lg:px-4 relative pb-2 mb-3 overflow-x-auto w-[calc(100%-2rem)] sm:mb-4 sm:pb-4 left-4'>
           <div className='relative flex justify-between flex-grow min-w-full gap-2 w-fit sm:justify-start sm:gap-4 after:content-[""] after:absolute after:w-full after:h-px after:bottom-0 after:-z-10 after:left-0 after:bg-slate-300 after:dark:bg-slate-700'>
             <CategoryButton
               selectedCategory={selectedCategory}
