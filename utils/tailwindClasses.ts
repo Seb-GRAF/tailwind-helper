@@ -75,7 +75,7 @@ export type Positioning = {
 
 export type Placement = {
   class: string
-  type: string
+  type?: string
   rem?: number
   px?: number
   percent?: number
