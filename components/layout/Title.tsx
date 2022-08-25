@@ -64,7 +64,7 @@ const Title = (): JSX.Element => {
       {/* HIDE TITLE AND DESCRIPTION */}
       <button
         onClick={toggleDescription}
-        className='absolute z-50 text-xl right-[1.6rem] sm:right-7 top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
+        className='absolute z-50 text-xl right-[1.6rem] sm:right-7 -top-3 sm:top-4 hover:text-indigo-600 hover:dark:text-indigo-400'>
         <span className='sr-only'>Hide/Show Description</span>
         <span>{isDescriptionOpen ? '⊖' : '⊕'}</span>
       </button>
@@ -131,7 +131,7 @@ const Title = (): JSX.Element => {
         </a>
       </Link>
       {/* DESCRIPTION */}
-      <p className='invisible max-w-3xl mx-auto mt-4 mb-12 overflow-hidden title-description sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-8'>
+      <p className='invisible max-w-3xl mx-auto overflow-hidden title-description sm:mt-24 description max-h-44 sm:max-h-18 sm:indent-0 indent-8'>
         You always forget property names? You want to convert a unit to the
         corresponding tailwind class? Or you are simply learning tailwind and
         would like a bit of help visualizing classes? Then this tool might come

@@ -4,18 +4,11 @@
 
 html {
   @apply bg-gray-200 text-slate-700;
-  /* @apply text-slate-700 bg-gradient-to-tl from-gray-100 via-gray-200 to-gray-200; */
-}
-
-body {
-  /* @apply overflow-x-hidden; */
 }
 
 .dark {
-  @apply text-gray-200 bg-slate-900;
-  /* @apply text-gray-200 bg-gradient-to-bl from-slate-800 via-slate-900 to-slate-900; */
+  @apply antialiased text-gray-200 bg-slate-900;
   color-scheme: dark;
-  @apply antialiased;
 }
 
 .padding {
@@ -31,7 +24,6 @@ body {
   );
   background-size: 12px 12px;
 }
-
 .dark .padding {
   background-image: linear-gradient(
     45deg,
@@ -59,7 +51,6 @@ body {
   );
   background-size: 12px 12px;
 }
-
 .dark .striped {
   background-image: linear-gradient(
     45deg,
@@ -73,6 +64,7 @@ body {
   );
   background-size: 12px 12px;
 }
+
 .striped-div {
   @apply border-[#e4e9ff];
   background-image: linear-gradient(
@@ -87,7 +79,6 @@ body {
   );
   background-size: 12px 12px;
 }
-
 .dark .striped-div {
   @apply border-[#2c3665];
   background-image: linear-gradient(
@@ -107,11 +98,13 @@ body {
   direction: rtl;
 }
 
+/* remove spin button on select */
 .placement-input::-webkit-inner-spin-button,
 .placement-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type='range'] {
   @apply h-2 bg-transparent appearance-none cursor-ew-resize;
 }

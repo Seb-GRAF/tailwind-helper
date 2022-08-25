@@ -6,7 +6,7 @@ interface Props {
 
 const Footer = ({ isDark }: Props): JSX.Element => {
   return (
-    <footer className='flex flex-col items-center justify-end flex-grow px-4 mt-16 justify-self-end text-slate-500 dark:text-slate-500'>
+    <footer className='flex flex-col items-center justify-end flex-grow px-4 mt-12 sm:mt-16 justify-self-end text-slate-500 dark:text-slate-500'>
       <div className='flex flex-col flex-wrap items-center justify-center w-full gap-8 pt-8 border-t sm:flex-row sm:gap-10 whitespace-nowrap border-slate-300 dark:border-slate-700'>
         {/* COPYRIGHT AND NAME */}
         <div className='flex items-center gap-2'>

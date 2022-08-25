@@ -61,9 +61,17 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Tailwind color list
 - Color picker
 
+ <br />
+
 # ✍ Upcoming helpers
 
 ### Images
 
 - Filters
 - Object Fit
+
+ <br />
+
+# License
+
+Licensed under the MIT License.

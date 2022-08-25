@@ -8,7 +8,7 @@ interface Props {
 
 const Header = ({ toggleThemeHandler, isDark }: Props): JSX.Element => {
   return (
-    <header className='relative flex items-center justify-between w-full px-4 sm:justify-end border-slate-600'>
+    <header className='relative flex items-center justify-between w-full px-4 mb-4 sm:mb-0 sm:justify-end border-slate-600'>
       {/* TITLE */}
       <Link passHref href='/'>
         <a>

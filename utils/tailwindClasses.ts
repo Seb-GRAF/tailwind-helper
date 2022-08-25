@@ -4,6 +4,7 @@
 
 export type FontFamily = {
   class: string
+  displayName: string
 }
 
 export type FontSize = {
@@ -14,18 +15,21 @@ export type FontSize = {
 
 export type TextDecoration = {
   class: string
+  displayName: string
 }
 
 export type DecorationStyle = {
   class: string
+  displayName: string
 }
+
 export type DecorationThickness = {
   class: string
 }
 
 export type Color = {
   class: string
-  hex: string
+  hex?: string
 }
 
 export type BorderRadius = {
@@ -71,7 +75,7 @@ export type Positioning = {
 
 export type Placement = {
   class: string
-  type?: string
+  type: string
   rem?: number
   px?: number
   percent?: number
@@ -99,14 +103,25 @@ export type Gap = {
   px?: number
 }
 
+export type ObjectFit = {
+  class: string
+  displayName: string
+}
+
+export type Filter = {
+  type: string
+  unit?: string
+  classes: { class: string; value: number }[]
+}
+
 /**
  * TAILWIND CLASSES
  */
 
 export const fontFamilies: FontFamily[] = [
-  { class: 'font-sans' },
-  { class: 'font-serif' },
-  { class: 'font-mono' },
+  { class: 'font-sans', displayName: 'Sans' },
+  { class: 'font-serif', displayName: 'Serif' },
+  { class: 'font-mono', displayName: 'Mono' },
 ]
 
 export const fontSizes: FontSize[] = [
@@ -126,18 +141,18 @@ export const fontSizes: FontSize[] = [
 ]
 
 export const textDecorations: TextDecoration[] = [
-  { class: 'no-underline' },
-  { class: 'underline' },
-  { class: 'overline' },
-  { class: 'line-through' },
+  { class: 'no-underline', displayName: 'No underline' },
+  { class: 'underline', displayName: 'Underline' },
+  { class: 'overline', displayName: 'Overline' },
+  { class: 'line-through', displayName: 'Line through' },
 ]
 
 export const decorationStyles: DecorationStyle[] = [
-  { class: 'decoration-solid' },
-  { class: 'decoration-double' },
-  { class: 'decoration-dotted' },
-  { class: 'decoration-dashed' },
-  { class: 'decoration-wavy' },
+  { class: 'decoration-solid', displayName: 'Solid' },
+  { class: 'decoration-double', displayName: 'Double' },
+  { class: 'decoration-dotted', displayName: 'Dotted' },
+  { class: 'decoration-dashed', displayName: 'Dashed' },
+  { class: 'decoration-wavy', displayName: 'Wavy' },
 ]
 
 export const decorationThicknesses: DecorationThickness[] = [
@@ -688,4 +703,170 @@ export const gaps: Gap[] = [
   { class: '80', rem: 20, px: 320 },
   { class: '96', rem: 24, px: 384 },
   { class: 'px', rem: 0.0625, px: 1 },
+]
+
+export const objectFits: ObjectFit[] = [
+  { class: 'object-fill', displayName: 'Fill' },
+  { class: 'object-contain', displayName: 'Contain' },
+  { class: 'object-cover', displayName: 'Cover' },
+  { class: 'object-scale-down', displayName: 'Scale Down' },
+  { class: 'object-none', displayName: 'None' },
+]
+
+export const filters: Filter[] = [
+  {
+    type: 'blur',
+    unit: 'px',
+    classes: [
+      {
+        class: 'blur-none',
+        value: 0,
+      },
+      {
+        class: 'blur-sm',
+        value: 4,
+      },
+      {
+        class: 'blur',
+        value: 8,
+      },
+      {
+        class: 'blur-md',
+        value: 12,
+      },
+      {
+        class: 'blur-lg',
+        value: 16,
+      },
+      {
+        class: 'blur-xl',
+        value: 24,
+      },
+      {
+        class: 'blur-2xl',
+        value: 40,
+      },
+      {
+        class: 'blur-3xl',
+        value: 64,
+      },
+    ],
+  },
+
+  {
+    type: 'brightness',
+    classes: [
+      { class: 'brightness-0', value: 0 },
+      { class: 'brightness-50', value: 0.5 },
+      { class: 'brightness-75', value: 0.75 },
+      { class: 'brightness-90', value: 0.9 },
+      { class: 'brightness-95', value: 0.95 },
+      { class: 'brightness-100', value: 1 },
+      { class: 'brightness-105', value: 1.05 },
+      { class: 'brightness-110', value: 1.1 },
+      { class: 'brightness-125', value: 1.25 },
+      { class: 'brightness-150', value: 1.5 },
+      { class: 'brightness-200', value: 2 },
+    ],
+  },
+
+  {
+    type: 'contrast',
+    classes: [
+      { class: 'contrast-0', value: 0 },
+      { class: 'contrast-50', value: 0.5 },
+      { class: 'contrast-75', value: 0.75 },
+      { class: 'contrast-100', value: 1 },
+      { class: 'contrast-125', value: 1.25 },
+      { class: 'contrast-150', value: 1.5 },
+      { class: 'contrast-200', value: 2 },
+    ],
+  },
+
+  {
+    type: 'grayscale',
+    unit: '%',
+    classes: [
+      {
+        class: 'grayscale-0',
+        value: 0,
+      },
+      {
+        class: 'grayscale',
+        value: 100,
+      },
+    ],
+  },
+
+  {
+    type: 'hue rotate',
+    unit: 'deg',
+    classes: [
+      {
+        class: 'hue-rotate-0',
+        value: 0,
+      },
+      {
+        class: 'hue-rotate-15',
+        value: 15,
+      },
+      {
+        class: 'hue-rotate-30',
+        value: 30,
+      },
+      {
+        class: 'hue-rotate-60',
+        value: 60,
+      },
+      {
+        class: 'hue-rotate-90',
+        value: 90,
+      },
+      {
+        class: 'hue-rotate-180',
+        value: 180,
+      },
+    ],
+  },
+
+  {
+    type: 'invert',
+    unit: '%',
+    classes: [
+      {
+        class: 'invert-0',
+        value: 0,
+      },
+      {
+        class: 'invert',
+        value: 100,
+      },
+    ],
+  },
+
+  {
+    type: 'saturate',
+    classes: [
+      { class: 'saturate-0', value: 0 },
+      { class: 'saturate-50', value: 0.5 },
+      { class: 'saturate-100', value: 1 },
+      { class: 'saturate-150', value: 1.5 },
+      { class: 'saturate-200', value: 2 },
+    ],
+  },
+
+  {
+    type: 'sepia',
+    unit: '%',
+    classes: [
+      {
+        class: 'sepia-0',
+        value: 0,
+      },
+      {
+        class: 'sepia',
+        value: 100,
+      },
+    ],
+  },
 ]

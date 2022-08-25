@@ -13,7 +13,7 @@ const CategoryButton = ({
 }: Props): JSX.Element => {
   return (
     <button
-      className={`text-xl sm:text-xl md:text-2xl font-medium tracking-normal px-2 md:px-4 pb-3 border-b-2 border-transparent ${
+      className={`text-xl md:text-2xl font-medium tracking-normal px-2 sm:px-0 md:px-2 md:px-auto pb-3 border-b-2 border-transparent ${
         selectedCategory !== name.toLowerCase() &&
         'hover:border-slate-300 dark:hover:border-slate-600'
       } ${

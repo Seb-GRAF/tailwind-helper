@@ -16,7 +16,7 @@ const FontFamilyHelper = ({ setFontFamily }: Props): JSX.Element => {
     if (value === 0) return
 
     setValue(0)
-    setCurrentFontFamily({ class: 'relative' })
+    setCurrentFontFamily(fontFamilies[0])
   }
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const FontFamilyHelper = ({ setFontFamily }: Props): JSX.Element => {
             }}>
             {fontFamilies.map((positioning, index) => (
               <option key={index} value={index}>
-                {positioning.class}
+                {positioning.displayName}
               </option>
             ))}
           </select>

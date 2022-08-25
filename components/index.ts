@@ -35,6 +35,9 @@ export { default as PositionExample } from './PositionExample'
 export { default as GridHelper } from './GridHelper'
 export { default as GridExample } from './GridExample'
 
+export { default as ImageHelper } from './ImageHelper'
+export { default as ImageExample } from './ImageExample'
+
 export { default as Colors } from './Colors'
 
 export { default as Favorites } from './Favorites'

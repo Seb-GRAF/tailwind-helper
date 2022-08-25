@@ -20,3 +20,7 @@ export { default as TranslateYHelper } from './TranslateYHelper'
 export { default as GridTemplateColumnsHelper } from './GridTemplateColumnsHelper'
 export { default as GridTemplateRowsHelper } from './GridTemplateRowsHelper'
 export { default as GapHelper } from './GapHelper'
+
+export { default as ObjectFitHelper } from './ObjectFitHelper'
+export { default as ObjectPositionHelper } from './ObjectPositionHelper'
+export { default as FilterHelper } from './FilterHelper'

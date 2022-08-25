@@ -160,5 +160,36 @@ module.exports = {
       pattern:
         /gap-(0|0.5|1|1.5|2|2.5|3|3.5|4|5|6|8|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96)/,
     },
+    {
+      pattern: /object-(contain|cover|fill|none|scale-down)/,
+    },
+    {
+      pattern:
+        /object-(left|right|top|bottom|center|left-bottom|left-top|right-bottom|right-top)/,
+    },
+    {
+      pattern: /brightness-(0|50|75|90|95|100|105|110|125|150|200)/,
+    },
+    {
+      pattern: /saturate-(0|50|100|150|200)/,
+    },
+    {
+      pattern: /contrast-(0|50|75|100|125|150|200)/,
+    },
+    {
+      pattern: /hue-rotate-(0|15|30|60|90|180)/,
+    },
+    {
+      pattern: /-hue-rotate-(0|15|30|60|90|180)/,
+    },
+    {
+      pattern: /blur-(none|sm|md|lg|xl|2xl|3xl)/,
+    },
+    {
+      pattern: /(grayscale|invert|sepia)-(0)/,
+    },
+    {
+      pattern: /(grayscale|invert|sepia|blur)/,
+    },
   ],
 }

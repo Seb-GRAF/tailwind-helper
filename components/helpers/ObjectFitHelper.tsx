@@ -1,39 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard, OutOfBounds } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
-import { textDecorations } from '../../utils/tailwindClasses'
+import { objectFits } from '../../utils/tailwindClasses'
 
 interface Props {
-  setTextDecoration: (value: string) => void
+  setObjectFit: (value: string) => void
 }
 
-const TextDecorationHelper = ({ setTextDecoration }: Props): JSX.Element => {
-  const [value, setValue] = useState(0)
-  const [currentFontDecoration, setCurrentTextDecoration] = useState(
-    textDecorations[0]
-  )
-  const [outOfBounds, setOutOfBounds] = useState<'def' | null>(null)
+const ObjectFitHelper = ({ setObjectFit }: Props): JSX.Element => {
+  const [value, setValue] = useState(1)
+  const [objectFit, setCurrentObjectFit] = useState(objectFits[1])
 
   const reset = () => {
-    if (value === 0) return
+    if (value === 1) return
 
-    setValue(0)
-    setCurrentTextDecoration(textDecorations[0])
+    setValue(1)
+    setCurrentObjectFit(objectFits[1])
   }
 
   useEffect(() => {
-    setCurrentTextDecoration(textDecorations[value])
+    setCurrentObjectFit(objectFits[value])
   }, [value])
 
   useEffect(() => {
-    if (currentFontDecoration?.class === 'no-underline') {
-      setOutOfBounds('def')
-    } else {
-      setOutOfBounds(null)
-    }
-
-    setTextDecoration(currentFontDecoration!.class)
-  }, [currentFontDecoration, setTextDecoration])
+    setObjectFit(objectFit!.class)
+  }, [objectFit, setObjectFit])
 
   return (
     <WidgetWrapper>
@@ -42,7 +33,7 @@ const TextDecorationHelper = ({ setTextDecoration }: Props): JSX.Element => {
         onClick={reset}>
         Reset
       </button>
-      <WidgetConverter helperName='Text Decoration'>
+      <WidgetConverter helperName='Object fit'>
         <div className='relative'>
           {/* CHEVRON DOWN ICON OVERRIDE */}
           <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none right-3 top-1/2'>
@@ -60,15 +51,15 @@ const TextDecorationHelper = ({ setTextDecoration }: Props): JSX.Element => {
             </svg>
           </div>
 
-          {/* FONT FAMILY SELECT */}
+          {/* OBJECT FIT SELECT */}
           <select
-            name='Text decoration'
+            name='object fit'
             className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
             value={value}
             onChange={(e) => {
               setValue(parseInt(e.target.value))
             }}>
-            {textDecorations.map((positioning, index) => (
+            {objectFits.map((positioning, index) => (
               <option key={index} value={index}>
                 {positioning.displayName}
               </option>
@@ -77,18 +68,12 @@ const TextDecorationHelper = ({ setTextDecoration }: Props): JSX.Element => {
         </div>
       </WidgetConverter>
       <WidgetResult>
-        <CopyToClipboard valueToCopy={currentFontDecoration.class.toString()}>
-          <span className='font-semibold'>{`${currentFontDecoration.class}`}</span>
+        <CopyToClipboard valueToCopy={objectFit.class.toString()}>
+          <span className='font-semibold'>{`${objectFit.class}`}</span>
         </CopyToClipboard>
-
-        {outOfBounds && (
-          <div className='absolute bottom-0 left-0 w-full text-center'>
-            <OutOfBounds bounds={outOfBounds} />
-          </div>
-        )}
       </WidgetResult>
     </WidgetWrapper>
   )
 }
 
-export default TextDecorationHelper
+export default ObjectFitHelper

@@ -30,7 +30,7 @@ const Colors = (): JSX.Element => {
   }
 
   return (
-    <section className='mx-auto space-y-4'>
+    <section className='mx-auto -mb-8 space-y-4 sm:mb-auto'>
       <ColorHelper />
       <div className='relative grid grid-cols-5 gap-2 p-0 pt-4 pb-0 md:pt-8 md:shadow-md dark:shadow-none md:bg-white md:p-8 md:pb-0 md:gap-3 min-w-fit md:dark:shadow-inset-outset-md md:rounded-xl md:dark:bg-slate-800 shadow-gray-400/30 md:dark:ring-1 dark:ring-inset dark:ring-slate-700/50'>
         {colors.map((color, index) => {

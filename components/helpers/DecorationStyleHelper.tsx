@@ -21,7 +21,7 @@ const DecorationStyleHelper = ({
     decorationStyles[0]
   )
   const [currentDecorationThickness, setCurrentDecorationThickness] = useState(
-    decorationStyles[0]
+    decorationThicknesses[0]
   )
 
   const reset = () => {
@@ -76,7 +76,7 @@ const DecorationStyleHelper = ({
             </svg>
           </div>
 
-          {/* FONT FAMILY SELECT */}
+          {/* DECORATION STYLE SELECT */}
           <select
             name='Text decoration'
             className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
@@ -86,7 +86,7 @@ const DecorationStyleHelper = ({
             }}>
             {decorationStyles.map((positioning, index) => (
               <option key={index} value={index}>
-                {positioning.class}
+                {positioning.displayName}
               </option>
             ))}
           </select>
