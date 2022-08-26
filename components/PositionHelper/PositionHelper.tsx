@@ -4,8 +4,8 @@ import {
   PlacementHelper,
   TranslateXHelper,
   TranslateYHelper,
-} from './helpers'
-import { PositionExample } from '.'
+  PositionExample,
+} from '.'
 
 const PositionHelper = () => {
   const [positioning, setPositioning] = useState('')

@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react'
-import { colors } from '../utils/tailwindClasses'
-import { CopyToClipboard } from '.'
-import { ColorHelper } from './helpers'
-import { FavoritesCtx } from '../contexts/FavoritesProvider'
-import { FavoriteButton } from '.'
+import { colors } from '../../utils/tailwindClasses'
+import { CopyToClipboard } from '..'
+import { ColorHelper } from '.'
+import { FavoritesCtx } from '../../contexts/FavoritesProvider'
+import { FavoriteButton } from '..'
 
 const Colors = (): JSX.Element => {
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState(false)

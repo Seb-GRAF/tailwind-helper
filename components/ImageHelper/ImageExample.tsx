@@ -1,22 +1,21 @@
-import CopyToClipboard from './CopyToClipboard'
+import CopyToClipboard from '../CopyToClipboard'
 import { useState, useEffect, useContext } from 'react'
-import { Tooltip, FavoriteButton } from '.'
-import { FavoritesCtx } from '../contexts/FavoritesProvider'
+import { Tooltip, FavoriteButton } from '..'
+import { FavoritesCtx } from '../../contexts/FavoritesProvider'
 
 interface Props {
-  gridTemplateColumns: string
-  gridTemplateRows: string
-  gap: string
+  objectFit: string
+  objectPosition: string
+  filter: string
 }
 
-const GridExample = ({
-  gridTemplateColumns,
-  gridTemplateRows,
-  gap,
+const ImageExample = ({
+  objectFit,
+  objectPosition,
+  filter,
 }: Props): JSX.Element => {
   const [pinned, setPinned] = useState(false)
 
-  const [divAmount, setDivAmount] = useState([...Array(1)])
   const [toPrint, setToPrint] = useState('')
   const [customName, setCustomName] = useState('')
   const [showInput, setShowInput] = useState(false)
@@ -25,13 +24,11 @@ const GridExample = ({
 
   useEffect(() => {
     setToPrint(
-      `grid${
-        gridTemplateColumns !== 'grid-cols-1' ? ` ${gridTemplateColumns}` : ''
-      }${gridTemplateRows !== 'grid-rows-1' ? ` ${gridTemplateRows}` : ''}${
-        gap !== 'gap-0' ? ` ${gap}` : ''
-      }`
+      `${objectFit !== 'object-none' ? `${objectFit}` : ''}${
+        objectPosition !== 'object-center' ? ` ${objectPosition}` : ''
+      }${filter !== 'blur-none' ? ` ${filter}` : ''}`
     )
-  }, [gridTemplateColumns, gridTemplateRows, gap])
+  }, [objectFit, objectPosition, filter])
 
   useEffect(() => {
     if (favoritesContext.isAlreadyFavorite(toPrint) && customName !== '') {
@@ -42,17 +39,6 @@ const GridExample = ({
       })
     }
   }, [customName, favoritesContext, toPrint])
-
-  useEffect(() => {
-    let columns = gridTemplateColumns.split('-')
-    let rows = gridTemplateRows.split('-')
-
-    let colAmount = Number(columns[2])
-    let rowAmount = Number(rows[2])
-
-    if (!isNaN(colAmount) && !isNaN(rowAmount))
-      setDivAmount([...Array(colAmount * rowAmount)])
-  }, [gridTemplateColumns, gridTemplateRows])
 
   return (
     <div
@@ -122,12 +108,12 @@ const GridExample = ({
           />
           <FavoriteButton
             favoriteClass={toPrint}
-            category='grids'
+            category='images'
             favoriteName={
               customName.length > 0
                 ? customName
-                : `Grid ${
-                    favoritesContext.countDefaultNames('grids', 'Grid') + 1
+                : `Image ${
+                    favoritesContext.countDefaultNames('images', 'Image') + 1
                   }`
             }
           />
@@ -143,38 +129,43 @@ const GridExample = ({
       {/* EXAMPLE */}
       <div className={`flex flex-col w-full min-h-96`}>
         <div
-          className={`rounded-xl p-2 overflow-x-hidden grid ${gridTemplateColumns} ${gridTemplateRows} ${gap} w-full h-auto striped`}>
-          {divAmount.map((e, i) => (
-            <div
-              key={`grid-div-${i}`}
-              className='w-full bg-indigo-300 rounded-md dark:bg-indigo-700 h-14 shadow-inset-outset-md'
+          className={`w-full h-full px-1 pt-1 sm:px-2 sm:pt-2 flex justify-center`}>
+          <div className='w-full h-72 max-h-96 resize min-h-[5rem] min-w-[5rem] striped-div rounded-lg overflow-hidden max-w-full border-2'>
+            <img
+              className={`${objectFit} ${objectPosition} ${filter} w-full h-full`}
+              src='/city.jpg'
+              alt='japanese city with view of mount Fuji'
             />
-          ))}
+          </div>
         </div>
 
         {/* VALUE TO PRINT */}
         <div className='flex items-end justify-between mx-3 my-2'>
           <CopyToClipboard valueToCopy={toPrint}>
-            <div className='flex flex-wrap gap-2 font-semibold'>
-              <span className='whitespace-nowrap'>grid </span>
-              {gridTemplateColumns !== 'grid-cols-1' && (
-                <span className='whitespace-nowrap'>{gridTemplateColumns}</span>
-              )}
-              {gridTemplateRows !== 'grid-rows-1' && (
-                <span className='whitespace-nowrap'>{gridTemplateRows}</span>
-              )}
-              {gap !== 'gap-0' && (
-                <span className='whitespace-nowrap'>{gap}</span>
-              )}
-              <svg
-                width='24'
-                height='24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='1.5'>
-                <path d='M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8'></path>
-              </svg>
-            </div>
+            {toPrint === '' ? (
+              <p className='font-semibold'>This is the default value</p>
+            ) : (
+              <div className='flex flex-wrap gap-2 font-semibold'>
+                {objectFit !== 'object-none' && (
+                  <span className='whitespace-nowrap'>{objectFit}</span>
+                )}
+                {objectPosition !== 'object-center' && (
+                  <span className='whitespace-nowrap'>{objectPosition}</span>
+                )}
+                {filter !== 'blur-none' && (
+                  <span className='whitespace-nowrap'>{filter}</span>
+                )}
+
+                <svg
+                  width='24'
+                  height='24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='1.5'>
+                  <path d='M8 16c0 1.886 0 2.828.586 3.414C9.172 20 10.114 20 12 20h4c1.886 0 2.828 0 3.414-.586C20 18.828 20 17.886 20 16v-4c0-1.886 0-2.828-.586-3.414C18.828 8 17.886 8 16 8m-8 8h4c1.886 0 2.828 0 3.414-.586C16 14.828 16 13.886 16 12V8m-8 8c-1.886 0-2.828 0-3.414-.586C4 14.828 4 13.886 4 12V8c0-1.886 0-2.828.586-3.414C5.172 4 6.114 4 8 4h4c1.886 0 2.828 0 3.414.586C16 5.172 16 6.114 16 8'></path>
+                </svg>
+              </div>
+            )}
           </CopyToClipboard>
           <Tooltip
             message='Example of your settings'
@@ -188,4 +179,4 @@ const GridExample = ({
   )
 }
 
-export default GridExample
+export default ImageExample

@@ -1,7 +1,7 @@
-import CopyToClipboard from './CopyToClipboard'
+import CopyToClipboard from '../CopyToClipboard'
 import { useState, useEffect, useContext } from 'react'
-import { Tooltip, FavoriteButton } from '.'
-import { FavoritesCtx } from '../contexts/FavoritesProvider'
+import { Tooltip, FavoriteButton } from '..'
+import { FavoritesCtx } from '../../contexts/FavoritesProvider'
 
 interface Props {
   positioning: string

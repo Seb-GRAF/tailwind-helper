@@ -56,17 +56,6 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
     )
   }
 
-  const nearestColor = (colorHex: string): any | Color => {
-    return colors.reduce(
-      (a, b) =>
-        (a =
-          distance(hexToRgb(colorHex), hexToRgb(b.hex)) < a[0]
-            ? [distance(hexToRgb(colorHex), hexToRgb(b.hex)), b]
-            : a),
-      [Number.POSITIVE_INFINITY, colors[0]]
-    )[1]
-  }
-
   const isTooDark = (color: string): boolean => {
     const hex = color.substring(1)
     const rgb = parseInt(hex, 16)
@@ -81,27 +70,29 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
   }
 
   useEffect(() => {
+    const nearestColor = (colorHex: string): any | Color => {
+      return colors.reduce(
+        (a, b) =>
+          (a =
+            distance(hexToRgb(colorHex), hexToRgb(b.hex)) < a[0]
+              ? [distance(hexToRgb(colorHex), hexToRgb(b.hex)), b]
+              : a),
+        [Number.POSITIVE_INFINITY, colors[0]]
+      )[1]
+    }
     setClosestColor(nearestColor(value))
   }, [value])
 
   useEffect(() => {
     if (setColor)
       setColor(
-        `${
-          closestColor.class !== 'black' || currentOpacity.class !== '10'
-            ? `${closestColor.class}${
-                currentOpacity.class !== '100' ? `/${currentOpacity.class}` : ''
-              }`
-            : ''
+        `${closestColor.class}${
+          currentOpacity.class !== '100' ? `/${currentOpacity.class}` : ''
         }`
       )
     setCurrentColor(
-      `${
-        closestColor.class !== 'black' || currentOpacity.class !== '10'
-          ? `${closestColor.class}${
-              currentOpacity.class !== '100' ? `/${currentOpacity.class}` : ''
-            }`
-          : ''
+      `${closestColor.class}${
+        currentOpacity.class !== '100' ? `/${currentOpacity.class}` : ''
       }`
     )
   }, [closestColor, setColor, currentOpacity])

@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {
-  CopyToClipboard,
-  StyledRange,
-  FavoriteButton,
-  StyledInput,
-  Tooltip,
-} from '..'
+import { CopyToClipboard, StyledRange, FavoriteButton } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 import { shadows, colors, Color, opacities } from '../../utils/tailwindClasses'
 

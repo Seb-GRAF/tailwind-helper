@@ -3,8 +3,8 @@ import {
   GridTemplateColumnsHelper,
   GridTemplateRowsHelper,
   GapHelper,
-} from './helpers'
-import { GridExample } from '.'
+  GridExample,
+} from '.'
 
 const GridHelper = () => {
   const [gridTemplateColumns, setGridTemplateColumns] = useState('')

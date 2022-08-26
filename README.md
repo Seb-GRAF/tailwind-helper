@@ -56,19 +56,16 @@ Simply use the Font size helper and then copy and paste the class into your html
 - Gris template rows
 - Gap
 
+### Images
+
+- Object Fit
+- Object Position
+- Filters
+
 ### Colors
 
 - Tailwind color list
 - Color picker
-
- <br />
-
-# ✍ Upcoming helpers
-
-### Images
-
-- Filters
-- Object Fit
 
  <br />
 

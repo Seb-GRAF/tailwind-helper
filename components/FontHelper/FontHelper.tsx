@@ -6,9 +6,9 @@ import {
   LetterSpacingHelper,
   TextDecorationHelper,
   DecorationStyleHelper,
-  ColorHelper,
-} from './helpers'
-import { FontExample } from '.'
+  FontExample,
+} from '.'
+import { ColorHelper } from '../Colors'
 
 const FontHelper = () => {
   const [fontFamily, setFontFamily] = useState('')

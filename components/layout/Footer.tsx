@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 interface Props {
   isDark: boolean
 }
@@ -9,7 +7,7 @@ const Footer = ({ isDark }: Props): JSX.Element => {
     <footer className='flex flex-col items-center justify-end flex-grow px-4 mt-12 sm:mt-16 justify-self-end text-slate-500 dark:text-slate-500'>
       <div className='flex flex-col flex-wrap items-center justify-center w-full gap-8 pt-8 border-t sm:flex-row sm:gap-10 whitespace-nowrap border-slate-300 dark:border-slate-700'>
         {/* COPYRIGHT AND NAME */}
-        <div className='flex items-center gap-2'>
+        <div className='flex flex-wrap items-center justify-center gap-2'>
           <div>&copy; {new Date().getFullYear()} |</div>
           Made with{' '}
           <svg

@@ -1,6 +1,10 @@
 import { useState } from 'react'
-import { ObjectFitHelper, ObjectPositionHelper, FilterHelper } from './helpers'
-import { ImageExample } from '.'
+import {
+  ObjectFitHelper,
+  ObjectPositionHelper,
+  FilterHelper,
+  ImageExample,
+} from '.'
 
 const ImageHelper = () => {
   const [objectFit, setObjectFit] = useState('')

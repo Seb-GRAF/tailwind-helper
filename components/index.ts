@@ -1,4 +1,3 @@
-import { Favorite } from '../contexts/FavoritesProvider'
 export {
   WidgetConverter,
   WidgetResult,
@@ -8,13 +7,6 @@ export {
   Layout,
 } from './layout'
 
-export { FontSizeHelper } from './helpers'
-export { FontWeightHelper } from './helpers'
-export { LetterSpacingHelper } from './helpers'
-export { MarginHelper } from './helpers'
-export { PaddingHelper } from './helpers'
-export { ShadowHelper } from './helpers'
-
 export { default as Tooltip } from './Tooltip'
 export { default as CopyToClipboard } from './CopyToClipboard'
 export { default as OutOfBounds } from './OutOfBounds'
@@ -23,22 +15,12 @@ export { default as StyledInput } from './StyledInput'
 export { default as CategoryButton } from './CategoryButton'
 export { default as OrientationButton } from './OrientationButton'
 
-export { default as FontHelper } from './FontHelper'
-export { default as FontExample } from './FontExample'
-
-export { default as LayoutHelper } from './LayoutHelper'
-export { default as LayoutExample } from './LayoutExample'
-
-export { default as PositionHelper } from './PositionHelper'
-export { default as PositionExample } from './PositionExample'
-
-export { default as GridHelper } from './GridHelper'
-export { default as GridExample } from './GridExample'
-
-export { default as ImageHelper } from './ImageHelper'
-export { default as ImageExample } from './ImageExample'
-
-export { default as Colors } from './Colors'
+export { FontHelper } from './FontHelper'
+export { LayoutHelper } from './LayoutHelper'
+export { PositionHelper } from './PositionHelper'
+export { GridHelper } from './GridHelper'
+export { ImageHelper } from './ImageHelper'
+export { Colors } from './Colors'
 
 export { default as Favorites } from './Favorites'
 export { default as FavoriteButton } from './FavoriteButton'
