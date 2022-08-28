@@ -1,7 +1,6 @@
 import CopyToClipboard from '../CopyToClipboard'
-import { useState, useEffect, useContext } from 'react'
-import { Tooltip, FavoriteButton } from '..'
-import { FavoritesCtx } from '../../contexts/FavoritesProvider'
+import { useState, useEffect } from 'react'
+import { Tooltip, PinButton, FavoriteInput } from '..'
 
 interface Props {
   fontFamily: string
@@ -26,10 +25,6 @@ const FontSizeExample = ({
 }: Props): JSX.Element => {
   const [pinned, setPinned] = useState(false)
   const [toPrint, setToPrint] = useState('')
-  const [customName, setCustomName] = useState('')
-  const [showInput, setShowInput] = useState(false)
-
-  const favoritesContext = useContext(FavoritesCtx)
 
   // removes default styles from value to print
   useEffect(() => {
@@ -57,16 +52,6 @@ const FontSizeExample = ({
     decorationThickness,
   ])
 
-  useEffect(() => {
-    if (favoritesContext.isAlreadyFavorite(toPrint) && customName !== '') {
-      favoritesContext.updateFavorite({
-        class: toPrint,
-        name: customName,
-        category: 'fonts',
-      })
-    }
-  }, [customName, toPrint, favoritesContext])
-
   return (
     <div
       className={`${
@@ -75,80 +60,10 @@ const FontSizeExample = ({
           : 'relative dark:ring-1 dark:ring-inset dark:ring-slate-700/50'
       } z-20 bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-outset-md shadow-gray-400/30`}>
       {/* PINNED */}
-      <button
-        className='absolute top-2 left-2'
-        onClick={() => setPinned((prev) => !prev)}>
-        <Tooltip message={pinned ? 'Unpin' : 'Pin to bottom'} side='right'>
-          {pinned ? (
-            <svg
-              className='w-5 h-5'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'
-              />
-            </svg>
-          ) : (
-            <svg
-              className='w-5 h-5'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z'
-              />
-            </svg>
-          )}
-        </Tooltip>
-      </button>
+      <PinButton pinned={pinned} setPinned={setPinned} />
       {/* FAVORITE  */}
-      {!showInput && (
-        <button
-          className='absolute z-20 text-xl right-2 top-1'
-          onClick={() => setShowInput(true)}>
-          {favoritesContext?.isAlreadyFavorite(toPrint) ? '★' : '☆'}
-        </button>
-      )}
-      {showInput && (
-        <div className='absolute top-0 right-0 z-10 w-10'>
-          <input
-            type='text'
-            placeholder='Custom name'
-            defaultValue={
-              favoritesContext?.isAlreadyFavorite(toPrint)
-                ? favoritesContext?.favorites?.find((e) => e.class === toPrint)
-                    ?.name
-                : ''
-            }
-            className='absolute z-10 px-2 pr-6 bg-gray-100 rounded-md shadow-md top-1 right-1 w-15 h-7 dark:bg-slate-700 ring-1 ring-gray-200/20 shadow-slate-900/20'
-            onChange={(e) => setCustomName(e.target.value)}
-          />
-          <FavoriteButton
-            favoriteClass={toPrint}
-            category='fonts'
-            favoriteName={
-              customName.length > 0
-                ? customName
-                : `Font ${favoritesContext.countFavorite('fonts') + 1}`
-            }
-          />
-          <div
-            className='fixed top-0 right-0 w-full h-full'
-            onClick={() => {
-              setShowInput(false)
-              setCustomName('')
-            }}></div>
-        </div>
-      )}
+      <FavoriteInput toPrint={toPrint} category='fonts' defaultName='Font' />
+
       {/* TEXT INPUT */}
       <input
         id='text-example'

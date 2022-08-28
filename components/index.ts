@@ -23,5 +23,8 @@ export { ImageHelper } from './ImageHelper'
 export { Colors } from './Colors'
 
 export { default as Favorites } from './Favorites'
+export { default as FavoriteCategory } from './FavoriteCategory'
 export { default as FavoriteButton } from './FavoriteButton'
+export { default as FavoriteInput } from './FavoriteInput'
 export { default as DeleteButton } from './DeleteButton'
+export { default as PinButton } from './PinButton'
