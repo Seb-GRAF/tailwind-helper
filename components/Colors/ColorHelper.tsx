@@ -116,15 +116,17 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
           {/* COLOR  */}
           <div className='flex flex-col gap-2'>
             <div className='relative overflow-hidden rounded-md h-14 w-44 ring-1 ring-inset ring-gray-300/50 dark:ring-slate-700/50'>
-              <input
-                type='color'
-                name='color'
-                className={`absolute -top-0 -left-1/3 h-[200%] -m-4 bg-indigo-300 cursor-pointer w-[200%] ring-1 ring-gray-600/10 dark:ring-gray-100/10 opacity-${currentOpacity.class}`}
-                value={value}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setValue(e.target.value)
-                }}
-              />
+              <label className='w-full'>
+                <input
+                  type='color'
+                  className={`absolute -top-0 -left-1/3 h-[200%] -m-4 bg-indigo-300 cursor-pointer w-[200%] ring-1 ring-gray-600/10 dark:ring-gray-100/10 opacity-${currentOpacity.class}`}
+                  value={value}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setValue(e.target.value)
+                  }}
+                />
+                <span className='sr-only'>Color picker</span>
+              </label>
 
               {/* ADD/REMOVE FAVORITE */}
               <FavoriteButton
@@ -167,7 +169,6 @@ const ColorHelper = ({ setColor }: Props): JSX.Element => {
                 max={opacities.length - 1}
                 value={opacityIndex || 0}
                 setValue={setOpacityIndex}
-                absolute={true}
               />
             </div>
           </div>

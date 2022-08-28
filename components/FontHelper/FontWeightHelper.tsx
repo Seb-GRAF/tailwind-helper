@@ -53,7 +53,7 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
       </button>
       <WidgetConverter helperName='Font Weight'>
         <StyledInput
-          name='fontWeight'
+          name='Font weight'
           type='number'
           step={100}
           min={100}

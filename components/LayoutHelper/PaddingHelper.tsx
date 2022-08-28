@@ -164,7 +164,7 @@ const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
           </button>
           <StyledInput
             type='number'
-            name='padding'
+            name='Padding'
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={0}
             max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}

@@ -130,20 +130,23 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
           {/* COLOR  */}
           <div className='flex flex-col gap-2'>
             <div className='relative overflow-hidden rounded-md h-14 w-44'>
-              <input
-                type='color'
-                name='color'
-                className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
-                value={value}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  if (
-                    e.target.value.length === 7 &&
-                    e.target.value[0] === '#'
-                  ) {
-                    setValue(e.target.value)
-                  }
-                }}
-              />
+              <label className='w-full'>
+                <input
+                  type='color'
+                  name='color'
+                  className='absolute w-[200%] h-[200%] -m-4 bg-indigo-300 cursor-pointer top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+                  value={value}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    if (
+                      e.target.value.length === 7 &&
+                      e.target.value[0] === '#'
+                    ) {
+                      setValue(e.target.value)
+                    }
+                  }}
+                />
+                <span className='sr-only'>Color picker</span>
+              </label>
 
               {/* ADD/REMOVE FAVORITE */}
               <FavoriteButton
@@ -159,23 +162,26 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
 
             {/* HEX INPUT AND OPACITY SLIDER */}
             <div className='relative'>
-              <input
-                type='text'
-                defaultValue={value}
-                id='shadow-hex-value'
-                placeholder='#000000'
-                maxLength={7}
-                className='p-1 text-center rounded-md pr-14 w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
-                onChange={(e) => {
-                  if (
-                    e.target.value.length === 7 &&
-                    e.target.value[0] === '#'
-                  ) {
-                    setValue(e.target.value)
-                    setClosestColor(nearestColor(e.target.value))
-                  }
-                }}
-              />
+              <label className='w-full'>
+                <input
+                  type='text'
+                  defaultValue={value}
+                  id='shadow-hex-value'
+                  placeholder='#000000'
+                  maxLength={7}
+                  className='p-1 text-center rounded-md pr-14 w-44 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+                  onChange={(e) => {
+                    if (
+                      e.target.value.length === 7 &&
+                      e.target.value[0] === '#'
+                    ) {
+                      setValue(e.target.value)
+                      setClosestColor(nearestColor(e.target.value))
+                    }
+                  }}
+                />
+                <span className='sr-only'>Hex value</span>
+              </label>
               <span className='absolute text-indigo-700 -translate-y-1/2 dark:text-indigo-300 top-1/2 right-7'>
                 {opacities[opacityIndex].class}%
               </span>
@@ -187,7 +193,6 @@ const ShadowHelper = ({ setShadow }: Props): JSX.Element => {
                 max={opacities.length - 1}
                 value={opacityIndex || 0}
                 setValue={setOpacityIndex}
-                absolute={true}
               />
             </div>
           </div>

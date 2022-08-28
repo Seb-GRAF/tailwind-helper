@@ -23,7 +23,6 @@ const GridTemplateRows = ({ setGridTemplateRows }: Props): JSX.Element => {
   }, [value])
 
   useEffect(() => {
-    // sets parent letter spacing to converted size
     setGridTemplateRows(templateRows.class)
   }, [setGridTemplateRows, templateRows])
 
@@ -36,17 +35,20 @@ const GridTemplateRows = ({ setGridTemplateRows }: Props): JSX.Element => {
       </button>
       <WidgetConverter helperName='Grid Rows'>
         <div className='relative w-full'>
-          <input
-            readOnly={true}
-            className='w-full p-4 text-indigo-700 rounded-md cursor-not-allowed bg-slate-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis '
-            type='text'
-            step={1}
-            name='grid-template-rows'
-            min={0}
-            max={gridTemplateRows.length - 1}
-            value={`repeat(${value + 1}, minmax(0, 1fr)`}
-            onChange={(e) => setValue(Number(e.target.value))}
-          />
+          <label className='w-full'>
+            <input
+              readOnly={true}
+              className='w-full p-4 text-indigo-700 rounded-md cursor-not-allowed bg-slate-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis '
+              type='text'
+              step={1}
+              name='grid-template-rows'
+              min={0}
+              max={gridTemplateRows.length - 1}
+              value={`repeat(${value + 1}, minmax(0, 1fr)`}
+              onChange={(e) => setValue(Number(e.target.value))}
+            />
+            <span className='sr-only'>Grid rows</span>
+          </label>
         </div>
         <StyledRange
           step={1}

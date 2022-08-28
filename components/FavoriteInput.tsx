@@ -37,6 +37,11 @@ const FavoriteInput = ({ toPrint, category, defaultName }: Props) => {
         <button
           className='absolute z-20 text-xl right-2 top-1'
           onClick={() => setShowFavoriteInput(true)}>
+          <span className='sr-only'>
+            {favoritesContext?.isAlreadyFavorite(toPrint)
+              ? 'Remove from favorites'
+              : 'Add to favorites'}
+          </span>
           {favoritesContext?.isAlreadyFavorite(toPrint) ? '★' : '☆'}
         </button>
       )}
@@ -70,7 +75,8 @@ const FavoriteInput = ({ toPrint, category, defaultName }: Props) => {
             onClick={() => {
               setShowFavoriteInput(false)
               setCustomName('')
-            }}></div>
+            }}
+          />
         </div>
       )}
     </>

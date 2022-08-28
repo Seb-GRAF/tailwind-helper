@@ -112,7 +112,6 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
   }, [value, unit])
 
   useEffect(() => {
-    // sets parent font size to converted size
     setBorderRadius(`${orientationOutput}${convertedBorderRadius!.class}`)
   }, [convertedBorderRadius, setBorderRadius, orientationOutput])
 
@@ -160,7 +159,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
         <div className='relative w-full'>
           <StyledInput
             type='number'
-            name='margin'
+            name='Border Radius'
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={0}
             max={unit === 'px' ? 32 : unit === 'rem' ? 2 : 0}

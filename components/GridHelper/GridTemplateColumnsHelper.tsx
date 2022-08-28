@@ -25,7 +25,6 @@ const GridTemplateColumns = ({
   }, [value])
 
   useEffect(() => {
-    // sets parent letter spacing to converted size
     setGridTemplateColumns(templateColumns.class)
   }, [setGridTemplateColumns, templateColumns])
 
@@ -38,17 +37,19 @@ const GridTemplateColumns = ({
       </button>
       <WidgetConverter helperName='Grid Columns'>
         <div className='relative w-full'>
-          <input
-            readOnly={true}
-            className='w-full p-4 text-indigo-700 rounded-md cursor-not-allowed bg-slate-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis '
-            type='text'
-            step={1}
-            name='grid-template-columns'
-            min={0}
-            max={gridTemplateColumns.length - 1}
-            value={`repeat(${value + 1}, minmax(0, 1fr)`}
-            onChange={(e) => setValue(Number(e.target.value))}
-          />
+          <label className='w-full'>
+            <input
+              readOnly={true}
+              className='w-full p-4 text-indigo-700 rounded-md cursor-not-allowed bg-slate-100 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis '
+              type='text'
+              step={1}
+              min={0}
+              max={gridTemplateColumns.length - 1}
+              value={`repeat(${value + 1}, minmax(0, 1fr)`}
+              onChange={(e) => setValue(Number(e.target.value))}
+            />
+            <span className='sr-only'>Grid columns</span>
+          </label>
         </div>
         <StyledRange
           step={1}

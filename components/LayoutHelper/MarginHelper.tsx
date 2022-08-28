@@ -98,13 +98,11 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
     }
   }, [orientation, orientationOutput])
 
-  // updates converted size on value and unit change
   useEffect(() => {
     setConvertedMargin(getClosestItem(margins, value, unit))
   }, [value, unit])
 
   useEffect(() => {
-    // sets parent font size to converted size
     setMargin(
       `${isNegative ? '-' : ''}${orientationOutput}-${convertedMargin!.class}`
     )
@@ -164,7 +162,7 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
           </button>
           <StyledInput
             type='number'
-            name='margin'
+            name='Margin'
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={0}
             max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}

@@ -40,6 +40,9 @@ const FavoriteButton = ({
     <button
       className={`absolute z-10 text-xl pointer-events-auto top-1 right-2 ${color}`}
       onClick={onClick}>
+      <span className='sr-only'>
+        {isFavorite ? 'remove from favorites' : 'add to favorites'}
+      </span>
       {isFavorite ? '★' : '☆'}
     </button>
   )

@@ -55,7 +55,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
           <StyledInput
             type='number'
             step={0.025}
-            name='fontSize'
+            name='Letter spacing'
             min={-0.05}
             max={0.1}
             value={value || 0}

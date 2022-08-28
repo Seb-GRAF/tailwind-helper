@@ -5,7 +5,6 @@ interface Props {
   min: number
   max: number
   value: number
-  absolute?: boolean
   setValue: (value: number) => void
 }
 
@@ -15,20 +14,22 @@ const StyledRange = ({
   max,
   value,
   setValue,
-  absolute = true,
 }: Props): JSX.Element => {
   return (
-    <input
-      type='range'
-      step={step}
-      min={min}
-      max={max}
-      value={value}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-        setValue(parseFloat(e.target.value))
-      }
-      className={`w-full -mt-1`}
-    />
+    <label className='w-full'>
+      <input
+        type='range'
+        step={step}
+        min={min}
+        max={max}
+        value={value}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setValue(parseFloat(e.target.value))
+        }
+        className={`w-full -mt-1`}
+      />
+      <span className='sr-only'>Select helper value</span>
+    </label>
   )
 }
 

@@ -59,7 +59,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
         <div className='relative w-full'>
           <StyledInput
             type='number'
-            name='fontSize'
+            name='Font size'
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
             max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}

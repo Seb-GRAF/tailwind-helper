@@ -41,7 +41,7 @@ const GapHelper = ({ setGap }: Props): JSX.Element => {
         <div className='relative w-full'>
           <StyledInput
             type='number'
-            name='gap'
+            name='Gap'
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={0}
             max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}

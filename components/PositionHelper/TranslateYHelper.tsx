@@ -78,16 +78,18 @@ const TranslateYHelper = ({ setTranslateY }: Props): JSX.Element => {
                   }}>
                   {isNegative ? '-' : '+'}
                 </button>
-                <input
-                  type='number'
-                  name='placement'
-                  step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
-                  min={0}
-                  max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
-                  value={value || 0}
-                  onChange={(e) => setValue(parseInt(e.target.value))}
-                  className='w-full p-4 pr-24 text-indigo-700 bg-gray-100 rounded-md appearance-none placement-input dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis'
-                />
+                <label className='w-full'>
+                  <input
+                    type='number'
+                    step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
+                    min={0}
+                    max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
+                    value={value || 0}
+                    onChange={(e) => setValue(parseInt(e.target.value))}
+                    className='w-full p-4 pr-24 text-indigo-700 bg-gray-100 rounded-md appearance-none placement-input dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis'
+                  />
+                  <span className='sr-only'>Translate Y value</span>
+                </label>
                 <span className='absolute top-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none right-12 dark:text-indigo-300'>
                   {unit}
                 </span>
