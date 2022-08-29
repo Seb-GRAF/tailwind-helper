@@ -3,7 +3,7 @@ import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 import { translates } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
-import { getClosestItem } from '../../utils/getClosestItem'
+import { getClosestItem, TailwindObjectKey } from '../../utils/getClosestItem'
 
 interface Props {
   setTranslateX: (value: string) => void
@@ -11,7 +11,7 @@ interface Props {
 
 const TranslateXHelper = ({ setTranslateX }: Props): JSX.Element => {
   const [value, setValue] = useState(translates[0].px)
-  const [unit, setUnit] = useState('px')
+  const [unit, setUnit] = useState<TailwindObjectKey>('px')
   const [isNegative, setIsNegative] = useState(false)
   const [currentTranslate, setCurrentTranslate] = useState('')
   const [convertedTranslate, setConvertedTranslate] = useState(translates[0])

@@ -3,7 +3,7 @@ import { CopyToClipboard, StyledRange, StyledInput, Tooltip } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 import { gaps } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
-import { getClosestItem } from '../../utils/getClosestItem'
+import { getClosestItem, TailwindObjectKey } from '../../utils/getClosestItem'
 
 interface Props {
   setGap: (value: string) => void
@@ -11,7 +11,7 @@ interface Props {
 
 const GapHelper = ({ setGap }: Props): JSX.Element => {
   const [value, setValue] = useState(gaps[4].px)
-  const [unit, setUnit] = useState('px')
+  const [unit, setUnit] = useState<TailwindObjectKey>('px')
   const [convertedGap, setConvertedGap] = useState(gaps[4])
 
   const reset = () => {

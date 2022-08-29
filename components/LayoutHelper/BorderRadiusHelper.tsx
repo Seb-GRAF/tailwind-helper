@@ -8,7 +8,7 @@ import {
 } from '..'
 import { borderRadiuses } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
-import { getClosestItem } from '../../utils/getClosestItem'
+import { getClosestItem, TailwindObjectKey } from '../../utils/getClosestItem'
 
 type OrientationKey = 'top' | 'right' | 'bottom' | 'left'
 
@@ -18,7 +18,7 @@ interface Props {
 
 const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
   const [value, setValue] = useState(borderRadiuses[4].px)
-  const [unit, setUnit] = useState('px')
+  const [unit, setUnit] = useState<TailwindObjectKey>('px')
   const [orientation, setOrientation] = useState({
     left: false,
     right: false,

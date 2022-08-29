@@ -3,7 +3,7 @@ import { CopyToClipboard, OutOfBounds, StyledRange, StyledInput } from '..'
 import { WidgetWrapper, WidgetConverter, WidgetResult } from '..'
 import { fontSizes } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
-import { getClosestItem } from '../../utils/getClosestItem'
+import { getClosestItem, TailwindObjectKey } from '../../utils/getClosestItem'
 
 interface Props {
   setFontSize: (value: string) => void
@@ -11,7 +11,7 @@ interface Props {
 
 const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
   const [value, setValue] = useState(48)
-  const [unit, setUnit] = useState('px')
+  const [unit, setUnit] = useState<TailwindObjectKey>('px')
   const [outOfBounds, setOutOfBounds] = useState<'max' | 'min' | 'def' | null>(
     null
   )

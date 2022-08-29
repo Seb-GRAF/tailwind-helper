@@ -8,7 +8,7 @@ import {
 } from '..'
 import { paddings } from '../../utils/tailwindClasses'
 import { unitConverter } from '../../utils/unitConverter'
-import { getClosestItem } from '../../utils/getClosestItem'
+import { getClosestItem, TailwindObjectKey } from '../../utils/getClosestItem'
 
 type OrientationKey = 'top' | 'right' | 'bottom' | 'left'
 
@@ -18,7 +18,7 @@ interface Props {
 
 const PaddingHelper = ({ setPadding }: Props): JSX.Element => {
   const [value, setValue] = useState(paddings[8].px)
-  const [unit, setUnit] = useState('px')
+  const [unit, setUnit] = useState<TailwindObjectKey>('px')
   const [isNegative, setIsNegative] = useState(false)
   const [orientation, setOrientation] = useState({
     left: false,
