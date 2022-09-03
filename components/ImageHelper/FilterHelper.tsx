@@ -91,7 +91,7 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
               </select>
             </div>
           ) : (
-            <>
+            <div className='relative'>
               {/* CHEVRON DOWN ICON OVERRIDE */}
               <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none right-3 top-1/2'>
                 <svg
@@ -121,7 +121,7 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
                   </option>
                 ))}
               </select>
-            </>
+            </div>
           )}
 
           {/* FILTER SLIDER */}

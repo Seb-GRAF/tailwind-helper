@@ -60,37 +60,38 @@ const DecorationStyleHelper = ({
       </button>
       <WidgetConverter helperName='Decoration Style'>
         <div className='relative'>
-          {/* CHEVRON DOWN ICON OVERRIDE */}
-          <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none right-3 top-1/2'>
-            <svg
-              className='w-4 h-4'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M19 9l-7 7-7-7'></path>
-            </svg>
+          <div className='relative'>
+            {/* CHEVRON DOWN ICON OVERRIDE */}
+            <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none top-1/2 right-3'>
+              <svg
+                className='w-4 h-4'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+                xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M19 9l-7 7-7-7'></path>
+              </svg>
+            </div>
+
+            {/* DECORATION STYLE SELECT */}
+            <select
+              name='Text decoration'
+              className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+              value={value}
+              onChange={(e) => {
+                setValue(parseInt(e.target.value))
+              }}>
+              {decorationStyles.map((positioning, index) => (
+                <option key={index} value={index}>
+                  {positioning.displayName}
+                </option>
+              ))}
+            </select>
           </div>
-
-          {/* DECORATION STYLE SELECT */}
-          <select
-            name='Text decoration'
-            className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
-            value={value}
-            onChange={(e) => {
-              setValue(parseInt(e.target.value))
-            }}>
-            {decorationStyles.map((positioning, index) => (
-              <option key={index} value={index}>
-                {positioning.displayName}
-              </option>
-            ))}
-          </select>
-
           {/* STYLE SLIDER */}
           <div className='relative'>
             <StyledRange
