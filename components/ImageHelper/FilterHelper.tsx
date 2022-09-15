@@ -40,7 +40,7 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
   return (
     <WidgetWrapper>
       <button
-        className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
+        className='absolute top-2 right-3 text-sm text-slate-400 transition-all hover:text-indigo-700 dark:hover:text-indigo-300'
         onClick={reset}>
         Reset
       </button>
@@ -48,11 +48,11 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
         <div className='relative'>
           {/* FILTER SELECT */}
           {filters[value].type === 'hue rotate' ? (
-            <div className='relative flex gap-2 w-44'>
+            <div className='relative flex w-44 gap-2'>
               {/* CHEVRON DOWN ICON OVERRIDE */}
-              <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none right-3 top-1/2'>
+              <div className='pointer-events-none absolute right-3 top-1/2 z-20 -translate-y-1/2 text-xl'>
                 <svg
-                  className='w-4 h-4'
+                  className='h-4 w-4'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -67,7 +67,7 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
 
               {/* SWITCH TO NEGATIVE/POSITIVE VALUES */}
               <button
-                className='flex-shrink-0 w-4 rounded hover:text-indigo-600 dark:hover:text-indigo-300 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10 h-14'
+                className='h-14 w-4 shrink-0 rounded bg-slate-100 ring-1 ring-gray-600/10 hover:text-indigo-600 dark:bg-slate-700 dark:ring-gray-100/10 dark:hover:text-indigo-300'
                 // {...(unit === 'percent' ? { disabled: true } : {})}
                 onClick={(e) => {
                   e.preventDefault()
@@ -77,7 +77,7 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
               </button>
               <select
                 name='Filters'
-                className='relative w-full p-4 pr-8 text-indigo-700 bg-gray-100 rounded-md appearance-none dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+                className='relative w-full appearance-none rounded-md bg-gray-100 p-4 pr-8 text-indigo-700 ring-1 ring-gray-600/10 dark:bg-slate-700 dark:text-indigo-300 dark:ring-gray-100/10'
                 value={value}
                 onChange={(e) => {
                   setValue(parseInt(e.target.value))
@@ -93,9 +93,9 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
           ) : (
             <div className='relative'>
               {/* CHEVRON DOWN ICON OVERRIDE */}
-              <div className='absolute z-20 text-xl -translate-y-1/2 pointer-events-none right-3 top-1/2'>
+              <div className='pointer-events-none absolute right-3 top-1/2 z-20 -translate-y-1/2 text-xl'>
                 <svg
-                  className='w-4 h-4'
+                  className='h-4 w-4'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -109,7 +109,7 @@ const FilterHelper = ({ setFilter }: Props): JSX.Element => {
               </div>
               <select
                 name='Filters'
-                className='relative p-4 text-indigo-700 bg-gray-100 rounded-md appearance-none cursor-pointer w-44 dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10'
+                className='relative w-44 cursor-pointer appearance-none rounded-md bg-gray-100 p-4 text-indigo-700 ring-1 ring-gray-600/10 dark:bg-slate-700 dark:text-indigo-300 dark:ring-gray-100/10'
                 value={value}
                 onChange={(e) => {
                   setValue(parseInt(e.target.value))

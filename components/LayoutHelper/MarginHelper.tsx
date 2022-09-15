@@ -111,12 +111,12 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
   return (
     <WidgetWrapper>
       <button
-        className='absolute text-sm transition-all top-2 right-3 text-slate-400 dark:hover:text-indigo-300 hover:text-indigo-700'
+        className='absolute top-2 right-3 text-sm text-slate-400 transition-all hover:text-indigo-700 dark:hover:text-indigo-300'
         onClick={reset}>
         Reset
       </button>
       {/* ORIENTATION PICKER */}
-      <div className='pointer-events-none absolute top-2 left-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] text-xs'>
+      <div className='pointer-events-none absolute top-2 left-2 h-[calc(100%-1rem)] w-[calc(100%-1rem)] text-xs'>
         <OrientationButton
           onClick={() => toggleOrientation('top')}
           orientation={orientation}
@@ -152,7 +152,7 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
         <div className='relative flex w-full gap-2'>
           {/* SWITCH TO NEGATIVE/POSITIVE VALUES */}
           <button
-            className='flex-shrink-0 w-4 rounded hover:text-indigo-600 dark:hover:text-indigo-300 bg-slate-100 dark:bg-slate-700 ring-1 ring-gray-600/10 dark:ring-gray-100/10 h-14'
+            className='h-14 w-4 shrink-0 rounded bg-slate-100 ring-1 ring-gray-600/10 hover:text-indigo-600 dark:bg-slate-700 dark:ring-gray-100/10 dark:hover:text-indigo-300'
             // {...(unit === 'percent' ? { disabled: true } : {})}
             onClick={(e) => {
               e.preventDefault()
@@ -170,7 +170,7 @@ const MarginHelper = ({ setMargin }: Props): JSX.Element => {
             setValue={setValue}
             hasUnit={true}
           />
-          <span className='absolute top-0 right-0 flex items-center w-10 h-full text-indigo-700 pointer-events-none dark:text-indigo-300'>
+          <span className='pointer-events-none absolute top-0 right-0 flex h-full w-10 items-center text-indigo-700 dark:text-indigo-300'>
             {unit}
           </span>
         </div>

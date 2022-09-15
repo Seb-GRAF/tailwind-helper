@@ -1,3 +1,181 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "jest": true,
+    "jquery": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "plugin:tailwind/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020,
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "html",
+    "import",
+    "prettier",
+    "react-hooks",
+    "simple-import-sort"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "React"
+      }
+    ],
+    "arrow-body-style": [2, "as-needed"],
+    "comma-dangle": 0,
+    "func-names": 0,
+    "import": 0,
+    "import/extensions": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "packageDir": "./"
+      }
+    ],
+    "import/no-named-as-default": 0,
+    "import/order": "off",
+    "import/prefer-default-export": 0,
+    "jsx-a11y/accessible-emoji": 0,
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+        "aspects": ["invalidHref"]
+      }
+    ],
+    "jsx-a11y/control-has-associated-label": [
+      2,
+      {
+        "ignoreElements": ["link"]
+      }
+    ],
+    "jsx-a11y/href-no-hash": "off",
+    "max-len": 0,
+    "no-alert": 0,
+    "no-await-in-loop": 0,
+    "no-console": 0,
+    "no-debugger": 0,
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "no-restricted-exports": 0,
+    "no-restricted-syntax": [
+      2,
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "no-return-assign": ["error", "except-parens"],
+    "no-shadow": [
+      2,
+      {
+        "allow": ["resolve", "reject", "done", "next", "err", "error"],
+        "hoist": "all"
+      }
+    ],
+    "no-underscore-dangle": 0,
+    "no-unused-expressions": [
+      2,
+      {
+        "allowTaggedTemplates": true
+      }
+    ],
+    "no-unused-vars": 0,
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all"
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "arrowParens": "avoid",
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "react-hooks/exhaustive-deps": "warn",
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": "arrow-function" }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react/display-name": 1,
+    "react/forbid-prop-types": 0,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-props-no-spreading": 0,
+    "react/no-array-index-key": 0,
+    "react/no-unescaped-entities": 0,
+    "react/require-default-props": 0,
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          [
+            "^(assert|buffer|child_process|cluster|console|constants|crypto|dgram|dns|domain|events|fs|http|https|module|net|os|path|punycode|querystring|readline|repl|stream|string_decoder|sys|timers|tls|tty|url|util|vm|zlib|freelist|v8|process|async_hooks|http2|perf_hooks)(/.*|$)"
+          ],
+          ["^react", "^@?\\w"],
+          [
+            "^(@|assets|components|config|contexts|hooks|locales|pages|sections|services|store|styles|types|utils)(/.*|$)"
+          ],
+          ["^\\u0000"],
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ],
+    "space-before-function-paren": 0
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["./src"]
+      },
+      "react": {
+        "version": "detect"
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./"
+      }
+    }
+  }
 }
