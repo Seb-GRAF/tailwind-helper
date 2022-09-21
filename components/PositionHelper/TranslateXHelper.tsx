@@ -84,7 +84,7 @@ const TranslateXHelper = ({ setTranslateX }: Props): JSX.Element => {
                     step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
                     min={0}
                     max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
-                    value={value || 0}
+                    value={value}
                     onChange={(e) => setValue(parseInt(e.target.value))}
                     className='w-full p-4 pr-24 text-indigo-700 bg-gray-100 rounded-md appearance-none placement-input dark:bg-slate-700 dark:text-indigo-300 ring-1 ring-gray-600/10 dark:ring-gray-100/10 overflow-ellipsis'
                   />
@@ -98,7 +98,7 @@ const TranslateXHelper = ({ setTranslateX }: Props): JSX.Element => {
                 step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
                 min={0}
                 max={unit === 'px' ? 384 : unit === 'rem' ? 24 : 0}
-                value={value || 0}
+                value={value}
                 setValue={setValue}
               />
             </>
@@ -130,7 +130,7 @@ const TranslateXHelper = ({ setTranslateX }: Props): JSX.Element => {
                       translates.filter((item) => item.type === 'fraction')
                         .length - 1
                     }
-                    value={translates[value].percent || 0}
+                    value={translates[value].percent}
                   />
                   <span className='sr-only'>Translate X value</span>
                 </label>

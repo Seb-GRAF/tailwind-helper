@@ -58,7 +58,7 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
           step={100}
           min={100}
           max={900}
-          value={value || 400}
+          value={value}
           setValue={setValue}
           hasUnit={false}
         />
@@ -67,7 +67,7 @@ const FontWeightHelper = ({ setFontWeight }: Props): JSX.Element => {
           step={100}
           min={100}
           max={900}
-          value={value || 400}
+          value={value}
           setValue={setValue}
         />
       </WidgetConverter>

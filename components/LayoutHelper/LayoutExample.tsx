@@ -46,8 +46,7 @@ const LayoutExample = ({
       />
 
       {/* EXAMPLE */}
-      <div
-        className={`mb-2 flex items-center justify-center w-full min-h-96 overflow-xs-hidden`}>
+      <div className={`mb-2 flex items-center justify-center w-full min-h-96`}>
         <div
           className={`padding overflow-x-hidden ${borderRadius} ${margin} ${padding} ${shadow} flex justify-center item-center bg-indigo-300 dark:bg-indigo-700 w-full h-auto`}>
           <div

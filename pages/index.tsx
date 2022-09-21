@@ -52,7 +52,9 @@ const Home: NextPage = () => {
       {/* HELPERS */}
       <div className='px-4'>
         {components.map(({ name, component }) => (
-          <section className={`${selectedCategory !== name ? 'hidden' : ''}`}>
+          <section
+            className={`${selectedCategory !== name ? 'hidden' : ''}`}
+            key={`component-${name}`}>
             {component}
           </section>
         ))}

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 interface Props {
   step: number
   min: number
   max: number
   value: number
-  type: string
+  type?: string
   name: string
   hasUnit: boolean
   setValue: (value: number) => void
@@ -17,7 +17,7 @@ const StyledInput = ({
   max,
   value,
   setValue,
-  type,
+  type = 'number',
   name,
   hasUnit = true,
 }: Props): JSX.Element => {
@@ -33,9 +33,14 @@ const StyledInput = ({
         min={min}
         max={max}
         value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setValue(parseFloat(e.target.value))
-        }
+        onBlur={() => {
+          if (!value) setValue(0)
+        }}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          if (e.target.value) setValue(parseFloat(e.target.value))
+          else setValue(null)
+        }}
+        inputMode='decimal'
       />
       <span className='sr-only'>{name}</span>
     </label>

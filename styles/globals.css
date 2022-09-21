@@ -6,6 +6,10 @@ html {
   @apply bg-gray-200 text-slate-700;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .dark {
   @apply antialiased text-gray-200 bg-slate-900;
   color-scheme: dark;

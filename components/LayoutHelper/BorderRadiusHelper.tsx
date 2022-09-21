@@ -163,7 +163,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={0}
             max={unit === 'px' ? 32 : unit === 'rem' ? 2 : 0}
-            value={value || 0}
+            value={value}
             setValue={setValue}
             hasUnit={true}
           />
@@ -175,7 +175,7 @@ const BorderRadiusHelper = ({ setBorderRadius }: Props): JSX.Element => {
           step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
           min={0}
           max={unit === 'px' ? 32 : unit === 'rem' ? 2 : 0}
-          value={value || 0}
+          value={value}
           setValue={setValue}
         />
 

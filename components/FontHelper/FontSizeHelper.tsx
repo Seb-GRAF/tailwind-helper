@@ -63,7 +63,7 @@ const FontSizeHelper = ({ setFontSize }: Props): JSX.Element => {
             step={unit === 'px' ? 1 : unit === 'rem' ? 0.125 : 0.1}
             min={unit === 'px' ? 12 : unit === 'rem' ? 0.75 : 0}
             max={unit === 'px' ? 128 : unit === 'rem' ? 8 : 0}
-            value={value || 0}
+            value={value}
             setValue={setValue}
             hasUnit={true}
           />

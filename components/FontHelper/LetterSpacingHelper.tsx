@@ -53,12 +53,11 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
       <WidgetConverter helperName='Letter Spacing'>
         <div className='relative w-full'>
           <StyledInput
-            type='number'
             step={0.025}
             name='Letter spacing'
             min={-0.05}
             max={0.1}
-            value={value || 0}
+            value={value}
             setValue={setValue}
             hasUnit={true}
           />
@@ -70,7 +69,7 @@ const LetterSpacingHelper = ({ setLetterSpacing }: Props): JSX.Element => {
           step={0.025}
           min={-0.05}
           max={0.1}
-          value={value || 0}
+          value={value}
           setValue={setValue}
         />
       </WidgetConverter>
