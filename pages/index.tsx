@@ -8,7 +8,6 @@ import {
   ImageHelper,
   Colors,
   Favorites,
-  CategoryButton,
   Tabs,
 } from '../components';
 import { motion, AnimatePresence } from 'framer-motion';
