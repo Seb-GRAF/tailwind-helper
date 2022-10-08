@@ -10,8 +10,12 @@ body {
   overflow-x: hidden;
 }
 
+#__next {
+  position: relative;
+}
+
 .dark {
-  @apply antialiased text-gray-200 bg-slate-900;
+  @apply antialiased text-slate-200 bg-slate-900;
   color-scheme: dark;
 }
 

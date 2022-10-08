@@ -18,7 +18,6 @@ const PositionExample = ({
   const [pinned, setPinned] = useState(false)
 
   const [toPrint, setToPrint] = useState('')
-  const [customName, setCustomName] = useState('')
 
   useEffect(() => {
     setToPrint(
@@ -36,7 +35,7 @@ const PositionExample = ({
         pinned
           ? 'sticky bottom-4 ring-4 dark:ring-slate-700 ring-gray-300'
           : 'relative dark:ring-1 dark:ring-inset dark:ring-slate-700/50'
-      } z-30 bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-outset-md shadow-gray-400/30 p-2`}>
+      } z-20 bg-white shadow-md dark:bg-slate-800 rounded-xl dark:shadow-inset-outset-md shadow-gray-400/30 p-2`}>
       {/* PINNED */}
       <PinButton pinned={pinned} setPinned={setPinned} />
       {/* FAVORITE  */}

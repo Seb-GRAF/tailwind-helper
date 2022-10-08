@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { Header, Footer, SEO, Title } from './'
-import { ReactNode } from 'react'
+import React, { useState, useEffect } from 'react';
+import { Header, Footer, SEO, Title } from './';
+import { ReactNode } from 'react';
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
 const Layout = ({ children }: Props): JSX.Element => {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(false);
 
   const isLocalStorageEmpty = () => {
-    return !localStorage.getItem('isDarkTheme')
-  }
+    return !localStorage.getItem('isDarkTheme');
+  };
 
   const setValueToLocal = (value: boolean) => {
-    localStorage.setItem('isDarkTheme', `${value}`)
-  }
+    localStorage.setItem('isDarkTheme', `${value}`);
+  };
 
   const toggleThemeHandler = () => {
-    const currentTheme = JSON.parse(localStorage.getItem('isDarkTheme'))
+    const currentTheme = JSON.parse(localStorage.getItem('isDarkTheme'));
 
-    setIsDark(() => !currentTheme)
-    document.querySelector('html').classList.toggle('dark')
-    setValueToLocal(!currentTheme)
-  }
+    setIsDark(() => !currentTheme);
+    document.querySelector('html').classList.toggle('dark');
+    setValueToLocal(!currentTheme);
+  };
 
   useEffect(() => {
     // toggles theme based on system theme
@@ -31,36 +31,36 @@ const Layout = ({ children }: Props): JSX.Element => {
       // true if dark theme
       const systemTheme = window.matchMedia(
         '(prefers-color-scheme: dark)'
-      ).matches
+      ).matches;
 
-      if (systemTheme) document.querySelector('html').classList.add('dark')
-      if (!systemTheme) document.querySelector('html').classList.remove('dark')
+      if (systemTheme) document.querySelector('html').classList.add('dark');
+      if (!systemTheme) document.querySelector('html').classList.remove('dark');
 
-      setIsDark(systemTheme)
-      setValueToLocal(systemTheme)
-    }
+      setIsDark(systemTheme);
+      setValueToLocal(systemTheme);
+    };
 
-    if (isLocalStorageEmpty()) systemThemeToggle()
+    if (isLocalStorageEmpty()) systemThemeToggle();
     else {
-      const isDarkTheme = JSON.parse(localStorage.getItem('isDarkTheme'))
-      isDarkTheme && document.querySelector('html').classList.add('dark')
-      setIsDark(() => isDarkTheme)
+      const isDarkTheme = JSON.parse(localStorage.getItem('isDarkTheme'));
+      isDarkTheme && document.querySelector('html').classList.add('dark');
+      setIsDark(() => isDarkTheme);
     }
 
     // watches for system theme change
     window
       .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', systemThemeToggle)
+      .addEventListener('change', systemThemeToggle);
 
     return () => {
       window
         .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', systemThemeToggle)
-    }
-  }, [])
+        .removeEventListener('change', systemThemeToggle);
+    };
+  }, []);
 
   return (
-    <div className='flex flex-col max-w-4xl min-h-screen pt-4 pb-8 mx-auto'>
+    <div className='relative flex flex-col max-w-4xl min-h-screen pt-4 pb-8 mx-auto overflow-clip'>
       <SEO isDark={isDark} />
       <Header isDark={isDark} toggleThemeHandler={toggleThemeHandler} />
       <main className='relative'>
@@ -69,7 +69,7 @@ const Layout = ({ children }: Props): JSX.Element => {
       </main>
       <Footer isDark={isDark} />
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
